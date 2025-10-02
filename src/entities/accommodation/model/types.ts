@@ -6,8 +6,8 @@ export interface Accommodation {
     name: string;
     description: string;
     rating: number;
-    approved: boolean;
-    approvedBy: string;
+    approved?: boolean;
+    approvedBy?: string;
     ownerId: string;
 }
 

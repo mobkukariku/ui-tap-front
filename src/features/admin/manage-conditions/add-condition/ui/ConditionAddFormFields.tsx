@@ -42,7 +42,7 @@ export function ConditionAddFormFields({setOpen}:Props) {
         <form onSubmit={form.handleSubmit(onSubmit)}>
 
             <DialogHeader>
-                <DialogTitle>Добавить сервис</DialogTitle>
+                <DialogTitle>Добавить условие</DialogTitle>
             </DialogHeader>
             <div className="flex items-center my-5 gap-2">
                 <div className="flex flex-col w-full gap-4">

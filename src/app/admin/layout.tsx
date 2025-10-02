@@ -8,10 +8,6 @@ export default function AdminLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-        <body
-            className={`antialiased`}
-        >
         <SidebarProvider >
             <AdminSidebar />
             <main className={"p-4 w-full"}>
@@ -19,7 +15,5 @@ export default function AdminLayout({
             </main>
             <Toaster />
         </SidebarProvider>
-        </body>
-        </html>
     )
 }

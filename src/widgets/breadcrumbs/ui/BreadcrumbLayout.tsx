@@ -8,11 +8,7 @@ import {
 } from "@/shared/ui/breadcrumb";
 import Link from "next/link";
 import React from "react";
-
-interface BreadcrumbItemData {
-    label: string;
-    href?: string;
-}
+import {BreadcrumbItemData} from "@/entities/breadcrumbs/model/types";
 
 interface BreadcrumbsProps {
     items: BreadcrumbItemData[];
