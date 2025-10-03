@@ -8,27 +8,23 @@ import * as z from "zod";
 import {Label} from "@/shared/ui/label";
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
+import {AddServiceFormData, addServiceSchema} from "@/features/admin/manage-services/add-service/model/schema";
 
 
 interface Props {
     setOpen: (open: boolean) => void;
 }
 
-const schema = z.object({
-    key: z.string().min(1, "Обязательное поле"),
-    value: z.string().min(1, "Обязательное поле"),
-});
 
-type FormData = z.infer<typeof schema>;
 
 export function ServiceAddFormFields({setOpen}:Props) {
 
-    const form = useForm<FormData>({
-        resolver: zodResolver(schema),
+    const form = useForm<AddServiceFormData>({
+        resolver: zodResolver(addServiceSchema),
         defaultValues: { key: "", value: "" },
     });
 
-    const onSubmit = (data: FormData) => {
+    const onSubmit = (data: AddServiceFormData) => {
         console.log(data);
         setOpen(false);
         toast.success("Сервис был создан.", {

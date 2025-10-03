@@ -1,16 +1,27 @@
 import {
-    Sidebar,
-    SidebarContent, SidebarFooter,
+    BuildingIcon,
+    Calendar1Icon,
+    EllipsisVertical,
+    InfoIcon,
+    LayoutDashboardIcon,
+    LogOut,
+    Settings,
+    User
+} from "lucide-react";
+import {
+    Sidebar, SidebarContent,
     SidebarGroup,
     SidebarGroupContent,
     SidebarGroupLabel,
-    SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem
+    SidebarHeader,
+    SidebarMenu, SidebarMenuButton, SidebarMenuItem
 } from "@/shared/ui/sidebar";
 import {Avatar, AvatarFallback, AvatarImage} from "@/shared/ui/avatar";
-import {EllipsisVertical, LayoutDashboardIcon, LogOut, Settings, User} from "lucide-react";
 import {
     DropdownMenu,
-    DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
     DropdownMenuTrigger
 } from "@/shared/ui/dropdown-menu";
 import {Button} from "@/shared/ui/button";
@@ -18,28 +29,27 @@ import {Button} from "@/shared/ui/button";
 const items = [
     {
         title: "Accommodation",
-        url: "/admin/accommodations",
+        url: "/super-manager/accommodations",
         icon: LayoutDashboardIcon,
     },
     {
-        title: "Услуги",
-        url: "/admin/services",
-        icon: Settings,
+        title: "Заявки",
+        url: "/super-manager/requests",
+        icon: InfoIcon,
     },
     {
-        title: "Условия",
-        url: "/admin/conditions",
-        icon: Settings,
+        title: "Бронирования",
+        url: "/super-manager/booking",
+        icon: Calendar1Icon,
     },
     {
-        title: "Пользователи",
-        url: "/admin/users",
-        icon: User,
+        title: "Номера",
+        url: "/super-manager/rooms",
+        icon: BuildingIcon,
     }
 ]
 
-export function AdminSidebar() {
-
+export function ManagerSidebar() {
     return (
         <Sidebar>
             <SidebarHeader className={"p-4"}>
@@ -51,10 +61,10 @@ export function AdminSidebar() {
                     <figcaption
                         className={"flex flex-col gap-0"}>
                         <p>
-                            Freddie Mercury
+                            Ozzy Osbourne
                         </p>
                         <p className={"text-gray-500 text-xs dark:text-gray-400"}>
-                            Admin
+                            Manager
                         </p>
                     </figcaption>
                     <DropdownMenu>
@@ -96,4 +106,3 @@ export function AdminSidebar() {
         </Sidebar>
     )
 }
-

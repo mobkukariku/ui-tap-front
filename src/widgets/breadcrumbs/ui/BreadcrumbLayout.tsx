@@ -9,6 +9,8 @@ import {
 import Link from "next/link";
 import React from "react";
 import {BreadcrumbItemData} from "@/entities/breadcrumbs/model/types";
+import {SidebarTrigger} from "@/shared/ui/sidebar";
+import {Separator} from "@/shared/ui/separator";
 
 interface BreadcrumbsProps {
     items: BreadcrumbItemData[];
@@ -18,6 +20,7 @@ export function BreadcrumbLayout({ items }: BreadcrumbsProps) {
     return (
         <Breadcrumb className={"mt-2 mb-16"}>
             <BreadcrumbList>
+                <SidebarTrigger />
                 {items.map((item, index) => {
                     const isLastItem = index === items.length - 1;
 

@@ -8,27 +8,21 @@ import * as z from "zod";
 import {Label} from "@/shared/ui/label";
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
+import {AddConditionFormData, addConditionSchema} from "@/features/admin/manage-conditions/add-condition/model/schema";
 
 
 interface Props {
     setOpen: (open: boolean) => void;
 }
 
-const schema = z.object({
-    key: z.string().min(1, "Обязательное поле"),
-    value: z.string().min(1, "Обязательное поле"),
-});
-
-type FormData = z.infer<typeof schema>;
-
 export function ConditionAddFormFields({setOpen}:Props) {
 
-    const form = useForm<FormData>({
-        resolver: zodResolver(schema),
+    const form = useForm<AddConditionFormData>({
+        resolver: zodResolver(addConditionSchema),
         defaultValues: { key: "", value: "" },
     });
 
-    const onSubmit = (data: FormData) => {
+    const onSubmit = (data: AddConditionFormData) => {
         console.log(data);
         setOpen(false);
         toast.success("Условие было создано.", {
