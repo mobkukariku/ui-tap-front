@@ -4,7 +4,6 @@ import {useForm,} from "react-hook-form";
 import {DialogClose, DialogFooter, DialogHeader, DialogTitle} from "@/shared/ui/dialog";
 import {Button} from "@/shared/ui/button";
 import {zodResolver} from "@hookform/resolvers/zod";
-import * as z from "zod";
 import {Label} from "@/shared/ui/label";
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
