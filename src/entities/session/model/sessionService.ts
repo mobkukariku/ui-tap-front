@@ -29,7 +29,6 @@ export const sessionService = {
     },
     getUserFromToken: (token: string) => {
         const decoded = sessionService.decodeToken(token);
-        console.log(decoded);
         if(!decoded) return null;
 
         return {

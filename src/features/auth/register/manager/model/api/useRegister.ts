@@ -10,7 +10,7 @@ export function useRegister() {
             localStorage.setItem("refreshToken", response.data.refreshToken);
         },
         onError: (error) => {
-            console.log(error.message);
+            console.error(error.message);
         },
         onSettled: () => {
             console.log("settled");

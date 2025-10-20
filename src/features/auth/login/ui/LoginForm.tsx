@@ -36,7 +36,6 @@ export function LoginForm() {
                 description: getCurrentTime()
             });
 
-            console.log(isAuthenticated, user);
 
             if (isAuthenticated && user) {
                 if (user.role.includes("SUPER_MANAGER")) {
