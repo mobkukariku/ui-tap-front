@@ -1,4 +1,3 @@
-// src/features/auth/manager/register/ui/SuccessfulRequestSendModal.tsx
 import {Dialog, DialogContent, DialogTitle} from "@/shared/ui/dialog";
 import {Button} from "@/shared/ui/button";
 import {CircleCheck} from "lucide-react";

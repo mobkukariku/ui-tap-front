@@ -1,4 +1,4 @@
-import {RegisterCredentials} from "@/features/auth/manager/register/model/types";
+import {RegisterCredentials} from "@/features/auth/register/manager/model/types";
 import {api} from "@/shared/api/axiosInstance";
 
 export const managerRegisterApi = {

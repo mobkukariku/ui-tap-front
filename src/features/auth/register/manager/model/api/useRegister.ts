@@ -1,6 +1,6 @@
 import {useMutation} from "@tanstack/react-query";
-import {RegisterCredentials} from "@/features/auth/manager/register/model/types";
-import {managerRegisterApi} from "@/features/auth/manager/register/model/api/api";
+import {RegisterCredentials} from "@/features/auth/register/manager/model/types";
+import {managerRegisterApi} from "@/features/auth/register/manager/model/api/api";
 
 export function useRegister() {
     return useMutation({

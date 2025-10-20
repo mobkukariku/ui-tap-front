@@ -2,12 +2,12 @@
 import {Label} from "@/shared/ui/label";
 import {Input} from "@/shared/ui/input";
 import {useForm} from "react-hook-form";
-import {ManagerRegisterFormData, managerRegisterSchema} from "@/features/auth/manager/register/model/schema";
+import {ManagerRegisterFormData, managerRegisterSchema} from "@/features/auth/register/manager/model/schema";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useState} from "react";
-import {SuccessfulRequestSendModal} from "@/features/auth/manager/register/ui/SuccessfulRequestSendModal";
+import {SuccessfulRequestSendModal} from "@/features/auth/register/manager/ui/SuccessfulRequestSendModal";
 import {Button} from "@/shared/ui/button";
-import {useRegister} from "@/features/auth/manager/register/model/api/useRegister";
+import {useRegister} from "@/features/auth/register/manager/model/api/useRegister";
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {AxiosError} from "axios";
