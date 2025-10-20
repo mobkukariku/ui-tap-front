@@ -1,15 +1,23 @@
 "use client"
 import {useForm} from "react-hook-form";
-import {AdminLoginFormData, adminLoginSchema} from "@/features/auth/admin/login/model/schema";
+import {AdminLoginFormData, adminLoginSchema} from "@/features/auth/login/model/schema";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {redirect} from "next/navigation";
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {Input} from "@/shared/ui/input";
 import {Label} from "@/shared/ui/label";
 import {Button} from "@/shared/ui/button";
+import {useLogin} from "@/features/auth/login/model/api/useLogin";
+import {AxiosError} from "axios";
+import {ErrorResponse} from "@/shared/types";
+import {useAuth} from "@/entities/session/model/useAuth";
+import {useRouter} from "next/navigation";
 
 export function LoginForm() {
+    const login = useLogin();
+    const { isAuthenticated, user } = useAuth();
+    const router = useRouter()
+
     const form = useForm<AdminLoginFormData>({
         resolver: zodResolver(adminLoginSchema),
         defaultValues: {
@@ -18,14 +26,38 @@ export function LoginForm() {
         }
     });
 
-    const onSubmit = (data: AdminLoginFormData) => {
-        console.log(data);
-        toast.success("Успешный вход в систему.", {
-            position: "top-right",
-            richColors: true,
-            description: getCurrentTime()
-        });
-        redirect('/admin');
+    const onSubmit = async (data: AdminLoginFormData) => {
+        try {
+            await login.mutateAsync(data);
+
+            toast.success("Успешный вход в систему.", {
+                position: "top-right",
+                richColors: true,
+                description: getCurrentTime()
+            });
+
+            console.log(isAuthenticated, user);
+
+            if (isAuthenticated && user) {
+                if (user.role.includes("SUPER_MANAGER")) {
+                    router.push("/manager");
+                } else if (user.role.includes("ADMIN")) {
+                    router.push("/admin");
+                } else {
+                    router.push("/");
+                }
+            }
+
+        } catch (error) {
+            if (error instanceof Error) {
+                const axiosError = error as AxiosError<ErrorResponse>;
+                toast.error("Ошибка входа в систему", {
+                    position: "top-right",
+                    richColors: true,
+                    description: axiosError.response?.data?.message || "Проверьте данные и попробуйте снова"
+                });
+            }
+        }
     }
 
     return (

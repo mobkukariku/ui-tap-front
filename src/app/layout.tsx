@@ -1,11 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { Geist_Mono } from 'next/font/google'
 import {Toaster} from "sonner";
+import {QueryProvider} from "@/app/providers/query-provider";
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] })
-const geistMono = Geist_Mono({ subsets: ['latin'], weight: ['400', '500', '700'] })
 
 export const metadata: Metadata = {
     title: 'TapHome',
@@ -20,8 +19,10 @@ export default function RootLayout({
     return (
         <html lang="ru" suppressHydrationWarning>
             <body className={inter.className}>
-                {children}
-                <Toaster />
+                <QueryProvider>
+                    {children}
+                    <Toaster />
+                </QueryProvider>
             </body>
         </html>
     )

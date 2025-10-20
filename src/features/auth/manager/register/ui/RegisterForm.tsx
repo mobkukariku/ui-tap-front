@@ -7,37 +7,97 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {useState} from "react";
 import {SuccessfulRequestSendModal} from "@/features/auth/manager/register/ui/SuccessfulRequestSendModal";
 import {Button} from "@/shared/ui/button";
+import {useRegister} from "@/features/auth/manager/register/model/api/useRegister";
+import {toast} from "sonner";
+import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
+import {AxiosError} from "axios";
+import {ErrorResponse} from "@/shared/types";
 
 export function RegisterForm() {
+    const register = useRegister();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const form = useForm<ManagerRegisterFormData>({
         resolver: zodResolver(managerRegisterSchema),
         defaultValues: {
+            username: "",
+            firstName: "",
+            lastName: "",
             email: "",
-            name: "",
             password: "",
-            confirm_password: ""
+            phoneNumber: ""
         }
     });
 
     const onSubmit = async (data: ManagerRegisterFormData) => {
-        try {
-            setIsSubmitting(true);
-            console.log(data);
-            setIsModalOpen(true);
-            form.reset();
-        } catch (error) {
-            console.error("Ошибка при отправке формы:", error);
-        } finally {
-            setIsSubmitting(false);
+        console.log(data);
+        try{
+            await register.mutateAsync(data);
+
+            toast.success("Успешный вход в систему.", {
+                position: "top-right",
+                richColors: true,
+                description: getCurrentTime()
+            });
+        }catch (error) {
+            if (error instanceof Error) {
+                const axiosError = error as AxiosError<ErrorResponse>;
+
+                toast.error("Ошибка входа в систему", {
+                    position: "top-right",
+                    richColors: true,
+                    description: axiosError.response?.data?.message || "Проверьте данные и попробуйте снова"
+                })
+            } else {
+                toast.error("Ошибка входа в систему", {
+                    position: "top-right",
+                    richColors: true,
+                    description: "Произошла непредвиденная ошибка"
+                });
+            }
         }
     };
 
     return (
         <>
             <form onSubmit={form.handleSubmit(onSubmit)} className={"flex mt-5 flex-col w-3/4 sm:w-100 gap-5"}>
+                <fieldset className={"flex flex-col gap-2"}>
+                    <Label>Никнейм</Label>
+                    <Input
+                        key={"username"}
+                        placeholder={"Введите имя"}
+                        {...form.register("username")}
+                        className={form.formState.errors.username ? "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30" : ""}
+                    />
+                    {form.formState.errors.username && (
+                        <p className="text-sm text-red-500">{form.formState.errors.username.message as string}</p>
+                    )}
+                </fieldset>
+                <fieldset className={"flex flex-col gap-2"}>
+                    <Label>Имя</Label>
+                    <Input
+                        key={"name"}
+                        placeholder={"Введите имя"}
+                        {...form.register("firstName")}
+                        className={form.formState.errors.firstName ? "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30" : ""}
+                    />
+                    {form.formState.errors.firstName && (
+                        <p className="text-sm text-red-500">{form.formState.errors.firstName.message as string}</p>
+                    )}
+                </fieldset>
+                <fieldset className={"flex flex-col gap-2"}>
+                    <Label>Фамилию</Label>
+                    <Input
+                        key={"lastName"}
+                        placeholder={"Введите Фамилию"}
+                        {...form.register("lastName")}
+                        className={form.formState.errors.lastName ? "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30" : ""}
+                    />
+                    {form.formState.errors.lastName && (
+                        <p className="text-sm text-red-500">{form.formState.errors.lastName.message as string}</p>
+                    )}
+                </fieldset>
                 <fieldset className={"flex flex-col gap-2"}>
                     <Label>Email</Label>
                     <Input
@@ -48,18 +108,6 @@ export function RegisterForm() {
                     />
                     {form.formState.errors.email && (
                         <p className="text-sm text-red-500">{form.formState.errors.email.message as string}</p>
-                    )}
-                </fieldset>
-                <fieldset className={"flex flex-col gap-2"}>
-                    <Label>Имя</Label>
-                    <Input
-                        key={"name"}
-                        placeholder={"Введите имя"}
-                        {...form.register("name")}
-                        className={form.formState.errors.name ? "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30" : ""}
-                    />
-                    {form.formState.errors.name && (
-                        <p className="text-sm text-red-500">{form.formState.errors.name.message as string}</p>
                     )}
                 </fieldset>
                 <fieldset className={"flex flex-col gap-2"}>
@@ -78,14 +126,14 @@ export function RegisterForm() {
                 <fieldset className={"flex flex-col gap-2"}>
                     <Label>Подтвердите пароль</Label>
                     <Input
-                        key={"confirm_password"}
-                        type="password"
-                        placeholder={"Введите пароль повторно"}
-                        {...form.register("confirm_password")}
-                        className={form.formState.errors.confirm_password ? "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30" : ""}
+                        key={"phoneNumber"}
+                        type="number"
+                        placeholder={"Введите номер телефона"}
+                        {...form.register("phoneNumber")}
+                        className={form.formState.errors.phoneNumber ? "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30" : ""}
                     />
-                    {form.formState.errors.confirm_password && (
-                        <p className="text-sm text-red-500">{form.formState.errors.confirm_password.message as string}</p>
+                    {form.formState.errors.phoneNumber && (
+                        <p className="text-sm text-red-500">{form.formState.errors.phoneNumber.message as string}</p>
                     )}
                 </fieldset>
                 <fieldset className={"self-center mt-5"}>
