@@ -1,13 +1,13 @@
 import {BreadcrumbLayout} from "@/widgets/breadcrumbs/ui/BreadcrumbLayout";
 import {
     AccommodationHeader
-} from "@/features/manager/manage-units-accommodation/accommodation-header/ui/AccommodationHeader";
+} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-header/ui/AccommodationHeader";
 import {
     AccommodationsUnitFilter
-} from "@/features/manager/manage-units-accommodation/accommodation-unit-filter/ui/AccommodationsUnitFilter";
+} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-filter/ui/AccommodationsUnitFilter";
 import {
     AccommodationUnitList
-} from "@/features/manager/manage-units-accommodation/accommodation-unit-list/ui/AccommodationUnitList";
+} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/ui/AccommodationUnitList";
 
 interface AccomodationPageProps {
     params: {

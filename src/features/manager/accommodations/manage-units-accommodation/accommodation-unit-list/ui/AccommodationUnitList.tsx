@@ -1,5 +1,5 @@
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/shared/ui/table";
-import {data} from "@/features/manager/manage-units-accommodation/accommodation-unit-list/model/constants";
+import {data} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/constants";
 import {Badge} from "@/shared/ui/badge";
 import {Button} from "@/shared/ui/button";
 

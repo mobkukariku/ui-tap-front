@@ -1,8 +1,8 @@
-import {accomodationList} from "@/features/manager/manage-list-accommodations/accommodations-list/model/constants";
-import {AccommodationItem} from "@/features/manager/manage-list-accommodations/accommodations-list/ui/AccommodationItem";
+import {accomodationList} from "@/features/manager/accommodations/manage-list-accommodations/accommodations-list/model/constants";
+import {AccommodationItem} from "@/features/manager/accommodations/manage-list-accommodations/accommodations-list/ui/AccommodationItem";
 import {
     AccommodationEmptyList
-} from "@/features/manager/manage-list-accommodations/accommodations-list/ui/AccommodationEmptyList";
+} from "@/features/manager/accommodations/manage-list-accommodations/accommodations-list/ui/AccommodationEmptyList";
 
 export function AccommodationList() {
 
