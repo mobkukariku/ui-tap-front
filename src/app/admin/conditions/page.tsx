@@ -1,6 +1,6 @@
 import {BreadcrumbLayout} from "@/widgets/breadcrumbs/ui/BreadcrumbLayout";
-import {FilterPanel} from "@/widgets/conditions-filter-panel/ui/FilterPanel";
 import {ConditionTable} from "@/features/admin/manage-conditions/condition-table/ui/ConditionTable";
+import {ConditionFilter} from "@/features/admin/manage-conditions/filter-condition/ui/ConditionFIlter";
 
 export default function AdminConditionsPage() {
     return <>
@@ -10,7 +10,7 @@ export default function AdminConditionsPage() {
                 { label: "Условия", href: "/admin/conditions" }
             ]}
         />
-        <FilterPanel />
+        <ConditionFilter />
         <ConditionTable />
     </>;
 }

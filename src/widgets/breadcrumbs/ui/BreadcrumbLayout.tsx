@@ -10,7 +10,6 @@ import Link from "next/link";
 import React from "react";
 import {BreadcrumbItemData} from "@/entities/breadcrumbs/model/types";
 import {SidebarTrigger} from "@/shared/ui/sidebar";
-import {Separator} from "@/shared/ui/separator";
 
 interface BreadcrumbsProps {
     items: BreadcrumbItemData[];
@@ -18,7 +17,7 @@ interface BreadcrumbsProps {
 
 export function BreadcrumbLayout({ items }: BreadcrumbsProps) {
     return (
-        <Breadcrumb className={"mt-2 mb-16"}>
+        <Breadcrumb className={"mt-2 mb-6"}>
             <BreadcrumbList>
                 <SidebarTrigger />
                 {items.map((item, index) => {

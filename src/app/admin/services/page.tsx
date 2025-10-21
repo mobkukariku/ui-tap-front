@@ -1,6 +1,6 @@
 import {ServicesTable} from "@/features/admin/manage-services/table-services/ui/ServicesTable";
 import {BreadcrumbLayout} from "@/widgets/breadcrumbs/ui/BreadcrumbLayout";
-import {FilterPanel} from "@/widgets/services-filter-panel/ui/FilterPanel";
+import {ServicesFilter} from "@/features/admin/manage-services/filter-services/ui/ServicesFIlter";
 
 export default function AdminServicesPage() {
     return (
@@ -11,7 +11,7 @@ export default function AdminServicesPage() {
                     { label: "Услуги", href: "/admin/services" }
                 ]}
             />
-            <FilterPanel />
+            <ServicesFilter />
             <ServicesTable />
         </>
     );

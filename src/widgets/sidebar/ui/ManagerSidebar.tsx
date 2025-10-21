@@ -29,22 +29,22 @@ import {Button} from "@/shared/ui/button";
 const items = [
     {
         title: "Accommodation",
-        url: "/super-manager/accommodations",
+        url: "/manager/accommodations",
         icon: LayoutDashboardIcon,
     },
     {
         title: "Заявки",
-        url: "/super-manager/requests",
+        url: "/manager/requests",
         icon: InfoIcon,
     },
     {
         title: "Бронирования",
-        url: "/super-manager/booking",
+        url: "/manager/booking",
         icon: Calendar1Icon,
     },
     {
         title: "Номера",
-        url: "/super-manager/rooms",
+        url: "/manager/rooms",
         icon: BuildingIcon,
     }
 ]

@@ -1,10 +1,10 @@
-import { Input } from "@/shared/ui/input";
-import { Search} from "lucide-react";
-import {ConditionAdd} from "@/features/admin/manage-conditions/add-condition/ui/ConditionAdd";
+import {PlusIcon, Search} from "lucide-react";
+import {Input} from "@/shared/ui/input";
+import {Button} from "@/shared/ui/button";
 
-export function ConditionFilter() {
+export function AccommodationsUnitFilter() {
     return (
-        <section className={"my-5 flex justify-between"}>
+        <section className={"flex  justify-between mt-10 mb-5"}>
             <form role="search" className="flex-1 max-w-md">
                 <fieldset
                     className="relative">
@@ -16,7 +16,10 @@ export function ConditionFilter() {
                     />
                 </fieldset>
             </form>
-            <ConditionAdd />
+            <Button>
+                <PlusIcon  />
+                Добавить номер
+            </Button>
         </section>
-    );
+    )
 }

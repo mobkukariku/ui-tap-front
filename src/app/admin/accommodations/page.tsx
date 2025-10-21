@@ -2,7 +2,9 @@ import {BreadcrumbLayout} from "@/widgets/breadcrumbs/ui/BreadcrumbLayout";
 import {
     AccommodationTable
 } from "@/features/admin/approve-accommodation/accommodation-table/ui/AccommodationTable";
-import {FilterPanel} from "@/widgets/accommodations-filter-panel/ui/FilterPanel";
+import {
+    AccommodationSearchInput
+} from "@/features/admin/approve-accommodation/filter-accommodation/ui/AccommodationSearchInput";
 
 export default function AdminAccommodationsPage() {
   return (
@@ -13,7 +15,7 @@ export default function AdminAccommodationsPage() {
               { label: "Accommodations", href: "/admin/accommodations" }
             ]}
         />
-          <FilterPanel />
+          <AccommodationSearchInput />
           <AccommodationTable />
       </>
   );
