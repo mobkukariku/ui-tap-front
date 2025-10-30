@@ -19,7 +19,7 @@ describe('RequestTable interactions', () => {
     render(<RequestTable />);
 
     // Initially, multiple rows each have an "Откликнуться" button
-    let respondButtons = screen.getAllByRole('button', { name: 'Откликнуться' });
+    const respondButtons = screen.getAllByRole('button', { name: 'Откликнуться' });
     expect(respondButtons.length).toBeGreaterThan(0);
 
     // Click the first row's respond button

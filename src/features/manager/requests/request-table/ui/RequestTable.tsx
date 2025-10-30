@@ -1,46 +1,18 @@
 'use client'
 
-import { useState, useEffect, useRef } from "react"
+import { useState } from "react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/ui/table"
 import { Badge } from "@/shared/ui/badge"
 import { Button } from "@/shared/ui/button"
 import { PopupMenuButton } from "@/shared/ui/popup-menu-button"
 import { data as initialData } from "@/features/manager/requests/request-table/model/constants"
-import { ArrowDownUp } from "lucide-react"
+import {formatDate} from "@/shared/lib/date/formateDate";
 
 export function RequestTable() {
     const [data, setData] = useState(initialData)
-    const [sortAsc, setSortAsc] = useState(true)
     const [activePopup, setActivePopup] = useState<number | null>(null)
     const [respondedRows, setRespondedRows] = useState<Set<string>>(() => new Set())
 
-    const tableRef = useRef<HTMLTableElement | null>(null)
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (!tableRef.current || !event.target) return
-            const isInside = (event.target as HTMLElement).closest("[data-popup]")
-            if (!isInside) setActivePopup(null)
-        }
-
-        document.addEventListener("mousedown", handleClickOutside)
-        return () => document.removeEventListener("mousedown", handleClickOutside)
-    }, [])
-
-    const handleSort = () => {
-        const sorted = [...data].sort((a, b) => {
-            if (a.status < b.status) return sortAsc ? -1 : 1
-            if (a.status > b.status) return sortAsc ? 1 : -1
-            return 0
-        })
-        setData(sorted)
-        setSortAsc(!sortAsc)
-    }
-
-    const formatDate = (dateStr: string) => {
-        const [year, month, day] = dateStr.split('-')
-        return `${day}.${month}.${year}`
-    }
 
     const toggleResponded = (id: string, add: boolean) => {
         setRespondedRows(prev => {
@@ -57,7 +29,7 @@ export function RequestTable() {
     ]
 
     return (
-        <Table ref={tableRef} className="w-full relative">
+        <Table  className="w-full relative">
             <TableHeader>
                 <TableRow>
                     <TableHead>Клиент</TableHead>
@@ -67,14 +39,8 @@ export function RequestTable() {
                     <TableHead>
                         <div
                             className="flex items-center gap-[8px] cursor-pointer select-none"
-                            onClick={handleSort}
                         >
                             Статус
-                            <ArrowDownUp
-                                className={`opacity-60 text-[#525252] w-[16px] h-[16px] transition-transform duration-200 ${
-                                    sortAsc ? 'rotate-180' : ''
-                                }`}
-                            />
                         </div>
                     </TableHead>
                     <TableHead>Действия</TableHead>

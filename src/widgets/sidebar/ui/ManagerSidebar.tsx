@@ -4,9 +4,7 @@ import {
     EllipsisVertical,
     InfoIcon,
     LayoutDashboardIcon,
-    LogOut,
-    Settings,
-    User
+    LogOut
 } from "lucide-react";
 import {
     Sidebar, SidebarContent,
@@ -39,7 +37,7 @@ const items = [
     },
     {
         title: "Бронирования",
-        url: "/manager/booking",
+        url: "/manager/bookings",
         icon: Calendar1Icon,
     },
     {

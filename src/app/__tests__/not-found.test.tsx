@@ -10,12 +10,19 @@ jest.mock('next/navigation', () => ({
         };
     },
 }));
+import Image from 'next/image';
 
 // Мок для next/image
 jest.mock('next/image', () => ({
     __esModule: true,
     default: (props: React.JSX.IntrinsicAttributes & React.ClassAttributes<HTMLImageElement> & React.ImgHTMLAttributes<HTMLImageElement>) => {
-        return <img {...props} />;
+        return <Image
+            src="..."
+            alt="Описательный текст изображения"
+            width={500}  // Укажите подходящую ширину
+            height={300} // Укажите подходящую высоту
+        />;
+
     },
 }));
 

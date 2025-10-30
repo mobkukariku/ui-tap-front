@@ -5,47 +5,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/shared/ui/badge"
 import { Button } from "@/shared/ui/button"
 import { data as initialData } from "@/features/manager/bookings/booking-table/model/constants"
-import { ArrowDownUp } from "lucide-react"
 
 function BookingTable() {
-    const [data, setData] = useState(initialData)
-    const [sortState, setSortState] = useState({
-        status: true,
-        price: true,
-        dates: true,
-    })
+    const [data, setData] = useState(initialData);
 
-    const sortBy = <T extends keyof typeof initialData[0]>(key: T, asc: boolean) => {
-        const sorted = [...data].sort((a, b) => {
-            if (a[key] < b[key]) return asc ? -1 : 1
-            if (a[key] > b[key]) return asc ? 1 : -1
-            return 0
-        })
-        setData(sorted)
-    }
-
-    const handleSortStatus = () => {
-        sortBy("status", sortState.status)
-        setSortState({ ...sortState, status: !sortState.status })
-    }
-
-    const handleSortPrice = () => {
-        const sorted = [...data].sort((a, b) =>
-            sortState.price ? a.price - b.price : b.price - a.price
-        )
-        setData(sorted)
-        setSortState({ ...sortState, price: !sortState.price })
-    }
-
-    const handleSortDates = () => {
-        const toTimestamp = (d: string) => new Date(d).getTime()
-        const sorted = [...data].sort((a, b) => {
-            const diff = toTimestamp(a.fromDate) - toTimestamp(b.fromDate)
-            return sortState.dates ? diff : -diff
-        })
-        setData(sorted)
-        setSortState({ ...sortState, dates: !sortState.dates })
-    }
 
     const getBadgeVariant = (status: string) => {
         switch (status) {
@@ -73,40 +36,23 @@ function BookingTable() {
                     <TableHead>
                         <div
                             className="flex items-center gap-2 cursor-pointer select-none"
-                            onClick={handleSortDates}
                         >
                             Даты
-                            <ArrowDownUp
-                                className={`opacity-60 text-[#525252] w-4 h-4 transition-transform duration-200 ${
-                                    sortState.dates ? "rotate-180" : ""
-                                }`}
-                            />
                         </div>
                     </TableHead>
                     <TableHead>
                         <div
                             className="flex items-center gap-2 cursor-pointer select-none"
-                            onClick={handleSortPrice}
                         >
                             Цена
-                            <ArrowDownUp
-                                className={`opacity-60 text-[#525252] w-4 h-4 transition-transform duration-200 ${
-                                    sortState.price ? "rotate-180" : ""
-                                }`}
-                            />
+
                         </div>
                     </TableHead>
                     <TableHead>
                         <div
                             className="flex items-center gap-2 cursor-pointer select-none"
-                            onClick={handleSortStatus}
                         >
                             Статус
-                            <ArrowDownUp
-                                className={`opacity-60 text-[#525252] w-4 h-4 transition-transform duration-200 ${
-                                    sortState.status ? "rotate-180" : ""
-                                }`}
-                            />
                         </div>
                     </TableHead>
                     <TableHead className="text-center">Действия</TableHead>

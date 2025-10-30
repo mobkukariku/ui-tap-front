@@ -16,7 +16,7 @@ import {ErrorResponse} from "@/shared/types";
 export function RegisterForm() {
     const register = useRegister();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitting] = useState(false);
 
     const form = useForm<ManagerRegisterFormData>({
         resolver: zodResolver(managerRegisterSchema),

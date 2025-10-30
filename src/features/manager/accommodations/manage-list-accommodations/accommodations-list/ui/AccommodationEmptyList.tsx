@@ -1,5 +1,4 @@
-import {HouseIcon, PlusIcon} from "lucide-react";
-import {Button} from "@/shared/ui/button";
+import {HouseIcon} from "lucide-react";
 
 export function AccommodationEmptyList() {
     return (
