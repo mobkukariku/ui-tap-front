@@ -26,7 +26,7 @@ export async function middleware(req:NextRequest) {
     }
 
     if(managerRoutes.some((path) => req.nextUrl.pathname.startsWith(path))) {
-        if(role === "MANAGER") {
+        if(role === "SUPER_MANAGER") {
             return NextResponse.next();
         }
 
