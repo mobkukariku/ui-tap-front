@@ -1,6 +1,6 @@
 import axios, {AxiosError} from "axios";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://10.36.40.36:8080/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://10.36.40.36:8080/api";
 
 export const api = axios.create({
     baseURL: API_URL,
