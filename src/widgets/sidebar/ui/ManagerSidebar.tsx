@@ -1,3 +1,4 @@
+"use client"
 import {
     BuildingIcon,
     Calendar1Icon,
@@ -23,6 +24,7 @@ import {
     DropdownMenuTrigger
 } from "@/shared/ui/dropdown-menu";
 import {Button} from "@/shared/ui/button";
+import {useHandleLogout} from "@/widgets/sidebar/model/useHandleLogout";
 
 const items = [
     {
@@ -48,6 +50,8 @@ const items = [
 ]
 
 export function ManagerSidebar() {
+    const {handleLogout} = useHandleLogout();
+
     return (
         <Sidebar>
             <SidebarHeader className={"p-4"}>
@@ -73,7 +77,7 @@ export function ManagerSidebar() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                             <DropdownMenuGroup>
-                                <DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => handleLogout()}>
                                     <LogOut />
                                     Выйти
                                 </DropdownMenuItem>

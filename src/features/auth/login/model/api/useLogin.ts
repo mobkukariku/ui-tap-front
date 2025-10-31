@@ -8,8 +8,8 @@ export function useLogin()  {
 
     return useMutation({
         mutationFn: (data: LoginCredentials) => loginApi.login(data),
-        onSuccess: (response) => {
-            login(response.data.accessToken, response.data.refreshToken);
+        onSuccess: async (response) => {
+            await login(response.data.accessToken);
         },
         onError: (error) => {
             console.log(error.message);

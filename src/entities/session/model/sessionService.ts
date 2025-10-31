@@ -5,13 +5,11 @@ export const sessionService = {
     getToken: () => {
         return localStorage.getItem('accessToken');
     },
-    setTokens: (accessToken: string, refreshToken: string) => {
+    setTokens: (accessToken: string) => {
         localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
     },
     removeTokens: () => {
         localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
     },
     decodeToken: (token:string): JwtPayload | null => {
         try{
@@ -38,14 +36,5 @@ export const sessionService = {
             email: decoded.email,
             role: decoded.resource_access.inlive.roles,
         }
-    },
-    hasRole: (role: string | string[]) => {
-        const token = sessionService.getToken();
-        if(!token) return false;
-
-        const decoded = sessionService.decodeToken(token);
-        if(!decoded) return false;
-
-        return decoded.resource_access.inlive.roles === role;
     }
 }

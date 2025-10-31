@@ -1,3 +1,4 @@
+"use client"
 import {
     Sidebar,
     SidebarContent,
@@ -14,6 +15,7 @@ import {
     DropdownMenuTrigger
 } from "@/shared/ui/dropdown-menu";
 import {Button} from "@/shared/ui/button";
+import {useHandleLogout} from "@/widgets/sidebar/model/useHandleLogout";
 
 const items = [
     {
@@ -39,6 +41,7 @@ const items = [
 ]
 
 export function AdminSidebar() {
+    const {handleLogout} = useHandleLogout();
 
     return (
         <Sidebar>
@@ -65,7 +68,7 @@ export function AdminSidebar() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                             <DropdownMenuGroup>
-                                <DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => handleLogout()}>
                                     <LogOut />
                                     Выйти
                                 </DropdownMenuItem>

@@ -1,43 +1,34 @@
-import {NextRequest, NextResponse} from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-const adminRoutes = [
-    "/admin",
-]
+const roleRoutes = {
+    ADMIN: ["/admin"],
+    SUPER_MANAGER: ["/manager"],
+};
 
-const managerRoutes = [
-    "/manager",
-]
+const LOGIN_PAGE = "/auth/login";
 
+export async function middleware(req: NextRequest) {
+    const role = req.cookies.get("USER_ROLE")?.value;
 
-export async function middleware(req:NextRequest) {
-    const role = req.cookies.get('USER_ROLE')?.value;
-    console.log(1)
-
-    if(!role){
-        return NextResponse.redirect(new URL('/auth/login', req.url))
+    if (!role) {
+        return NextResponse.redirect(new URL(LOGIN_PAGE, req.url));
     }
 
-    if (adminRoutes.some((path) => req.nextUrl.pathname.startsWith(path))) {
-        if(role === "ADMIN") {
-            return NextResponse.next();
-        }
+    const pathname = req.nextUrl.pathname;
 
-        return NextResponse.redirect(new URL('/auth/login', req.url))
+    const allowedRoutes = roleRoutes[role as keyof typeof roleRoutes];
+
+    if (allowedRoutes?.some((path) => pathname.startsWith(path))) {
+        return NextResponse.next();
     }
 
-    if(managerRoutes.some((path) => req.nextUrl.pathname.startsWith(path))) {
-        if(role === "SUPER_MANAGER") {
-            return NextResponse.next();
-        }
-
-        return NextResponse.redirect(new URL('/auth/login', req.url))
+    if (role in roleRoutes) {
+        return NextResponse.redirect(new URL(roleRoutes[role as keyof typeof roleRoutes][0], req.url));
     }
+
+    return NextResponse.redirect(new URL(LOGIN_PAGE, req.url));
 }
-
 
 export const config = {
-    matcher: [
-        '/admin/:path*',
-        '/manager/:path*'
-    ],
-}
+    matcher: ["/admin/:path*", "/manager/:path*"],
+};
