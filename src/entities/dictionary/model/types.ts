@@ -6,8 +6,10 @@ export interface Dictionary {
 
 export interface DictionaryCredentials {
     isDeleted: boolean;
-    keys: string[];
-    values: string;
+    keys: string[] | null;
+    values: string | null;
+    page: number;
+    size: number;
 }
 
 export interface DictionaryResponse {
