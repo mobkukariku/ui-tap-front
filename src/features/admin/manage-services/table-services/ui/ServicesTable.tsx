@@ -1,40 +1,44 @@
-"use client"
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/shared/ui/table";
-import {useDictionary} from "@/entities/dictionary/model/api/useDictionary";
-
-
-// const data = [
-//     {
-//         id: 1,
-//         key: "WIFI_FREE",
-//         value: "Бесплатный Wi-Fi во всех зонах"
-//     }
-// ]
+"use client";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/ui/table";
+import { useDictionary } from "@/entities/dictionary/model/api/useDictionary";
+import { useState } from "react";
+import {TablePagination} from "@/widgets/pagination/ui/TablePagination";
 
 export function ServicesTable() {
-    const { data, isLoading, error } = useDictionary(null);
+    const [page, setPage] = useState(0);
+
+    const { data, isLoading, isError } = useDictionary("ACC_SERVICE", page);
 
     if (isLoading) return <p>Loading...</p>;
-    if (error) return <p>Error loading departments</p>;
-
-    console.log(data);
+    if (isError) return <p>Error loading services</p>;
 
     return (
-        <Table className="w-full">
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Ключ</TableHead>
-                    <TableHead>Значение</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {/*{data.map((item) => (*/}
-                {/*    <TableRow key={item.id}>*/}
-                {/*        <TableCell>{item.key}</TableCell>*/}
-                {/*        <TableCell>{item.value}</TableCell>*/}
-                {/*    </TableRow>*/}
-                {/*))}*/}
-            </TableBody>
-        </Table>
-    )
+        <>
+            <Table className="w-full">
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>ID</TableHead>
+                        <TableHead>Значение</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {data?.content.map((item) => (
+                        <TableRow key={item.id}>
+                            <TableCell>{item.id}</TableCell>
+                            <TableCell>{item.value}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+            {data?.totalElements > 20 && (
+                <TablePagination
+                    page={page}
+                    totalPages={data.totalPages}
+                    totalElements={data.totalElements}
+                    size={10}
+                    onPageChange={setPage}
+                />
+            )}
+        </>
+    );
 }

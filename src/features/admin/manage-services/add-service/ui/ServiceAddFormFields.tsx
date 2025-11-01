@@ -8,6 +8,7 @@ import {Label} from "@/shared/ui/label";
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {AddServiceFormData, addServiceSchema} from "@/features/admin/manage-services/add-service/model/schema";
+import {useAddService} from "@/features/admin/manage-services/add-service/model/api/useAddService";
 
 
 interface Props {
@@ -18,19 +19,24 @@ interface Props {
 
 export function ServiceAddFormFields({setOpen}:Props) {
 
+    const {mutate, isPending, isSuccess} = useAddService();
     const form = useForm<AddServiceFormData>({
         resolver: zodResolver(addServiceSchema),
-        defaultValues: { key: "", value: "" },
+        defaultValues: { value: "" },
     });
 
     const onSubmit = (data: AddServiceFormData) => {
-        console.log(data);
-        setOpen(false);
-        toast.success("Сервис был создан.", {
-            position: "top-right",
-            richColors: true,
-            description: getCurrentTime()
-        })
+        try{
+            mutate(data);
+            setOpen(false);
+            toast.success("Сервис был создан.", {
+                position: "top-right",
+                richColors: true,
+                description: getCurrentTime()
+            })
+        }catch (error){
+            console.log(error);
+        }
     };
 
     return (
@@ -41,17 +47,6 @@ export function ServiceAddFormFields({setOpen}:Props) {
             </DialogHeader>
             <div className="flex items-center my-5 gap-2">
                 <div className="flex flex-col w-full gap-4">
-                    <div className={"flex gap-2 flex-col"}>
-                        <Label htmlFor={"key"}>Ключ</Label>
-                        <Input
-                            id="key"
-                            placeholder="Ключ"
-                            {...form.register("key")}
-                        />
-                        {form.formState.errors.key && (
-                            <p className="text-sm text-red-500">{form.formState.errors.key.message as string}</p>
-                        )}
-                    </div>
                     <div className={"flex gap-2 flex-col"}>
                         <Label htmlFor={"value"}>Значение</Label>
                         <Input
