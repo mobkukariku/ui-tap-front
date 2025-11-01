@@ -25,26 +25,31 @@ export const useAuth = () => {
     const { data, refetch } = useQuery({
         queryKey: sessionKeys.session(),
         queryFn: getAuthState,
-        staleTime: Infinity,
+        staleTime: 0,
     });
 
     const login = useCallback(
         async (accessToken: string) => {
             sessionService.setTokens(accessToken);
+
+            const newState = getAuthState();
+            queryClient.setQueryData(sessionKeys.session(), newState); // ✅ сразу обновляем кэш
+
             await refetch();
         },
-        [refetch]
+        [refetch, queryClient, getAuthState]
     );
 
     const logout = useCallback(async () => {
         sessionService.removeTokens();
+
+        queryClient.setQueryData(sessionKeys.session(), { isAuthenticated: false, user: null }); // ✅ мгновенно чистим
         await queryClient.invalidateQueries({ queryKey: sessionKeys.session() });
         await refetch();
     }, [queryClient, refetch]);
 
     return {
         isAuthenticated: data?.isAuthenticated ?? false,
-
         user: data?.user ?? null,
         login,
         logout,

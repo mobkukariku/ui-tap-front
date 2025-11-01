@@ -18,7 +18,6 @@ interface Props {
 
 
 export function ServiceAddFormFields({setOpen}:Props) {
-
     const {mutate, isPending, isSuccess} = useAddService();
     const form = useForm<AddServiceFormData>({
         resolver: zodResolver(addServiceSchema),
@@ -27,7 +26,7 @@ export function ServiceAddFormFields({setOpen}:Props) {
 
     const onSubmit = (data: AddServiceFormData) => {
         try{
-            mutate(data);
+            mutate(data.value);
             setOpen(false);
             toast.success("Сервис был создан.", {
                 position: "top-right",

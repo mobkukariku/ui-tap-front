@@ -1,6 +1,5 @@
 export interface Dictionary {
-    id: number;
-    name: string;
+    key: string;
     value: string;
 }
 
@@ -12,11 +11,11 @@ export interface DictionaryCredentials {
     size: number;
 }
 
+
 export interface DictionaryResponse {
     content: Dictionary[];
     page: number;
     size: number;
     totalElements: number;
     totalPages: number;
-    last: boolean;
 }

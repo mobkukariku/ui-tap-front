@@ -1,20 +1,20 @@
-
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {createService} from "@/features/admin/manage-services/add-service/model/api/api";
+import {ConditionDictionaryCreateCredentials} from "@/features/admin/manage-conditions/add-condition/model/types";
+import {createCondition} from "@/features/admin/manage-conditions/add-condition/model/api/api";
 
-export function useAddService() {
+export function useAddCondition() {
     const queryClient = useQueryClient();
 
     return useMutation({
         mutationFn: (value: string) =>
-            createService({
-                key: "ACC_SERVICE",
+            createCondition({
+                key: "ACC_CONDITION",
                 value: value
             })
         ,
         onSuccess: async () => {
             await queryClient.invalidateQueries({
-                queryKey: ["dictionary", "ACC_SERVICE"],
+                queryKey: ["dictionary", "ACC_CONDITION"],
                 exact: false
             });
         },
@@ -23,6 +23,6 @@ export function useAddService() {
         },
         onSettled: () => {
             console.log("onSettled");
-        }
+        },
     })
 }

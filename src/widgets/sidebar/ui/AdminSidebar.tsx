@@ -32,11 +32,6 @@ const items = [
         title: "Условия",
         url: "/admin/conditions",
         icon: Settings,
-    },
-    {
-        title: "Пользователи",
-        url: "/admin/users",
-        icon: User,
     }
 ]
 
