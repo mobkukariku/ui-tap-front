@@ -9,7 +9,7 @@ import { data as initialData } from "@/features/manager/requests/request-table/m
 import {formatDate} from "@/shared/lib/date/formateDate";
 
 export function RequestTable() {
-    const [data, setData] = useState(initialData)
+    const [data] = useState(initialData)
     const [activePopup, setActivePopup] = useState<number | null>(null)
     const [respondedRows, setRespondedRows] = useState<Set<string>>(() => new Set())
 

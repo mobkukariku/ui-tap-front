@@ -6,7 +6,7 @@ import { DictionaryCredentials } from "@/entities/dictionary/model/types";
             params: {
                 isDeleted: data.isDeleted ?? false,
                 keys: data.keys?.length ? data.keys : "",
-                value: data.values ??  "",
+                value: data.value ??  "",
                 page: data.page ?? 0,
                 size: data.size ?? 20,
             },

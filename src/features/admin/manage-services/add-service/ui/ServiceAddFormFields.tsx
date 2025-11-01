@@ -9,6 +9,7 @@ import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {AddServiceFormData, addServiceSchema} from "@/features/admin/manage-services/add-service/model/schema";
 import {useAddService} from "@/features/admin/manage-services/add-service/model/api/useAddService";
+import {AxiosError} from "axios";
 
 
 interface Props {
@@ -18,8 +19,7 @@ interface Props {
 
 
 export function ServiceAddFormFields({setOpen}:Props) {
-
-    const {mutate, isPending, isSuccess} = useAddService();
+    const {mutate} = useAddService();
     const form = useForm<AddServiceFormData>({
         resolver: zodResolver(addServiceSchema),
         defaultValues: { value: "" },
@@ -27,7 +27,7 @@ export function ServiceAddFormFields({setOpen}:Props) {
 
     const onSubmit = (data: AddServiceFormData) => {
         try{
-            mutate(data);
+            mutate(data.value);
             setOpen(false);
             toast.success("Сервис был создан.", {
                 position: "top-right",
@@ -35,7 +35,15 @@ export function ServiceAddFormFields({setOpen}:Props) {
                 description: getCurrentTime()
             })
         }catch (error){
-            console.log(error);
+            if(error instanceof AxiosError){
+                toast.error("Ошибка создания сервиса", {
+                    position: "top-right",
+                    richColors: true,
+                    description:
+                        error.response?.data?.message ||
+                        "Проверьте данные и попробуйте снова",
+                });
+            }
         }
     };
 

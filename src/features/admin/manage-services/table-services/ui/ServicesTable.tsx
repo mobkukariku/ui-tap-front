@@ -3,11 +3,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { useDictionary } from "@/entities/dictionary/model/api/useDictionary";
 import { useState } from "react";
 import {TablePagination} from "@/widgets/pagination/ui/TablePagination";
+import {Dictionary} from "@/entities/dictionary/model/types";
 
 export function ServicesTable() {
     const [page, setPage] = useState(0);
 
-    const { data, isLoading, isError } = useDictionary("ACC_SERVICE", page);
+    const { data, isLoading, isError } = useDictionary("ACC_SERVICE",null, page);
 
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error loading services</p>;
@@ -22,7 +23,7 @@ export function ServicesTable() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {data?.content.map((item) => (
+                    {data?.content.map((item:Dictionary) => (
                         <TableRow key={item.id}>
                             <TableCell>{item.id}</TableCell>
                             <TableCell>{item.value}</TableCell>
@@ -34,7 +35,6 @@ export function ServicesTable() {
                 <TablePagination
                     page={page}
                     totalPages={data.totalPages}
-                    totalElements={data.totalElements}
                     size={10}
                     onPageChange={setPage}
                 />

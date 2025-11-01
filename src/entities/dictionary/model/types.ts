@@ -1,14 +1,17 @@
 export interface Dictionary {
-    id: number;
-    name: string;
+    id?: string;
+    key: string;
     value: string;
 }
 
 export interface DictionaryCredentials {
     isDeleted: boolean;
-    keys: string[];
-    values: string;
+    keys: string[] | null;
+    value: string | null;
+    page: number;
+    size: number;
 }
+
 
 export interface DictionaryResponse {
     content: Dictionary[];
@@ -16,5 +19,4 @@ export interface DictionaryResponse {
     size: number;
     totalElements: number;
     totalPages: number;
-    last: boolean;
 }
