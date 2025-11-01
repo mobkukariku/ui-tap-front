@@ -1,4 +1,5 @@
 export interface Dictionary {
+    id?: string;
     key: string;
     value: string;
 }
@@ -6,7 +7,7 @@ export interface Dictionary {
 export interface DictionaryCredentials {
     isDeleted: boolean;
     keys: string[] | null;
-    values: string | null;
+    value: string | null;
     page: number;
     size: number;
 }

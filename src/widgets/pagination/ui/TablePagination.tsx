@@ -43,7 +43,7 @@ export function TablePagination({ page, totalPages, onPageChange}: TablePaginati
                         <PaginationLink
                             href="#"
                             onClick={(e) => {
-                                e.preventDefault(e);
+                                e.preventDefault();
                                 onPageChange(p);
                             }}
                             isActive={p === page}

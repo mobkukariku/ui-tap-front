@@ -9,6 +9,7 @@ import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {AddConditionFormData, addConditionSchema} from "@/features/admin/manage-conditions/add-condition/model/schema";
 import {useAddCondition} from "@/features/admin/manage-conditions/add-condition/model/api/useAddCondition";
+import {AxiosError} from "axios";
 
 
 interface Props {
@@ -16,7 +17,7 @@ interface Props {
 }
 
 export function ConditionAddFormFields({setOpen}:Props) {
-    const {mutate, isPending, isSuccess} = useAddCondition();
+    const {mutate} = useAddCondition();
     const form = useForm<AddConditionFormData>({
         resolver: zodResolver(addConditionSchema),
         defaultValues: { value: "" },
@@ -32,7 +33,15 @@ export function ConditionAddFormFields({setOpen}:Props) {
                 description: getCurrentTime()
             })
         }catch (error){
-            console.log(error);
+            if(error instanceof AxiosError){
+                toast.error("Ошибка создания сервиса", {
+                    position: "top-right",
+                    richColors: true,
+                    description:
+                        error.response?.data?.message ||
+                        "Проверьте данные и попробуйте снова",
+                });
+            }
         }
     };
 

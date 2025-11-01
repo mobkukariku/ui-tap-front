@@ -4,17 +4,19 @@ import {DictionaryCredentials} from "@/entities/dictionary/model/types";
 import {useQuery} from "@tanstack/react-query";
 
 
-export function useDictionary(type: string, page = 0, size = 20) {
+
+
+export function useDictionary(key: string, value: string | null, page = 0, size = 20) {
     const payload: DictionaryCredentials = {
         isDeleted: false,
-        keys: type ? [type] : null,
-        values: null,
+        keys: key ? [key] : null,
+        value: value ? value : null,
         page,
         size,
     };
 
     return useQuery({
-        queryKey: ["dictionary", type, page, size],
+        queryKey: ["dictionary", key, page, size, value],
         queryFn: () => getDictionaries(payload)
     });
 }

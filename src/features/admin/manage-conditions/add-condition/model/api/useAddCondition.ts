@@ -1,5 +1,4 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {ConditionDictionaryCreateCredentials} from "@/features/admin/manage-conditions/add-condition/model/types";
 import {createCondition} from "@/features/admin/manage-conditions/add-condition/model/api/api";
 
 export function useAddCondition() {

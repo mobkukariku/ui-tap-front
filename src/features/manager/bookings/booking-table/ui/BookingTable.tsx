@@ -7,7 +7,7 @@ import { Button } from "@/shared/ui/button"
 import { data as initialData } from "@/features/manager/bookings/booking-table/model/constants"
 
 function BookingTable() {
-    const [data, setData] = useState(initialData);
+    const [data] = useState(initialData);
 
 
     const getBadgeVariant = (status: string) => {

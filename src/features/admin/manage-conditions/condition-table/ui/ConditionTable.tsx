@@ -3,12 +3,13 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/s
 import {useState} from "react";
 import {useDictionary} from "@/entities/dictionary/model/api/useDictionary";
 import {TablePagination} from "@/widgets/pagination/ui/TablePagination";
+import {Dictionary} from "@/entities/dictionary/model/types";
 
 
 export function ConditionTable() {
     const [page, setPage] = useState(0);
 
-    const { data, isLoading, isError } = useDictionary("ACC_CONDITION", page);
+    const { data, isLoading, isError } = useDictionary("ACC_CONDITION", null, page);
 
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error loading services</p>;
@@ -23,7 +24,7 @@ export function ConditionTable() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {data?.content.map((item) => (
+                    {data?.content.map((item: Dictionary) => (
                         <TableRow key={item.id}>
                             <TableCell>{item.id}</TableCell>
                             <TableCell>{item.value}</TableCell>
@@ -35,7 +36,6 @@ export function ConditionTable() {
                 <TablePagination
                     page={page}
                     totalPages={data.totalPages}
-                    totalElements={data.totalElements}
                     size={10}
                     onPageChange={setPage}
                 />

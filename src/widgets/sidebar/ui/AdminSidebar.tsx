@@ -8,7 +8,7 @@ import {
     SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem
 } from "@/shared/ui/sidebar";
 import {Avatar, AvatarFallback, AvatarImage} from "@/shared/ui/avatar";
-import {EllipsisVertical, LayoutDashboardIcon, LogOut, Settings, User} from "lucide-react";
+import {EllipsisVertical, LayoutDashboardIcon, LogOut, Settings} from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,

@@ -15,7 +15,7 @@ import Image from 'next/image';
 // Мок для next/image
 jest.mock('next/image', () => ({
     __esModule: true,
-    default: (props: React.JSX.IntrinsicAttributes & React.ClassAttributes<HTMLImageElement> & React.ImgHTMLAttributes<HTMLImageElement>) => {
+    default: () => {
         return <Image
             src="..."
             alt="Описательный текст изображения"

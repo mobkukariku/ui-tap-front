@@ -1,3 +1,3 @@
 import {Dictionary} from "@/entities/dictionary/model/types";
 
-export interface ConditionDictionaryCreateCredentials extends Dictionary {};
+export type ConditionDictionaryCreateCredentials = Dictionary;
