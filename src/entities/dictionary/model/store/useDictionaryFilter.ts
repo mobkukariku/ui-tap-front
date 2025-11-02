@@ -3,7 +3,7 @@ import { DictionaryCredentials } from "@/entities/dictionary/model/types";
 
 interface ConditionsFilterStore {
     filters: Partial<DictionaryCredentials> & { page: number; size: number };
-    setFilter: (key: keyof DictionaryCredentials | "page" | "size", value: any) => void;
+    setFilter: (key: keyof DictionaryCredentials | "page" | "size", value: number | string) => void;
     setFilters: (newFilters: Partial<DictionaryCredentials> &  Partial<{ page: number; size: number }>) => void;
     resetFilters: () => void;
 }
