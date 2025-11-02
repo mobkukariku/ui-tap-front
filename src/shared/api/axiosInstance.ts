@@ -1,5 +1,4 @@
-import axios, { AxiosError } from "axios";
-import Cookies from "js-cookie";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const API_URL = "/api";
 
@@ -22,7 +21,7 @@ let refreshPromise: Promise<string> | null = null;
 api.interceptors.response.use(
     (response) => response,
     async (error: AxiosError) => {
-        const originalRequest = error.config as any;
+        const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
 
         if (error.response?.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
@@ -49,7 +48,9 @@ api.interceptors.response.use(
 
             const newToken = await refreshPromise;
 
-            originalRequest.headers.Authorization = `Bearer ${newToken}`;
+            if (originalRequest.headers)
+                originalRequest.headers.Authorization = `Bearer ${newToken}`;
+
             return api(originalRequest);
         }
 
