@@ -1,22 +1,18 @@
-"use client"
-import {getDictionaries} from "@/entities/dictionary/model/api/api";
-import {DictionaryCredentials} from "@/entities/dictionary/model/types";
-import {useQuery} from "@tanstack/react-query";
+"use client";
+import { getDictionaries } from "@/entities/dictionary/model/api/api";
+import { useQuery } from "@tanstack/react-query";
+import { useDictionaryFilter } from "@/entities/dictionary/model/store/useDictionaryFilter";
 
+export function useDictionary(key: string) {
+    const { filters } = useDictionaryFilter();
 
-
-
-export function useDictionary(key: string, value: string | null, page = 0, size = 20) {
-    const payload: DictionaryCredentials = {
-        isDeleted: false,
+    const payload = {
         keys: key ? [key] : null,
-        value: value ? value : null,
-        page,
-        size,
+        ...filters,
     };
 
     return useQuery({
-        queryKey: ["dictionary", key, page, size, value],
+        queryKey: ["dictionary", key, filters],
         queryFn: () => getDictionaries(payload)
     });
 }

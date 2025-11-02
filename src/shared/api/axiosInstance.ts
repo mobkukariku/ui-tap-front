@@ -1,12 +1,12 @@
-import axios, {AxiosError} from "axios";
+import axios, { AxiosError } from "axios";
+import Cookies from "js-cookie";
 
-const API_URL = "/api"; // 👈 теперь без IP
+const API_URL = "/api";
 
 export const api = axios.create({
     baseURL: API_URL,
     withCredentials: true,
 });
-
 
 api.interceptors.request.use((config) => {
     const token = localStorage.getItem("accessToken");
@@ -16,14 +16,43 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
+let isRefreshing = false;
+let refreshPromise: Promise<string> | null = null;
+
 api.interceptors.response.use(
     (response) => response,
-    (error: AxiosError) => {
-        if (error.response?.status === 401) {
-            localStorage.removeItem("accessToken");
+    async (error: AxiosError) => {
+        const originalRequest = error.config as any;
+
+        if (error.response?.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
+
+            if (!isRefreshing) {
+                isRefreshing = true;
+                refreshPromise = (async () => {
+                    try {
+                        const response = await api.post("/auth/refresh", null, {
+                            withCredentials: true,
+                        });
+                        const newToken: string = response.data.accessToken;
+
+                        localStorage.setItem("accessToken", newToken);
+                        return newToken;
+                    } catch (err) {
+                        localStorage.removeItem("accessToken");
+                        throw err;
+                    } finally {
+                        isRefreshing = false;
+                    }
+                })();
+            }
+
+            const newToken = await refreshPromise;
+
+            originalRequest.headers.Authorization = `Bearer ${newToken}`;
+            return api(originalRequest);
         }
+
         return Promise.reject(error);
     }
 );
-
-

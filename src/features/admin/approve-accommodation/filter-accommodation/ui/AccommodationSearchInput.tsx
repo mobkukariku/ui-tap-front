@@ -1,7 +1,17 @@
+"use client"
 import {Input} from "@/shared/ui/input";
 import {Search} from "lucide-react";
+import {useDebounce} from "@/shared/hooks/useDebounce";
+import {
+    useAccommodationFilter
+} from "@/features/admin/approve-accommodation/filter-accommodation/model/store/useAccommodationFilter";
 
 export function AccommodationSearchInput() {
+    const { filters, setFilter } = useAccommodationFilter();
+
+    const debouncedSearch = useDebounce((value: string) => {
+        setFilter("name", value);
+    }, 400);
 
     return (
         <section className={"my-5 flex justify-between"}>
@@ -13,6 +23,8 @@ export function AccommodationSearchInput() {
                         id="accommondation-search"
                         placeholder="Найти Accommondation..."
                         className="pl-9"
+                        defaultValue={filters.name ?? ""}
+                        onChange={e => debouncedSearch(e.target.value)}
                     />
                 </fieldset>
             </form>

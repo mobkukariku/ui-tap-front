@@ -11,7 +11,7 @@ import {useRegister} from "@/features/auth/register/manager/model/api/useRegiste
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {AxiosError} from "axios";
-import {ErrorResponse} from "@/shared/types";
+import {ErrorResponse} from "@/shared/types/error";
 
 export function RegisterForm() {
     const register = useRegister();

@@ -1,7 +1,7 @@
 import { api } from "@/shared/api/axiosInstance";
 import { DictionaryCredentials } from "@/entities/dictionary/model/types";
 
-    export const getDictionaries = async (data: DictionaryCredentials) => {
+    export const getDictionaries = async (data: Partial<DictionaryCredentials>) => {
         const response = await api.get("/dictionaries/search", {
             params: {
                 isDeleted: data.isDeleted ?? false,
