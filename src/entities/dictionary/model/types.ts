@@ -1,15 +1,15 @@
+import {PaginationParams} from "@/shared/types/params";
+
 export interface Dictionary {
     id?: string;
     key: string;
     value: string;
 }
 
-export interface DictionaryCredentials {
-    isDeleted: boolean;
+export interface DictionaryCredentials extends PaginationParams {
+    isDeleted: boolean | null;
     keys: string[] | null;
     value: string | null;
-    page: number;
-    size: number;
 }
 
 

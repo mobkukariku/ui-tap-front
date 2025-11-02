@@ -1,15 +1,13 @@
 "use client";
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/shared/ui/table";
-import {useState} from "react";
-import {useDictionary} from "@/entities/dictionary/model/api/useDictionary";
-import {TablePagination} from "@/widgets/pagination/ui/TablePagination";
-import {Dictionary} from "@/entities/dictionary/model/types";
-
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/ui/table";
+import { useDictionary } from "@/entities/dictionary/model/api/useDictionary";
+import { TablePagination } from "@/widgets/pagination/ui/TablePagination";
+import { Dictionary } from "@/entities/dictionary/model/types";
+import { useDictionaryFilter } from "@/entities/dictionary/model/store/useDictionaryFilter";
 
 export function ConditionTable() {
-    const [page, setPage] = useState(0);
-
-    const { data, isLoading, isError } = useDictionary("ACC_CONDITION", null, page);
+    const { filters, setFilter } = useDictionaryFilter();
+    const { data, isLoading, isError } = useDictionary("ACC_CONDITION");
 
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error loading services</p>;
@@ -32,14 +30,15 @@ export function ConditionTable() {
                     ))}
                 </TableBody>
             </Table>
+
             {data?.totalElements > 20 && (
                 <TablePagination
-                    page={page}
+                    page={filters.page ?? 0}
                     totalPages={data.totalPages}
-                    size={10}
-                    onPageChange={setPage}
+                    size={filters.size ?? 0}
+                    onPageChange={(newPage) => setFilter("page", newPage)} // ✅ вот правильный способ
                 />
             )}
         </>
-    )
+    );
 }

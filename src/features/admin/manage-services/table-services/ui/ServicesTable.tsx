@@ -4,11 +4,13 @@ import { useDictionary } from "@/entities/dictionary/model/api/useDictionary";
 import { useState } from "react";
 import {TablePagination} from "@/widgets/pagination/ui/TablePagination";
 import {Dictionary} from "@/entities/dictionary/model/types";
+import {useDictionaryFilter} from "@/entities/dictionary/model/store/useDictionaryFilter";
 
 export function ServicesTable() {
-    const [page, setPage] = useState(0);
+    const { filters, setFilter } = useDictionaryFilter();
 
-    const { data, isLoading, isError } = useDictionary("ACC_SERVICE",null, page);
+    const { data, isLoading, isError } = useDictionary("ACC_SERVICE");
+
 
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error loading services</p>;
@@ -33,10 +35,10 @@ export function ServicesTable() {
             </Table>
             {data?.totalElements > 20 && (
                 <TablePagination
-                    page={page}
+                    page={filters.page ?? 0}
                     totalPages={data.totalPages}
-                    size={10}
-                    onPageChange={setPage}
+                    size={filters.size ?? 0}
+                    onPageChange={(newPage) => setFilter("page", newPage)} // ✅ вот правильный способ
                 />
             )}
         </>

@@ -6,12 +6,13 @@ import { toast } from "sonner";
 import { getCurrentTime } from "@/shared/lib/date/getCurrentTime";
 import { AxiosError } from "axios";
 import {sessionService} from "@/entities/session/model/sessionService";
+import {LoginCredentials} from "@/features/auth/login/model/types";
 
 export function useHandleLogin() {
     const login = useLogin();
     const router = useRouter();
 
-    const handleLogin = async (data: { email: string; password: string }) => {
+    const handleLogin = async (data: LoginCredentials) => {
         try {
             await login.mutateAsync(data);
 
