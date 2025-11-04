@@ -4,6 +4,8 @@ import { useDictionary } from "@/entities/dictionary/model/api/useDictionary";
 import { TablePagination } from "@/widgets/pagination/ui/TablePagination";
 import { Dictionary } from "@/entities/dictionary/model/types";
 import { useDictionaryFilter } from "@/entities/dictionary/model/store/useDictionaryFilter";
+import {DeleteIcon, PencilIcon, SettingsIcon, SquarePen, Trash} from "lucide-react";
+import {DictionaryChange} from "@/features/admin/manage-conditions/change-condition/ui/DictionaryChange";
 
 export function ConditionTable() {
     const { filters, setFilter } = useDictionaryFilter();
@@ -19,6 +21,7 @@ export function ConditionTable() {
                     <TableRow>
                         <TableHead>Ключ</TableHead>
                         <TableHead>Значение</TableHead>
+                        <TableHead>Действие</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -26,6 +29,10 @@ export function ConditionTable() {
                         <TableRow key={item.id}>
                             <TableCell>{item.id}</TableCell>
                             <TableCell>{item.value}</TableCell>
+                            <TableCell className={"flex gap-3"}>
+                                <DictionaryChange conditionId={Number(item.id)} />
+                                <Trash className={"w-4 text-red-500"} />
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
