@@ -18,13 +18,13 @@ export const getAccommodation = async (data:AccommodationSearchCredentials) => {
 };
 
 export const approveAccommodation = async (id: string) => {
-    const response = await api.post(`/accommodations/${id}/approve`);
+    const response = await api.patch(`/accommodations/${id}/approve`);
 
     return response.data;
 }
 
 export const rejectAccommodation = async (id: string) => {
-    const response = await api.post(`/accommodations/${id}/reject`);
+    const response = await api.patch(`/accommodations/${id}/reject`);
 
     return response.data;
 }

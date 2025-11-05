@@ -1,6 +1,7 @@
 import {PlusIcon, Search} from "lucide-react";
 import {Input} from "@/shared/ui/input";
 import {Button} from "@/shared/ui/button";
+import Link from "next/link";
 
 export function ManagerAccommodationFilterPanel() {
     return (
@@ -16,10 +17,12 @@ export function ManagerAccommodationFilterPanel() {
                     />
                 </fieldset>
             </form>
-            <Button>
-                <PlusIcon  />
-                Добавить жилье
-            </Button>
+            <Link href={"/manager/accommodations/create"}>
+                <Button>
+                    <PlusIcon  />
+                    Добавить жилье
+                </Button>
+            </Link>
         </section>
     )
 }

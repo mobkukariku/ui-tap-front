@@ -9,3 +9,8 @@ export const changeCondition = async (data: ChangeConditionCredentials) => {
 
     return response.data;
 }
+
+export const getConditions = async (id: number) => {
+    const response = await api.get(`/dictionaries/${id}`);
+    return response.data;
+}

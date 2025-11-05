@@ -4,6 +4,9 @@ import { useDictionary } from "@/entities/dictionary/model/api/useDictionary";
 import {TablePagination} from "@/widgets/pagination/ui/TablePagination";
 import {Dictionary} from "@/entities/dictionary/model/types";
 import {useDictionaryFilter} from "@/entities/dictionary/model/store/useDictionaryFilter";
+import {ConditionChange} from "@/features/admin/manage-conditions/change-condition/ui/ConditionChange";
+import {ServiceChange} from "@/features/admin/manage-services/change-service/ui/ServiceChange";
+import {RemoveService} from "@/features/admin/manage-services/remove-service/ui/RemoveService";
 
 export function ServicesTable() {
     const { filters, setFilter } = useDictionaryFilter();
@@ -21,6 +24,7 @@ export function ServicesTable() {
                     <TableRow>
                         <TableHead>ID</TableHead>
                         <TableHead>Значение</TableHead>
+                        <TableHead>Действие</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -28,6 +32,10 @@ export function ServicesTable() {
                         <TableRow key={item.id}>
                             <TableCell>{item.id}</TableCell>
                             <TableCell>{item.value}</TableCell>
+                            <TableCell className={"flex gap-3"}>
+                                <ServiceChange serviceId={Number(item.id)} />
+                                <RemoveService serviceId={Number(item.id)} />
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

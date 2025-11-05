@@ -9,10 +9,8 @@ import {Label} from "@/shared/ui/label";
 import {Input} from "@/shared/ui/input";
 import {DialogClose, DialogFooter} from "@/shared/ui/dialog";
 import {Button} from "@/shared/ui/button";
-import {toast} from "sonner";
-import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
-import {AxiosError} from "axios";
 import {useGetCondition} from "@/features/admin/manage-conditions/change-condition/model/api/useGetCondition";
+import {useEffect} from "react";
 
 
 interface Props {
@@ -26,8 +24,16 @@ export function ConditionChangeFormFields({setOpen, conditionId}: Props) {
 
     const form = useForm<ChangeConditionFormData>({
         resolver: zodResolver(changeConditionSchema),
-        defaultValues: { value: condition?.value},
+        defaultValues: { value: ""},
     })
+
+    useEffect(() => {
+        if (condition) {
+            form.reset({
+                value: condition.value,
+            });
+        }
+    }, [condition, form]);
 
     const onSubmit = (data: ChangeConditionFormData) => {
         try{
@@ -36,21 +42,8 @@ export function ConditionChangeFormFields({setOpen, conditionId}: Props) {
                 value: data.value
             });
             setOpen(false);
-            toast.success("Условие было изменено.", {
-                position: "top-right",
-                richColors: true,
-                description: getCurrentTime()
-            })
         }catch (error){
-            if(error instanceof AxiosError){
-                toast.error("Ошибка создания сервиса", {
-                    position: "top-right",
-                    richColors: true,
-                    description:
-                        error.response?.data?.message ||
-                        "Проверьте данные и попробуйте снова",
-                });
-            }
+            console.log(error);
         }
     }
 
@@ -77,7 +70,7 @@ export function ConditionChangeFormFields({setOpen, conditionId}: Props) {
                         Close
                     </Button>
                 </DialogClose>
-                <Button type="submit" >Сохранить</Button>
+                <Button type="submit">Сохранить</Button>
             </DialogFooter>
         </form>
     )

@@ -10,7 +10,7 @@ export default function SuperManagerLayout({
 
     return (
         <SidebarProvider >
-            <ManagerSidebar />
+            <ManagerSidebar  />
             <main className={"p-4 w-full"}>
                 {children}
             </main>

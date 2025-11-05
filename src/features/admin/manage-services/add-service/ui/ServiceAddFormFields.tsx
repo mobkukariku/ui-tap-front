@@ -29,21 +29,8 @@ export function ServiceAddFormFields({setOpen}:Props) {
         try{
             mutate(data.value);
             setOpen(false);
-            toast.success("Сервис был создан.", {
-                position: "top-right",
-                richColors: true,
-                description: getCurrentTime()
-            })
         }catch (error){
-            if(error instanceof AxiosError){
-                toast.error("Ошибка создания сервиса", {
-                    position: "top-right",
-                    richColors: true,
-                    description:
-                        error.response?.data?.message ||
-                        "Проверьте данные и попробуйте снова",
-                });
-            }
+            console.log(error);
         }
     };
 

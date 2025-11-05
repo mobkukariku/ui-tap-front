@@ -1,31 +1,29 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {createCondition} from "@/features/admin/manage-conditions/add-condition/model/api/api";
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
+import {changeService} from "@/features/admin/manage-services/change-service/model/api/api";
+import {ChangeServiceCredentials} from "@/features/admin/manage-services/change-service/model/types";
 
-export function useAddCondition() {
+
+
+export function useChangeService() {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: (value: string) =>
-            createCondition({
-                key: "ACC_CONDITION",
-                value: value
-            })
-        ,
+        mutationFn: (data: ChangeServiceCredentials) => changeService(data),
         onSuccess: async () => {
             await queryClient.invalidateQueries({
-                queryKey: ["dictionary", "ACC_CONDITION"],
+                queryKey: ["dictionary", "ACC_SERVICE"],
                 exact: false
             });
-            toast.success("Условие было создано.", {
+            toast.success("Услуга была изменена.", {
                 position: "top-right",
                 richColors: true,
                 description: getCurrentTime()
             })
         },
         onError: (error) => {
-            toast.error("Ошибка создания сервиса", {
+            toast.error("Ошибка изменении услуги", {
                 position: "top-right",
                 richColors: true,
                 description:
@@ -38,4 +36,5 @@ export function useAddCondition() {
             console.log("onSettled");
         },
     })
+
 }

@@ -1,12 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import {api} from "@/shared/api/axiosInstance";
+import {getConditions} from "@/features/admin/manage-conditions/change-condition/model/api/api";
 
 export function useGetCondition(id: number) {
     return useQuery({
         queryKey: ["condition", id],
-        queryFn: async () => {
-            const { data } = await api.get(`/dictionaries/${id}`);
-            return data;
-        },
+        queryFn: async () => getConditions(id),
     });
 }

@@ -1,17 +1,16 @@
 import {Dialog, DialogContent, DialogTitle, DialogTrigger} from "@/shared/ui/dialog";
 import {useState} from "react";
-import {Button} from "@/shared/ui/button";
 import {SquarePen} from "lucide-react";
 import {
     ConditionChangeFormFields
 } from "@/features/admin/manage-conditions/change-condition/ui/ConditionChangeFormFields";
 
 
-interface DictionaryChangeProps {
+interface ConditionChangeProps {
     conditionId: number
 }
 
-export function DictionaryChange({conditionId}: DictionaryChangeProps) {
+export function ConditionChange({conditionId}: ConditionChangeProps) {
     const [open, setOpen] = useState(false);
 
     return (

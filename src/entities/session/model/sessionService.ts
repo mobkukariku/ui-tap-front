@@ -1,3 +1,4 @@
+
 import {JwtPayload} from "@/entities/session/model/types";
 import {jwtDecode} from "jwt-decode";
 
@@ -12,6 +13,8 @@ export const sessionService = {
         localStorage.removeItem('accessToken');
     },
     decodeToken: (token:string): JwtPayload | null => {
+        if(!token) return null;
+
         try{
             return jwtDecode<JwtPayload>(token);
         }catch (error) {
