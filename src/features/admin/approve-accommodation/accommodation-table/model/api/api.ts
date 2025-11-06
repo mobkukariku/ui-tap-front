@@ -11,6 +11,8 @@ export const getAccommodation = async (data:AccommodationSearchCredentials) => {
             minRating: data.minRating ?? "",
             ownerId: data.ownerId ?? "",
             name: data.name ?? "",
+            page: data.page ?? 0,
+            size: data.size ?? 20,
         }
     });
 

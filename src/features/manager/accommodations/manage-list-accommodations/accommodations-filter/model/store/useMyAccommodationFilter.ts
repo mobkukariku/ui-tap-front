@@ -1,14 +1,16 @@
-import { create } from "zustand";
-import { AccommodationSearchCredentials } from "@/features/admin/approve-accommodation/accommodation-table/model/types";
+import {create} from "zustand";
+import {
+    AccommodationRequest
+} from "@/features/manager/accommodations/manage-list-accommodations/accommodations-list/model/types";
 
 interface AccommodationFilterStore {
-    filters: Partial<AccommodationSearchCredentials>;
-    setFilter: (key: keyof AccommodationSearchCredentials, value: string | null | undefined) => void;
+    filters: Partial<AccommodationRequest>;
+    setFilter: (key: keyof AccommodationRequest, value: string | null | undefined) => void;
 
     resetFilters: () => void;
 }
 
-export const useAccommodationFilter = create<AccommodationFilterStore>((set) => ({
+export const useMyAccommodationFilter = create<AccommodationFilterStore>((set) => ({
     filters: {
         cityId: null,
         districtId: null,
@@ -18,7 +20,6 @@ export const useAccommodationFilter = create<AccommodationFilterStore>((set) => 
         ownerId: null,
         name: null,
     },
-
     setFilter: (key, value) =>
         set((state) => ({
             filters: { ...state.filters, [key]: value },
@@ -36,4 +37,4 @@ export const useAccommodationFilter = create<AccommodationFilterStore>((set) => 
                 name: null,
             },
         }),
-}));
+}))

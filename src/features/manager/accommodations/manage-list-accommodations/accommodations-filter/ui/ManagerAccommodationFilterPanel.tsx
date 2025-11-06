@@ -1,9 +1,27 @@
+"use client"
 import {PlusIcon, Search} from "lucide-react";
 import {Input} from "@/shared/ui/input";
 import {Button} from "@/shared/ui/button";
 import Link from "next/link";
+import {
+    useMyAccommodationFilter
+} from "@/features/manager/accommodations/manage-list-accommodations/accommodations-filter/model/store/useMyAccommodationFilter";
+import {useDebounce} from "@/shared/hooks/useDebounce";
+import {
+    AccommodationRequest
+} from "@/features/manager/accommodations/manage-list-accommodations/accommodations-list/model/types";
+
 
 export function ManagerAccommodationFilterPanel() {
+    const {filters, setFilter} = useMyAccommodationFilter();
+
+    const debouncedSearch = useDebounce((value: AccommodationRequest) => {
+        Object.entries(value).forEach(([key, value]) => {
+            setFilter(key as keyof AccommodationRequest, value);
+        });
+    }, 400);
+
+
     return (
         <section className={"mt-5 mb-10 flex justify-between"}>
             <form role="search" className="flex-1 max-w-md">
@@ -14,6 +32,8 @@ export function ManagerAccommodationFilterPanel() {
                         id="accommondation-search"
                         placeholder="Искать объект"
                         className="pl-9"
+                        defaultValue={filters.name ?? ""}
+                        onChange={(e) => debouncedSearch({ name: e.target.value })}
                     />
                 </fieldset>
             </form>
