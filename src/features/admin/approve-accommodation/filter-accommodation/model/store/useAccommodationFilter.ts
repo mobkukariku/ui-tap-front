@@ -12,7 +12,7 @@ export const useAccommodationFilter = create<AccommodationFilterStore>((set) => 
     filters: {
         cityId: null,
         districtId: null,
-        approved: true,
+        approved: null,
         isDeleted: "false",
         minRating: null,
         ownerId: null,
@@ -29,7 +29,7 @@ export const useAccommodationFilter = create<AccommodationFilterStore>((set) => 
             filters: {
                 cityId: null,
                 districtId: null,
-                approved: true,
+                approved: null,
                 isDeleted: "false",
                 minRating: null,
                 ownerId: null,

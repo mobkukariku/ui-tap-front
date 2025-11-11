@@ -16,7 +16,7 @@ export function useCreateAccommodation() {
             });
         },
         onError: async (error) => {
-            toast.error("Ошибка отправки запроса", {
+            toast.error("Ошибка отправки запроса.", {
                 position: "top-right",
                 richColors: true,
                 description:

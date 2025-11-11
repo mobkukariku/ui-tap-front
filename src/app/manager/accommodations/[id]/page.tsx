@@ -29,8 +29,8 @@ export default async function AccomodationPage({ params }: AccomodationPageProps
                 ]}
             />
             <AccommodationHeader accommodationId={id} />
-            <h3 className={"text-center mt-10 font-medium text-xl"}>Номера/Квартиры</h3>
-            <AccommodationsUnitFilter />
+            <hr/>
+            <AccommodationsUnitFilter accommodationId={id} />
             <AccommodationUnitList />
         </>
     )

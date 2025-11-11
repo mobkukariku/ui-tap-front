@@ -1,7 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import {
     getAccommodationById
-} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-header/model/api/api";
+} from "@/features/manager/accommodations/accommodation-profile/model/api/api";
 
 export function useGetAccommodationById(id: string) {
 

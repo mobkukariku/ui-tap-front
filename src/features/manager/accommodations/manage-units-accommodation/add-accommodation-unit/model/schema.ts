@@ -1,0 +1,20 @@
+import { z } from "zod";
+
+export const createAccommodationUnitSchema = z.object({
+    accommodationId: z.number().min(1, "Некорректный ID проживания"), // в JSON это число, не строка
+    unitType: z.string().min(1, "Выберите тип"),
+    name: z.string().min(1, "Имя обязательно"),
+    description: z.string().min(1, "Описание обязательно"),
+    capacity: z.coerce.number<number>().min(0, "Минимум 0").max(5, "Максимум 20"),
+    area: z.coerce.number<number>().min(0, "Минимум 0").max(5, "Максимум 400"),
+    floor: z.coerce.number<number>().min(0, "Минимум 0").max(5, "Максимум 100"),
+    serviceDictionaryIds: z
+        .array(z.number())
+        .min(1, "Выберите хотя бы один сервис"),
+    conditionDictionaryIds: z
+        .array(z.number())
+        .min(1, "Выберите хотя бы одно условие"),
+});
+
+
+export type CreateAccommodationUnitFormData = z.infer<typeof createAccommodationUnitSchema>;

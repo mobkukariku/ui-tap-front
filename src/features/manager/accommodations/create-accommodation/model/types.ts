@@ -1,6 +1,6 @@
 export interface CreateAccommodationRequest {
-    cityId: number;
-    districtId: number;
+    cityId: string;
+    districtId: string;
     rating: number;
     name: string;
     description: string;

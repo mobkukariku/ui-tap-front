@@ -2,7 +2,7 @@
 import {
     useCreateAccommodation
 } from "@/features/manager/accommodations/create-accommodation/model/api/useCreateAccommodation";
-import {Controller, useForm} from "react-hook-form";
+import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
     CreateAccommodationFormData,
@@ -16,6 +16,8 @@ import {useGetCities} from "@/entities/city/model/api/useGetCities";
 import {useGetDistricts} from "@/entities/district/model/api/useGetDistricts";
 import {Button} from "@/shared/ui/button";
 import {useRouter} from "next/navigation";
+import {District} from "@/entities/district/model/types";
+import {City} from "@/entities/city/model/types";
 
 export function CreateAccommodationFormFields() {
     const {mutate} = useCreateAccommodation();
@@ -24,15 +26,24 @@ export function CreateAccommodationFormFields() {
 
     const form = useForm<CreateAccommodationFormData>({
         resolver: zodResolver(createAccommodationSchema),
-        defaultValues: null
+        defaultValues: {
+            name: "",
+            description: "",
+            address: "",
+            cityId: "",
+            districtId: "",
+            rating: 0,
+        },
     });
+
+
 
     const selectedCityId = form.watch("cityId");
     const { data: districts } = useGetDistricts(
         selectedCityId ? Number(selectedCityId) : null
     );
 
-    const onSubmit = (data: CreateAccommodationFormData) => {
+    const onSubmit:SubmitHandler<CreateAccommodationFormData> = (data: CreateAccommodationFormData) => {
         try {
             mutate(data);
             form.reset();
@@ -95,7 +106,7 @@ export function CreateAccommodationFormFields() {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
-                                        {cities?.map((item) => (
+                                        {cities?.map((item:City) => (
                                             <SelectItem value={String(item.id)} key={item.id}>
                                                 {item.name}
                                             </SelectItem>
@@ -127,7 +138,7 @@ export function CreateAccommodationFormFields() {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
-                                        {districts?.map((item) => (
+                                        {districts?.map((item:District) => (
                                             <SelectItem value={String(item.id)} key={item.id}>
                                                 {item.name}
                                             </SelectItem>
@@ -148,7 +159,7 @@ export function CreateAccommodationFormFields() {
             <fieldset className="flex flex-col gap-2">
                 <Label>Рейтинг</Label>
                 <Input
-
+                    type={"number"}
                     placeholder="Рейтинг"
                     {...form.register("rating")}
                     className={form.formState.errors.rating ? "border-red-500 focus-visible:ring-red-500/30" : ""}
