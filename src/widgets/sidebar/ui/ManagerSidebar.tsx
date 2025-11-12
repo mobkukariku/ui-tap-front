@@ -43,11 +43,6 @@ const items = [
         title: "Бронирования",
         url: "/manager/bookings",
         icon: Calendar1Icon,
-    },
-    {
-        title: "Номера",
-        url: "/manager/rooms",
-        icon: BuildingIcon,
     }
 ]
 

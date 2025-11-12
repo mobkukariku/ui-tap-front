@@ -12,7 +12,6 @@ export function AccDictionariesInfo({services, conditions}: AccDictionariesInfoP
             <div className={"bg-gray-100 flex px-7 py-5 flex-col gap-5 rounded-3xl border w-full h-fit"}>
                 <DictionaryField label={"Услуги"} values={services}  />
                 <DictionaryField label={"Условия"} values={conditions} />
-
             </div>
         </div>
     )
