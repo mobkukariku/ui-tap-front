@@ -53,12 +53,8 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
         }
     };
 
-    const onError = (errors: any) => {
-        console.log("form errors:", errors);
-    };
-
     return (
-        <form className={"my-20 flex flex-col mx-auto gap-5"} onSubmit={form.handleSubmit(onSubmit, onError)}>
+        <form className={"my-20 flex flex-col mx-auto gap-5"} onSubmit={form.handleSubmit(onSubmit)}>
             <fieldset className="flex flex-col gap-2">
                 <Label>Имя</Label>
                 <Input
