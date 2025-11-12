@@ -5,11 +5,8 @@ import {DialogClose, DialogFooter, DialogHeader, DialogTitle} from "@/shared/ui/
 import {Button} from "@/shared/ui/button";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Label} from "@/shared/ui/label";
-import {toast} from "sonner";
-import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {AddConditionFormData, addConditionSchema} from "@/features/admin/manage-conditions/add-condition/model/schema";
 import {useAddCondition} from "@/features/admin/manage-conditions/add-condition/model/api/useAddCondition";
-import {AxiosError} from "axios";
 
 
 interface Props {
@@ -27,21 +24,8 @@ export function ConditionAddFormFields({setOpen}:Props) {
         try{
             mutate(data.value);
             setOpen(false);
-            toast.success("Условие было создано.", {
-                position: "top-right",
-                richColors: true,
-                description: getCurrentTime()
-            })
         }catch (error){
-            if(error instanceof AxiosError){
-                toast.error("Ошибка создания сервиса", {
-                    position: "top-right",
-                    richColors: true,
-                    description:
-                        error.response?.data?.message ||
-                        "Проверьте данные и попробуйте снова",
-                });
-            }
+           console.log(error)
         }
     };
 

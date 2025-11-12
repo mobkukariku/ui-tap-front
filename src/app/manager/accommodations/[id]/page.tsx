@@ -28,8 +28,9 @@ export default async function AccomodationPage({ params }: AccomodationPageProps
                     { label: id, href: `/manager/accommodations/${id}`}
                 ]}
             />
-            <AccommodationHeader />
-            <AccommodationsUnitFilter />
+            <AccommodationHeader accommodationId={id} />
+            <hr/>
+            <AccommodationsUnitFilter accommodationId={id} />
             <AccommodationUnitList />
         </>
     )

@@ -4,6 +4,8 @@ import { useDictionary } from "@/entities/dictionary/model/api/useDictionary";
 import { TablePagination } from "@/widgets/pagination/ui/TablePagination";
 import { Dictionary } from "@/entities/dictionary/model/types";
 import { useDictionaryFilter } from "@/entities/dictionary/model/store/useDictionaryFilter";
+import {ConditionChange} from "@/features/admin/manage-conditions/change-condition/ui/ConditionChange";
+import {RemoveCondition} from "@/features/admin/manage-conditions/remove-condition/ui/RemoveCondition";
 
 export function ConditionTable() {
     const { filters, setFilter } = useDictionaryFilter();
@@ -19,6 +21,7 @@ export function ConditionTable() {
                     <TableRow>
                         <TableHead>Ключ</TableHead>
                         <TableHead>Значение</TableHead>
+                        <TableHead>Действие</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -26,6 +29,10 @@ export function ConditionTable() {
                         <TableRow key={item.id}>
                             <TableCell>{item.id}</TableCell>
                             <TableCell>{item.value}</TableCell>
+                            <TableCell className={"flex gap-3"}>
+                                <ConditionChange conditionId={Number(item.id)} />
+                                <RemoveCondition conditionId={Number(item.id)} />
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

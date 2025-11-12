@@ -29,24 +29,22 @@ export function AccommodationTable() {
     return (
         <>
             <Table className={"w-full"}>
-                <TableHeader>
+                <TableHeader className={"w-full"}>
                     <TableRow>
                         <TableHead>Название</TableHead>
-                        <TableHead>Описание</TableHead>
-                        <TableHead>Адрес</TableHead>
+                        <TableHead className={"w-[500px]"}>Адрес</TableHead>
                         <TableHead>Рейтинг</TableHead>
-                        <TableHead>Статус</TableHead>
-                        <TableHead>Действия</TableHead>
+                        <TableHead className={"text-right"}>Статус</TableHead>
+                        <TableHead className="w-[300px] text-right">Действия</TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
+                <TableBody className={"w-full"}>
                     {data?.content.map((item:Accommodation) => (
-                        <TableRow key={item.id}>
+                        <TableRow  key={item.id}>
                             <TableCell>{item.name}</TableCell>
-                            <TableCell>{item.description}</TableCell>
                             <TableCell>{item.address}</TableCell>
                             <TableCell>{item.rating}</TableCell>
-                            <TableCell>
+                            <TableCell className={"text-right"}>
                                 {item.approved === true ? (
                                     <Badge>Одобрено</Badge>
                                 ) : item.approved === false ? (
@@ -55,8 +53,8 @@ export function AccommodationTable() {
                                     <Badge variant="waiting">На рассмотрении</Badge>
                                 )}
                             </TableCell>
-                            <TableCell>
-                                {item.approved === null ? ( <menu className={"flex gap-2"}>
+                            <TableCell className={"text-right"}>
+                                {item.approved === null ? ( <menu className={"flex justify-end gap-2"}>
                                     <Button
                                         onClick={() => approveAccommodation(item.id)}
                                         size={"sm"}

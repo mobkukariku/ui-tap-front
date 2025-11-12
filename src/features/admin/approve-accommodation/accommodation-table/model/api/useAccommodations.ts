@@ -7,6 +7,8 @@ import {
 import {
     useAccommodationFilter
 } from "@/features/admin/approve-accommodation/filter-accommodation/model/store/useAccommodationFilter";
+import {toast} from "sonner";
+import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 
 
 export function useAccommodations() {
@@ -24,14 +26,45 @@ export function useAccommodations() {
         mutationFn: (id: string) => approveAccommodation(id),
         onSuccess: async () => {
             await queryClient.invalidateQueries({ queryKey: ["accommodations"] });
+            toast.success("Accommodations одобрен.", {
+                position: "top-right",
+                richColors: true,
+                description: getCurrentTime()
+            })
         },
+        onError: (error) => {
+            toast.error("Ошибка подтверждения", {
+                position: "top-right",
+                richColors: true,
+                description:
+                    error.message ||
+                    "Проверьте данные и попробуйте снова",
+            });
+            return error.message;
+        }
     });
 
     const rejectMutation = useMutation({
         mutationFn: (id: string) => rejectAccommodation(id),
         onSuccess: async () => {
             await queryClient.invalidateQueries({ queryKey: ["accommodations"] });
+            toast.info("Accommodations отклонен.", {
+                position: "top-right",
+                richColors: true,
+                description: getCurrentTime()
+            })
         },
+        onError: (error) => {
+            toast.error("Ошибка отклонения", {
+                position: "top-right",
+                richColors: true,
+                description:
+                    error.message ||
+                    "Проверьте данные и попробуйте снова",
+            });
+
+            return error.message;
+        }
     });
 
     return {

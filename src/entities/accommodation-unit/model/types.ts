@@ -1,6 +1,6 @@
 export interface AccommodationUnit {
     id: string;
-    accId: string;
+    accommodationId: string;
     unitType: string;
     name: string;
     description: string;

@@ -12,11 +12,15 @@ import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {AxiosError} from "axios";
 import {ErrorResponse} from "@/shared/types/error";
+import {sessionService} from "@/entities/session/model/sessionService";
+import {useRouter} from "next/navigation";
 
 export function RegisterForm() {
     const register = useRegister();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isSubmitting] = useState(false);
+    const router = useRouter();
+
 
     const form = useForm<ManagerRegisterFormData>({
         resolver: zodResolver(managerRegisterSchema),
@@ -40,6 +44,17 @@ export function RegisterForm() {
                 richColors: true,
                 description: getCurrentTime()
             });
+
+            const token = sessionService.getToken();
+            const user = sessionService.getUserFromToken(token ?? "");
+
+            if (user?.role.includes("SUPER_MANAGER")) {
+                router.push("/manager");
+            } else if (user?.role.includes("ADMIN")) {
+                router.push("/admin");
+            } else {
+                router.push("/");
+            }
         }catch (error) {
             if (error instanceof Error) {
                 const axiosError = error as AxiosError<ErrorResponse>;
@@ -124,7 +139,7 @@ export function RegisterForm() {
                     )}
                 </fieldset>
                 <fieldset className={"flex flex-col gap-2"}>
-                    <Label>Подтвердите пароль</Label>
+                    <Label>Номер телефона</Label>
                     <Input
                         key={"phoneNumber"}
                         type="number"

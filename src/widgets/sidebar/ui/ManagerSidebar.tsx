@@ -25,6 +25,8 @@ import {
 } from "@/shared/ui/dropdown-menu";
 import {Button} from "@/shared/ui/button";
 import {useHandleLogout} from "@/widgets/sidebar/model/useHandleLogout";
+import {sessionService} from "@/entities/session/model/sessionService";
+import {useEffect, useState} from "react";
 
 const items = [
     {
@@ -51,8 +53,16 @@ const items = [
 
 export function ManagerSidebar() {
     const {handleLogout} = useHandleLogout();
+    const [isManager, setIsManager] = useState(false);
+    const token = typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
+    const user = sessionService.getUserFromToken(token ?? "");
 
-    return (
+    useEffect(() => {
+        setIsManager(true);
+    }, []);
+
+
+    return isManager ? (
         <Sidebar>
             <SidebarHeader className={"p-4"}>
                 <figure className={"flex items-center gap-2 justify-between"}>
@@ -62,11 +72,11 @@ export function ManagerSidebar() {
                     </Avatar>
                     <figcaption
                         className={"flex flex-col gap-0"}>
-                        <p>
-                            Ozzy Osbourne
+                        <p className={"w-full"}>
+                            {user?.given_name}
                         </p>
                         <p className={"text-gray-500 text-xs dark:text-gray-400"}>
-                            Manager
+                            {user?.role}
                         </p>
                     </figcaption>
                     <DropdownMenu>
@@ -106,5 +116,5 @@ export function ManagerSidebar() {
                 </SidebarGroup>
             </SidebarContent>
         </Sidebar>
-    )
+    ) : null;
 }

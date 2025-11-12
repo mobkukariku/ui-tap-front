@@ -1,20 +1,39 @@
-import {SettingsIcon} from "lucide-react";
+"use client"
+import {Building2, BuildingIcon, MapPin, SettingsIcon, Star} from "lucide-react";
+import {
+    useGetAccommodationById
+} from "@/features/manager/accommodations/accommodation-profile/model/api/useGetAccommodationById";
+import {Label} from "@/shared/ui/label";
+import {Badge} from "@/shared/ui/badge";
+import Link from "next/link";
 
-export function AccommodationHeader() {
+interface AccommodationHeaderProps {
+    accommodationId: string
+}
+
+export function AccommodationHeader({accommodationId}: AccommodationHeaderProps) {
+
+    const {data, isLoading, error} = useGetAccommodationById(accommodationId)
+
+    if(isLoading) return <p>Loading...</p>
+
+    if(error) return <p>{error.message}</p>
+
     return (
-        <section>
-            <div
-                className={"w-full h-70 relative rounded-lg bg-cover bg-center"}
-                style={{ backgroundImage: 'url(https://picsum.photos/200/300)' }}
-            >
-            </div>
-            <div className={"p-6 flex flex-col gap-4"}>
-                <div className={"flex items-center gap-2"}>
-                    <h3 className={"text-2xl font-semibold"}>Гранд Будапешт</h3>
-                    <SettingsIcon className={"opacity-60"} width={20} />
-                </div>
-                <p className={"text-sm text-gray-600"}>Grand Plaza South — это не просто отель, это флагман гостеприимства Южного Казахстана, где традиционная роскошь встречается с искусством индивидуального сервиса. Мы известны своим культом внимания к деталям и эксцентричным, но всегда безупречным подходом к обслуживанию. Каждый гость для нас — отдельная история.</p>
-            </div>
-        </section>
+        <article>
+            <section className={"p-6 flex flex-col gap-4"}>
+                <header className={"flex items-center justify-between gap-4"}>
+                    <div className={"flex flex-row gap-4 items-center"}>
+                        <h1 className={"text-2xl font-semibold"}>{data?.name}</h1>
+                        {
+                            data?.approved ? (<Badge>Подтвержден</Badge>) : null
+                        }
+                    </div>
+                    <Link href={`/manager/accommodations/${accommodationId}/profile`}>
+                        <SettingsIcon className={"opacity-60"} width={20} />
+                    </Link>
+                </header>
+            </section>
+        </article>
     )
 }
