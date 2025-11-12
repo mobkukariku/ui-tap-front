@@ -3,10 +3,10 @@ import {
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/types";
 import {api} from "@/shared/api/axiosInstance";
 
-export const getAccommodationUnits = async (data: AccommodationUnitSearchCredientials) => {
+export const getAccommodationUnits = async (id:string, data: AccommodationUnitSearchCredientials) => {
     const response = await api.get("/accommodation-units/search", {
         params: {
-            accommodationId: data.accommodationId ?? "",
+            accommodationId: id,
             unitTypeId: data.unitTypeId ?? "",
             isAvailable: data.isAvailable ?? "",
             isDeleted: data.isDeleted ?? "",
@@ -22,3 +22,9 @@ export const getAccommodationUnits = async (data: AccommodationUnitSearchCredien
 
     return response.data;
 };
+
+export const getAccommodationUnitById = async (id: number) => {
+    const response = await api.get(`/accommodation-units/${id}`);
+
+    return response.data;
+}

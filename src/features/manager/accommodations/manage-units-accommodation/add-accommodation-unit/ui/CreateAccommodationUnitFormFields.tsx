@@ -16,7 +16,7 @@ import {unitTypes} from "@/features/manager/accommodations/manage-units-accommod
 import {Button} from "@/shared/ui/button";
 import {
     SelectDictionary
-} from "@/features/manager/accommodations/manage-units-accommodation/add-accommodation-unit/ui/SelectDictionary";
+} from "@/widgets/select-dictionary/ui/SelectDictionary";
 
 interface Props {
     accommodationId: string;

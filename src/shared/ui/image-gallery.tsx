@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog, DialogContent } from "@/shared/ui/dialog";
+import {Dialog, DialogContent, DialogTitle} from "@/shared/ui/dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 type ImageGalleryProps = {
@@ -41,7 +41,8 @@ export function ImageGallery({ images }: ImageGalleryProps) {
       </div>
 
       <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
-        <DialogContent className="max-w-6xl w-full h-[90vh] p-0 bg-black/95">
+        <DialogTitle></DialogTitle>
+        <DialogContent className="md:min-w-6xl w-[90dvw] h-[90dvh] p-0 bg-black/95">
           <div className="relative w-full h-full flex items-center justify-center">
             <button
               onClick={() => setLightboxOpen(false)}
@@ -67,7 +68,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
             <img
               src={images[currentIndex]}
               alt={`Фото ${currentIndex + 1}`}
-              className="max-w-full max-h-full object-contain"
+              className="md:min-w-full max-w-full max-h-full object-contain"
             />
 
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">

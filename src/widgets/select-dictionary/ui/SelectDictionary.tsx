@@ -21,7 +21,6 @@ export function SelectDictionary({type, placeholder="Выберите слова
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState<string[]>(propValue);
 
-    // синхронизируем локальный стейт с пропсом
     useEffect(() => {
         setValue(propValue);
     }, [propValue]);
@@ -34,7 +33,7 @@ export function SelectDictionary({type, placeholder="Выберите слова
             newValue = [...value, val];
         }
         setValue(newValue);
-        onChange?.(newValue); // <-- ключевой момент для RHF
+        onChange?.(newValue);
     }
 
     return (
