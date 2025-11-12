@@ -92,7 +92,6 @@ export function CreateAccommodationFormFields() {
             <div className={"flex flex-row gap-4 w-full"}>
                 <fieldset className="flex flex-col w-full gap-2">
                     <Label>Город</Label>
-
                     <Controller
                         name="cityId"
                         control={form.control}

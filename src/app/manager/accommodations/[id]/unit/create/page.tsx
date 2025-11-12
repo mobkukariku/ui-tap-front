@@ -23,7 +23,7 @@ export default async function CreateUnitPage({params}:UnitPageProps) {
                     { label: "Создание юнита", href: `/manager/accommodations/${id}/unit/create`}
                 ]}
             />
-            <CreateAccommodationUnit />
+            <CreateAccommodationUnit accommodationId={id} />
         </>
     )
 }
