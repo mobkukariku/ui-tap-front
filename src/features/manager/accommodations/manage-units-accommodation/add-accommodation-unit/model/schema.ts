@@ -8,10 +8,10 @@ export const createAccommodationUnitSchema = z.object({
     area: z.coerce.number<number>().min(0, "Минимум 0").max(400, "Максимум 400"),
     floor: z.coerce.number<number>().min(0, "Минимум 0").max(100, "Максимум 100"),
     serviceDictionaryIds: z
-        .array(z.number())
+        .array(z.coerce.number<number>())
         .min(1, "Выберите хотя бы один сервис"),
     conditionDictionaryIds: z
-        .array(z.number())
+        .array(z.coerce.number<number>())
         .min(1, "Выберите хотя бы одно условие"),
 });
 

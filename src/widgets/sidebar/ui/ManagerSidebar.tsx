@@ -1,6 +1,5 @@
 "use client"
 import {
-    BuildingIcon,
     Calendar1Icon,
     EllipsisVertical,
     InfoIcon,
@@ -43,11 +42,6 @@ const items = [
         title: "Бронирования",
         url: "/manager/bookings",
         icon: Calendar1Icon,
-    },
-    {
-        title: "Номера",
-        url: "/manager/rooms",
-        icon: BuildingIcon,
     }
 ]
 

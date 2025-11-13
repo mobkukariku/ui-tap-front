@@ -41,7 +41,7 @@ export function AdminSidebar() {
     const {handleLogout} = useHandleLogout();
     const [isAdmin, setIsAdmin] = useState(false);
     const token = typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
-    const user = sessionService.getUserFromToken(token);
+    const user = sessionService.getUserFromToken(token ?? "");
 
     useEffect(() => {
         setIsAdmin(true);

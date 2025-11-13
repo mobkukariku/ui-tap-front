@@ -10,9 +10,9 @@ export function DataField({ icon: Icon, label, value }: DataFieldProps) {
     return (
         <div className="flex flex-col w-full gap-2">
             <Label>{label}</Label>
-            <div className="w-full gap-2 items-center flex flex-row p-1 px-4 h-12 bg-white rounded-xl border">
-                <Icon className="w-5 h-5 text-gray-500" />
-                <p>{value}</p>
+            <div className="w-full gap-2 min-h-12  items-center flex flex-row p-1 px-4 h-fit bg-white rounded-xl border">
+                <Icon className="min-w-5 h-5 text-gray-500" />
+                <p className={"break-all"}>{value}</p>
             </div>
         </div>
     );

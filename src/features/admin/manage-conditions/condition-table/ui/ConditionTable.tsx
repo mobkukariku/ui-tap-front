@@ -6,12 +6,13 @@ import { Dictionary } from "@/entities/dictionary/model/types";
 import { useDictionaryFilter } from "@/entities/dictionary/model/store/useDictionaryFilter";
 import {ConditionChange} from "@/features/admin/manage-conditions/change-condition/ui/ConditionChange";
 import {RemoveCondition} from "@/features/admin/manage-conditions/remove-condition/ui/RemoveCondition";
+import {Spinner} from "@/shared/ui/spinner";
 
 export function ConditionTable() {
     const { filters, setFilter } = useDictionaryFilter();
     const { data, isLoading, isError } = useDictionary("ACC_CONDITION");
 
-    if (isLoading) return <p>Loading...</p>;
+    if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-10"} />
     if (isError) return <p>Error loading services</p>;
 
     return (

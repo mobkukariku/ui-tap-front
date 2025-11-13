@@ -5,4 +5,5 @@ export interface CreateAccommodationRequest {
     name: string;
     description: string;
     address: string;
+    images: File[];
 }

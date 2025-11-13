@@ -30,3 +30,9 @@ export const rejectAccommodation = async (id: string) => {
 
     return response.data;
 }
+
+export const getAccommodationById = async (id: string) => {
+    const response = await api.get(`/accommodations/${id}`);
+
+    return response.data;
+}

@@ -1,9 +1,8 @@
 "use client"
-import {Building2, BuildingIcon, MapPin, SettingsIcon, Star} from "lucide-react";
+import {SettingsIcon} from "lucide-react";
 import {
     useGetAccommodationById
 } from "@/features/manager/accommodations/accommodation-profile/model/api/useGetAccommodationById";
-import {Label} from "@/shared/ui/label";
 import {Badge} from "@/shared/ui/badge";
 import Link from "next/link";
 

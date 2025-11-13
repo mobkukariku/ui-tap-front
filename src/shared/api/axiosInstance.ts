@@ -1,4 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import {normalizeImageUrl} from "@/shared/lib/normalizeImageUrl";
+import {Accommodation} from "@/entities/accommodation/model/types";
 
 const API_URL = "/api";
 
@@ -57,3 +59,20 @@ api.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
+api.interceptors.response.use((response) => {
+    const data = response.data;
+
+    if (Array.isArray(data?.content)) {
+        data.content = data.content.map((item:Accommodation) => ({
+            ...item,
+            imageUrls: item.imageUrls?.map(normalizeImageUrl),
+        }));
+    }
+
+    if (data?.imageUrls) {
+        data.imageUrls = data.imageUrls.map(normalizeImageUrl);
+    }
+
+    return response;
+});

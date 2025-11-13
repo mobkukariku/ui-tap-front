@@ -16,7 +16,7 @@ export interface DictionaryCredentials extends PaginationParams {
 export interface DictionaryResponse {
     content: Dictionary[];
     page: number;
-    size: number;
-    totalElements: number;
-    totalPages: number;
+    size: string | number;
+    sortBy?: string | null;
+    sortDirection?: string | null
 }

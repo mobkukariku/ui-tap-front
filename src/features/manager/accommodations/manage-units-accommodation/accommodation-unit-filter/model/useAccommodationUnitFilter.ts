@@ -17,10 +17,10 @@ export const useAccommodationUnitFilter = create<AccommodationUnitFilterStore>((
         isAvailable: null,
         isDeleted: "false",
         name: null,
-        minCapacity: null,
-        maxCapacity: null,
-        minArea: null,
-        maxArea: null,
+        minCapacity: "0",
+        maxCapacity: "10",
+        minArea: "0",
+        maxArea: "400",
     },
     setFilter: (key, value) =>
         set((state) => ({

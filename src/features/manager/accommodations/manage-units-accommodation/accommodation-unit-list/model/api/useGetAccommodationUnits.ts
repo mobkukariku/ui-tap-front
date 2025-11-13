@@ -7,12 +7,13 @@ import {
     getAccommodationUnits
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/api/api";
 
-export function useGetAccommodationUnits() {
+export function useGetAccommodationUnits(id: string) {
 
     const {filters} = useAccommodationUnitFilter();
 
+
     return useQuery({
         queryKey: ["accommodation-units", filters],
-        queryFn: async () => getAccommodationUnits(filters)
+        queryFn: async () => getAccommodationUnits(id, filters)
     })
 }

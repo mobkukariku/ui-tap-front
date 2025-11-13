@@ -16,7 +16,7 @@ import {unitTypes} from "@/features/manager/accommodations/manage-units-accommod
 import {Button} from "@/shared/ui/button";
 import {
     SelectDictionary
-} from "@/features/manager/accommodations/manage-units-accommodation/add-accommodation-unit/ui/SelectDictionary";
+} from "@/widgets/select-dictionary/ui/SelectDictionary";
 
 interface Props {
     accommodationId: string;
@@ -53,12 +53,9 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
         }
     };
 
-    const onError = (errors: any) => {
-        console.log("form errors:", errors);
-    };
 
     return (
-        <form className={"my-20 flex flex-col mx-auto gap-5"} onSubmit={form.handleSubmit(onSubmit, onError)}>
+        <form className={"my-20 flex break-all flex-col mx-auto gap-5"} onSubmit={form.handleSubmit(onSubmit)}>
             <fieldset className="flex flex-col gap-2">
                 <Label>Имя</Label>
                 <Input
@@ -167,7 +164,11 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
                     name={"conditionDictionaryIds"}
                     control={form.control}
                     render={({ field }) => (
-                        <SelectDictionary value={field.value || []} onChange={field.onChange} placeholder={"Выберите условия"} type={"ACC_CONDITION"} />
+                        <SelectDictionary
+                            value={field.value || []}
+                            onChange={field.onChange}
+                            placeholder={"Выберите условия"}
+                            type={"ACC_CONDITION"} />
                     )}
                  />
                 {form.formState.errors.conditionDictionaryIds && (

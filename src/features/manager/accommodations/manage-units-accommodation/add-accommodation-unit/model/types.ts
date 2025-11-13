@@ -7,6 +7,6 @@ export interface IAddAccommodationUnitForm {
     capacity: number;
     floor: number;
     area: number;
-    serviceDictionaryIds: string[],
-    conditionDictionaryIds: string[],
+    serviceDictionaryIds: number[],
+    conditionDictionaryIds: number[],
 }

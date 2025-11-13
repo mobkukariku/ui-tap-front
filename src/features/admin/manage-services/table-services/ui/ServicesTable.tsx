@@ -4,9 +4,9 @@ import { useDictionary } from "@/entities/dictionary/model/api/useDictionary";
 import {TablePagination} from "@/widgets/pagination/ui/TablePagination";
 import {Dictionary} from "@/entities/dictionary/model/types";
 import {useDictionaryFilter} from "@/entities/dictionary/model/store/useDictionaryFilter";
-import {ConditionChange} from "@/features/admin/manage-conditions/change-condition/ui/ConditionChange";
 import {ServiceChange} from "@/features/admin/manage-services/change-service/ui/ServiceChange";
 import {RemoveService} from "@/features/admin/manage-services/remove-service/ui/RemoveService";
+import {Spinner} from "@/shared/ui/spinner";
 
 export function ServicesTable() {
     const { filters, setFilter } = useDictionaryFilter();
@@ -14,7 +14,7 @@ export function ServicesTable() {
     const { data, isLoading, isError } = useDictionary("ACC_SERVICE");
 
 
-    if (isLoading) return <p>Loading...</p>;
+    if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-10"} />
     if (isError) return <p>Error loading services</p>;
 
     return (

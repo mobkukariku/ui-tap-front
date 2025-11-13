@@ -9,4 +9,5 @@ export interface Accommodation {
     approved?: boolean;
     approvedBy?: string;
     ownerId: string;
+    imageUrls?: string[];
 }
