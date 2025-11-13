@@ -53,8 +53,9 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
         }
     };
 
+
     return (
-        <form className={"my-20 flex flex-col mx-auto gap-5"} onSubmit={form.handleSubmit(onSubmit)}>
+        <form className={"my-20 flex break-all flex-col mx-auto gap-5"} onSubmit={form.handleSubmit(onSubmit)}>
             <fieldset className="flex flex-col gap-2">
                 <Label>Имя</Label>
                 <Input
@@ -163,7 +164,11 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
                     name={"conditionDictionaryIds"}
                     control={form.control}
                     render={({ field }) => (
-                        <SelectDictionary value={field.value || []} onChange={field.onChange} placeholder={"Выберите условия"} type={"ACC_CONDITION"} />
+                        <SelectDictionary
+                            value={field.value || []}
+                            onChange={field.onChange}
+                            placeholder={"Выберите условия"}
+                            type={"ACC_CONDITION"} />
                     )}
                  />
                 {form.formState.errors.conditionDictionaryIds && (

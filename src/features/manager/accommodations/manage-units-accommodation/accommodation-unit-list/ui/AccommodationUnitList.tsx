@@ -16,6 +16,7 @@ import { useState } from "react";
 import {
   AccommodationUnitModal
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/ui/AccommodationUnitModal";
+import {Spinner} from "@/shared/ui/spinner";
 
 interface AccommodationUnitListProps {
   accommodationId: string;
@@ -28,7 +29,7 @@ export function AccommodationUnitList({accommodationId}:AccommodationUnitListPro
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  if (isLoading) return <p className="text-center py-8">Загрузка...</p>;
+  if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-10"} />
   if (isError) return <p className="text-center py-8 text-red-500">Ошибка загрузки</p>;
 
 
@@ -38,7 +39,6 @@ export function AccommodationUnitList({accommodationId}:AccommodationUnitListPro
         <TableHeader>
           <TableRow>
             <TableHead>Название</TableHead>
-            <TableHead>Описание</TableHead>
             <TableHead>Вместительность</TableHead>
             <TableHead>Площадь</TableHead>
             <TableHead>Этаж</TableHead>
@@ -50,9 +50,6 @@ export function AccommodationUnitList({accommodationId}:AccommodationUnitListPro
           {data?.content.map((item: AccommodationUnit) => (
             <TableRow key={item.id}>
               <TableCell className="font-medium">{item.name}</TableCell>
-              <TableCell className="max-w-xs truncate" title={item.description}>
-                {item.description || "—"}
-              </TableCell>
               <TableCell>{item.capacity}</TableCell>
               <TableCell>{item.area} м²</TableCell>
               <TableCell>{item.floor}</TableCell>

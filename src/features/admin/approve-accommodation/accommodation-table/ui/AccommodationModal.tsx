@@ -25,7 +25,7 @@ export function AccommodationModal({openModal, setOpenModal, id} : Props) {
 
     return (
         <Dialog open={openModal} onOpenChange={setOpenModal}>
-            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+            <DialogContent className="max-w-4xl max-h-[90vh] break-all overflow-y-auto">
                 <>
                     <DialogHeader>
                         <DialogTitle className="text-2xl font-bold flex items-center gap-2">

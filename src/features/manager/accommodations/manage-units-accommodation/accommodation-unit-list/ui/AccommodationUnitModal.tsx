@@ -53,7 +53,7 @@ export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:Accommo
 
     return (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-            <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DialogContent className="max-w-2xl break-all max-h-[90vh] overflow-y-auto">
                 <>
                     <DialogHeader>
                         <DialogTitle className="text-2xl font-bold flex items-center gap-2">

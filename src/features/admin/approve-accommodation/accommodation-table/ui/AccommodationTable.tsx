@@ -15,6 +15,7 @@ import { Accommodation } from "@/entities/accommodation/model/types";
 import { TablePagination } from "@/widgets/pagination/ui/TablePagination";
 import { useState } from "react";
 import { AccommodationModal } from "@/features/admin/approve-accommodation/accommodation-table/ui/AccommodationModal";
+import {Spinner} from "@/shared/ui/spinner";
 
 export function AccommodationTable() {
   const [page, setPage] = useState(0);
@@ -31,7 +32,7 @@ export function AccommodationTable() {
     rejecting,
   } = useAccommodations(page);
 
-  if (isLoading) return <p>Loading...</p>;
+  if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-10"} />
   if (isError) return <p>Error loading accommodations</p>;
 
   return (

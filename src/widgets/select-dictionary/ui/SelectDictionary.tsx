@@ -6,6 +6,7 @@ import {Button} from "@/shared/ui/button";
 import {Check, ChevronsUpDown} from "lucide-react";
 import {cn} from "@/shared/lib/utils";
 import {Dictionary} from "@/entities/dictionary/model/types";
+import {useDictionaryFilter} from "@/entities/dictionary/model/store/useDictionaryFilter";
 
 interface SelectDictionaryProps {
     type: string;
@@ -13,11 +14,12 @@ interface SelectDictionaryProps {
     onChange?: (values: string[]) => void;
     value?: string[];
     multiple?: boolean;
+    valueSize: number;
 }
 
 
-export function SelectDictionary({type, placeholder="Выберите словарь", onChange, value:propValue = []}: SelectDictionaryProps) {
-    const {data} = useDictionary(type ?? "");
+export function SelectDictionary({type, placeholder="Выберите словарь", onChange, value:propValue = [], valueSize=400}: SelectDictionaryProps) {
+    const {data} = useDictionary(type ?? "", String(valueSize));
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState<string[]>(propValue);
 
@@ -68,7 +70,7 @@ export function SelectDictionary({type, placeholder="Выберите слова
                                 <CommandItem
                                     key={dictionary.id}
                                     value={String(dictionary.id)}
-                                    onSelect={() => handleSetValue(dictionary.id as string)}
+                                    onSelect={() => handleSetValue(dictionary.id)}
                                 >
                                     <Check
                                         className={cn(
