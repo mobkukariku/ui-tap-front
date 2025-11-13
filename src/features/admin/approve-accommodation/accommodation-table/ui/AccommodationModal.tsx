@@ -34,7 +34,7 @@ export function AccommodationModal({openModal, setOpenModal, id} : Props) {
                         </DialogTitle>
                     </DialogHeader>
 
-                    {data?.imagesUrls ? <ImageGallery images={data?.imageUrls} /> : null}
+                    {data?.imageUrls ? <ImageGallery images={data?.imageUrls} /> : null}
 
                     <div className="mt-6 space-y-6">
                         <InfoItem icon={MapPin} label="Адрес">

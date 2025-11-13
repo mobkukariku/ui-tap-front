@@ -4,6 +4,7 @@ import {AccDictionariesInfo} from "@/features/manager/accommodations/accommodati
 import {
     useGetAccommodationById
 } from "@/features/manager/accommodations/accommodation-profile/model/api/useGetAccommodationById";
+import {ImageGallery} from "@/shared/ui/image-gallery";
 
 interface AccommodationProfileProps {
     accommodationId: string
@@ -20,7 +21,7 @@ export function AccommodationProfile({accommodationId}:AccommodationProfileProps
     return (
         <div className={"flex flex-col mx-auto w-200 mt-20"}>
             <div className={"flex flex-row mx-auto gap-5"}>
-                <div className={"bg-gray-200 w-50 h-50 rounded-2xl"}></div>
+                <ImageGallery images={data?.imageUrls} />
             </div>
             <AccMainInfo
                 name={data?.name}

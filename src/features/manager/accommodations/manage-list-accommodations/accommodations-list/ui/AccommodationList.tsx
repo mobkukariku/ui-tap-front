@@ -26,7 +26,7 @@ export function AccommodationList() {
     return (
         <section className={"flex flex-wrap max-md:justify-center flex-row gap-3"}>
             {accommodations?.content?.map(accommodation => (
-                <AccommodationItem id={accommodation.id} name={accommodation.name} key={accommodation.id} imageURL={"https://picsum.photos/200/300"}  />
+                <AccommodationItem id={accommodation.id} name={accommodation.name} key={accommodation.id} imageURL={accommodation.imageUrls[0]}  />
             ))}
         </section>
     )
