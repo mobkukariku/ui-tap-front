@@ -73,7 +73,7 @@ export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:Accommo
                                 className={
                                     data?.isAvailable
                                         ? "bg-green-50 text-green-700"
-                                        : "bg-red-50 text-red-700"
+                                        : "bg-red-100 border-red-400 text-red-700"
                                 }
                             >
                                 {data?.isAvailable ? "Доступно" : "Занято"}
