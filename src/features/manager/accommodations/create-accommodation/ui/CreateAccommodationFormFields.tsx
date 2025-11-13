@@ -30,7 +30,6 @@ export function CreateAccommodationFormFields() {
                 onImageRemove={removeImage}
                 error={form.formState.errors.images?.message as string}
                 maxImages={10}
-                required
             />
 
             <fieldset className="flex flex-col gap-2">

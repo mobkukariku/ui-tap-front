@@ -19,7 +19,7 @@ import {Spinner} from "@/shared/ui/spinner";
 
 export function AccommodationTable() {
   const [page, setPage] = useState(0);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string>("");
   const [openModal, setOpenModal] = useState(false);
 
   const {
@@ -30,7 +30,7 @@ export function AccommodationTable() {
     rejectAccommodation,
     approving,
     rejecting,
-  } = useAccommodations(page);
+  } = useAccommodations();
 
   if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-10"} />
   if (isError) return <p>Error loading accommodations</p>;

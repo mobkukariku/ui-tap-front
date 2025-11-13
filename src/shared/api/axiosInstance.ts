@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import {normalizeImageUrl} from "@/shared/lib/normalizeImageUrl";
+import {Accommodation} from "@/entities/accommodation/model/types";
 
 const API_URL = "/api";
 
@@ -63,7 +64,7 @@ api.interceptors.response.use((response) => {
     const data = response.data;
 
     if (Array.isArray(data?.content)) {
-        data.content = data.content.map((item) => ({
+        data.content = data.content.map((item:Accommodation) => ({
             ...item,
             imageUrls: item.imageUrls?.map(normalizeImageUrl),
         }));

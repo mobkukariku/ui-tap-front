@@ -27,7 +27,7 @@ export function AccommodationUnitList({accommodationId}:AccommodationUnitListPro
   const { data, isLoading, isError } = useGetAccommodationUnits(accommodationId);
   const [page, setPage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string>("");
 
   if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-10"} />
   if (isError) return <p className="text-center py-8 text-red-500">Ошибка загрузки</p>;

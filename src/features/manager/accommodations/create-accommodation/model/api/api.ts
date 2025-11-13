@@ -11,7 +11,7 @@ export const createAccommodation = async (data: CreateAccommodationRequest) => {
     formData.append("description", data.description);
     formData.append("address", data.address);
 
-    data.images.forEach((image, index) => {
+    data.images.forEach((image) => {
         formData.append("images", image);
     });
 

@@ -1,15 +1,12 @@
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/shared/ui/dialog";
 import {
     CheckCircle,
-    DollarSign,
     Home,
     Layers,
     Package,
-    Square, Sun,
+    Square,
     Tag,
     Users,
-    Utensils,
-    Wifi, Wind,
     XCircle
 } from "lucide-react";
 import InfoItem from "@/shared/ui/info-item";
@@ -17,6 +14,7 @@ import {Badge} from "@/shared/ui/badge";
 import {
     useGetAccommodationUnitById
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/api/useGetAccommodationUnitById";
+import {Dictionary} from "@/entities/dictionary/model/types";
 
 interface AccommodationUnitModalProps {
     id: string;
@@ -24,28 +22,7 @@ interface AccommodationUnitModalProps {
     setIsModalOpen: (isOpen: boolean) => void;
 }
 
-const mockUnit = {
-    name: "Солнечная студия №7",
-    unitType: "APARTMENT",
-    description: "Уютная студия с панорамным видом на горы. Включает кухню, Wi-Fi, кондиционер и балкон. Идеально для пары или одного гостя.",
-    capacity: 2,
-    area: 38.5,
-    floor: 5,
-    isAvailable: true,
-    services: ["WI_FI", "KITCHEN", "BALCONY", "AIR_CONDITIONING"],
-    conditions: ["Заезд после 14:00", "Выезд до 12:00", "Курение запрещено", "Домашние животные не допускаются"],
-    tariffs: [
-        { name: "Стандарт", price: 25000 },
-        { name: "Ночь с завтраком", price: 32000 },
-    ],
-};
 
-const serviceIcons: Record<string, React.ElementType> = {
-    WI_FI: Wifi,
-    KITCHEN: Utensils,
-    BALCONY: Sun,
-    AIR_CONDITIONING: Wind,
-};
 
 export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:AccommodationUnitModalProps) {
 
@@ -105,9 +82,9 @@ export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:Accommo
 
                         <InfoItem icon={Package} label="Услуги">
                             <div className="flex flex-wrap gap-2">
-                                {data?.services.map((service, i) => {
+                                {data?.services.map((service:Dictionary) => {
                                     return (
-                                        <Badge key={i} variant="secondary" className="flex items-center gap-1">
+                                        <Badge key={service.id} variant="secondary" className="flex items-center gap-1">
                                             {service.value}
                                         </Badge>
                                     );
@@ -117,9 +94,9 @@ export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:Accommo
 
                         <InfoItem icon={Package} label="Условия">
                             <div className="flex flex-wrap gap-2">
-                                {data?.conditions.map((condition, i) => {
+                                {data?.conditions.map((condition:Dictionary) => {
                                     return (
-                                        <Badge key={i} variant="secondary" className="flex items-center gap-1">
+                                        <Badge key={condition.id} variant="secondary" className="flex items-center gap-1">
                                             {condition.value}
                                         </Badge>
                                     );

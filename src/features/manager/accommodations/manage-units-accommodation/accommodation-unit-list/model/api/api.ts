@@ -23,7 +23,7 @@ export const getAccommodationUnits = async (id:string, data: AccommodationUnitSe
     return response.data;
 };
 
-export const getAccommodationUnitById = async (id: number) => {
+export const getAccommodationUnitById = async (id: string) => {
     const response = await api.get(`/accommodation-units/${id}`);
 
     return response.data;

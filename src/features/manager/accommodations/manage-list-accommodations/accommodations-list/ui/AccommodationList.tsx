@@ -1,6 +1,7 @@
 "use client"
 import {accomodationList} from "@/features/manager/accommodations/manage-list-accommodations/accommodations-list/model/constants";
 import {AccommodationItem} from "@/features/manager/accommodations/manage-list-accommodations/accommodations-list/ui/AccommodationItem";
+import {Accommodation} from "@/entities/accommodation/model/types";
 import {
     AccommodationEmptyList
 } from "@/features/manager/accommodations/manage-list-accommodations/accommodations-list/ui/AccommodationEmptyList";
@@ -25,8 +26,8 @@ export function AccommodationList() {
 
     return (
         <section className={"flex flex-wrap max-md:justify-center flex-row gap-3"}>
-            {accommodations?.content?.map(accommodation => (
-                <AccommodationItem id={accommodation.id} name={accommodation.name} key={accommodation.id} imageURL={accommodation.imageUrls[0]}  />
+            {accommodations?.content?.map((accommodation:Accommodation) => (
+                <AccommodationItem id={accommodation.id} name={accommodation.name} key={accommodation.id} imageURL={accommodation.imageUrls ? accommodation.imageUrls[0] : ""}  />
             ))}
         </section>
     )

@@ -1,6 +1,5 @@
 "use client"
 import {
-    BuildingIcon,
     Calendar1Icon,
     EllipsisVertical,
     InfoIcon,

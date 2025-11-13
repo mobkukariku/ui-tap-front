@@ -5,11 +5,8 @@ import {DialogClose, DialogFooter, DialogHeader, DialogTitle} from "@/shared/ui/
 import {Button} from "@/shared/ui/button";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Label} from "@/shared/ui/label";
-import {toast} from "sonner";
-import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {AddServiceFormData, addServiceSchema} from "@/features/admin/manage-services/add-service/model/schema";
 import {useAddService} from "@/features/admin/manage-services/add-service/model/api/useAddService";
-import {AxiosError} from "axios";
 
 
 interface Props {
