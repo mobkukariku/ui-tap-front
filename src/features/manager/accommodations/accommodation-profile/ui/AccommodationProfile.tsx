@@ -1,27 +1,49 @@
 "use client"
+import {useState} from "react";
 import {AccMainInfo} from "@/features/manager/accommodations/accommodation-profile/ui/AccMainInfo";
 import {AccDictionariesInfo} from "@/features/manager/accommodations/accommodation-profile/ui/AccDictionariesInfo";
 import {
     useGetAccommodationById
 } from "@/features/manager/accommodations/accommodation-profile/model/api/useGetAccommodationById";
 import {ImageGallery} from "@/shared/ui/image-gallery";
+import {EditMainInfoModal, EditTagsModal, EditPhotosModal} from "@/features/manager/accommodations/accommodation-profile/ui";
+import {Button} from "@/shared/ui/button";
+import {Pencil} from "lucide-react";
+import { Spinner } from "@/shared/ui/spinner";
 
 interface AccommodationProfileProps {
     accommodationId: string
 }
 
 export function AccommodationProfile({accommodationId}:AccommodationProfileProps) {
+    const [isMainInfoOpen, setIsMainInfoOpen] = useState(false);
+    const [isTagsOpen, setIsTagsOpen] = useState(false);
+    const [isPhotosOpen, setIsPhotosOpen] = useState(false);
 
     const {data, isLoading, error} = useGetAccommodationById(accommodationId);
 
-    if(isLoading) return <p>Loading...</p>
+    if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-10"} />
 
     if (error) return <p>{error.message}</p>
 
     return (
-        <div className={"flex flex-col mx-auto w-200 mt-20"}>
-            <div className={"flex flex-row mx-auto gap-5"}>
-                <ImageGallery images={data?.imageUrls} />
+        <div className={"flex flex-col mx-auto w-200 "}>
+            <div className={"flex flex-col gap-2 mt-10"}>
+                <div className="flex flex-row items-center justify-between">
+                    <p className={"opacity-50"}>Фотографии</p>
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setIsPhotosOpen(true)}
+                        className="h-8 w-8"
+                        aria-label="Редактировать фотографии"
+                    >
+                        <Pencil className="h-4 w-4" />
+                    </Button>
+                </div>
+                <div className={"flex flex-row mx-auto gap-5"}>
+                    <ImageGallery images={data?.imageUrls} />
+                </div>
             </div>
             <AccMainInfo
                 name={data?.name}
@@ -30,10 +52,41 @@ export function AccommodationProfile({accommodationId}:AccommodationProfileProps
                 cityName={data?.cityName}
                 districtName={data?.districtName}
                 rating={data?.rating}
+                onEdit={() => setIsMainInfoOpen(true)}
             />
             <AccDictionariesInfo
                 services={data?.services}
                 conditions={data?.conditions}
+                onEdit={() => setIsTagsOpen(true)}
+            />
+
+            <EditMainInfoModal
+                open={isMainInfoOpen}
+                setOpen={setIsMainInfoOpen}
+                accommodationId={Number(accommodationId)}
+                initialData={{
+                    name: data?.name || "",
+                    description: data?.description || "",
+                    address: data?.address || "",
+                    cityId: data?.cityId ? String(data.cityId) : "",
+                    districtId: data?.districtId ? String(data.districtId) : "",
+                    rating: data?.rating || 0,
+                }}
+            />
+
+            <EditTagsModal
+                open={isTagsOpen}
+                setOpen={setIsTagsOpen}
+                accommodationId={Number(accommodationId)}
+                initialServiceIds={data?.serviceIds || []}
+                initialConditionIds={data?.conditionIds || []}
+            />
+
+            <EditPhotosModal
+                open={isPhotosOpen}
+                setOpen={setIsPhotosOpen}
+                accommodationId={Number(accommodationId)}
+                initialImageUrls={data?.imageUrls || []}
             />
         </div>
     )

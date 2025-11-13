@@ -1,5 +1,6 @@
 import {DataField} from "@/features/manager/accommodations/accommodation-profile/ui/DataField";
-import {Building, Building2, Captions, MapPin, ScrollText, Star} from "lucide-react";
+import {Building, Building2, Captions, MapPin, ScrollText, Star, Pencil} from "lucide-react";
+import {Button} from "@/shared/ui/button";
 
 interface AccMainInfoProps {
     name: string;
@@ -8,12 +9,26 @@ interface AccMainInfoProps {
     cityName: string,
     districtName: string,
     rating: number,
+    onEdit?: () => void;
 }
 
-export function AccMainInfo({name, description, address, cityName, districtName, rating}:AccMainInfoProps) {
+export function AccMainInfo({name, description, address, cityName, districtName, rating, onEdit}:AccMainInfoProps) {
     return (
         <div className={"flex flex-col mt-10 gap-2"}>
-            <p className={"opacity-50"}>Основная информация</p>
+            <div className="flex flex-row items-center justify-between">
+                <p className={"opacity-50"}>Основная информация</p>
+                {onEdit && (
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={onEdit}
+                        className="h-8 w-8"
+                        aria-label="Редактировать основную информацию"
+                    >
+                        <Pencil className="h-4 w-4" />
+                    </Button>
+                )}
+            </div>
             <div className={"bg-gray-100 flex px-7 py-5 flex-col gap-5 rounded-3xl border w-full h-fit"}>
                 <DataField
                     icon={Captions}
