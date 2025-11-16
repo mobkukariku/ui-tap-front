@@ -18,7 +18,7 @@ export function useUpdateAccommodationUnit() {
                 description: getCurrentTime()
             });
         },
-        onError: async (error: any) => {
+        onError: async (error) => {
             toast.error("Ошибка обновления информации о номере", {
                 position: "top-right",
                 richColors: true,

@@ -1,7 +1,5 @@
 import {
-    AccommodationUnitSearchCredientials,
-    UpdateAccommodationUnitDictionariesRequest,
-    UpdateAccommodationUnitRequest
+    AccommodationUnitSearchCredientials, UpdateAccommodationUnitDictionariesRequest, UpdateAccommodationUnitRequest,
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/types";
 import {api} from "@/shared/api/axiosInstance";
 
@@ -31,7 +29,7 @@ export const getAccommodationUnitById = async (id: string) => {
     return response.data;
 }
 
-export const updateAccommodationUnit = async (data: UpdateAccommodationUnitRequest) => {    
+export const updateAccommodationUnit = async (data: UpdateAccommodationUnitRequest) => {
     const response = await api.put(`/accommodation-units/${data.id}`, {
         unitType: data.unitType,
         name: data.name,

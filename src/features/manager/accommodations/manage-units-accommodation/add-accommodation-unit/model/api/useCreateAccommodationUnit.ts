@@ -10,6 +10,7 @@ import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 
 export function useCreateAccommodationUnit() {
 
+
     return useMutation({
         mutationFn: (data: IAddAccommodationUnitForm) => createAccommodationUnit(data),
         onSuccess: async () => {

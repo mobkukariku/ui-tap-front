@@ -1,4 +1,4 @@
-import {ManagerRegisterForm} from "@/features/auth/register/manager/ui/ManagerRegisterForm";
+import {ClientRegisterForm} from "@/features/auth/register/client/ui/ClientRegisterForm";
 
 export default function RegisterPage() {
     return (
@@ -7,7 +7,7 @@ export default function RegisterPage() {
             <p className={"w-fit md:w-md text-center max-md:text-sm opacity-70"}>
                 Создайте аккаунт, чтобы получить доступ к системе
             </p>
-            <ManagerRegisterForm />
+            <ClientRegisterForm />
         </section>
     )
 }

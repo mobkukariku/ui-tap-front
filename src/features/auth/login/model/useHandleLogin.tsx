@@ -29,6 +29,8 @@ export function useHandleLogin() {
                 router.push("/manager");
             } else if (user?.role.includes("ADMIN")) {
                 router.push("/admin");
+            }else if (user?.role.includes("CLIENT")) {
+                router.push("/client");
             } else {
                 router.push("/");
             }

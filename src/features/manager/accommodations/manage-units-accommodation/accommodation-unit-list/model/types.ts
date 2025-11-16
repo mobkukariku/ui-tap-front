@@ -11,3 +11,20 @@ export interface AccommodationUnitSearchCredientials extends PaginationParams {
     minArea?: string | null;
     maxArea?: string | null;
 }
+
+export interface UpdateAccommodationUnitRequest {
+    id: string;
+    unitType: string;
+    name: string;
+    description: string;
+    capacity: number;
+    floor: number;
+    area: number;
+    isAvailable: boolean;
+}
+
+export interface UpdateAccommodationUnitDictionariesRequest {
+    unitId: string;
+    serviceDictionaryIds: string[];
+    conditionDictionaryIds: string[];
+}

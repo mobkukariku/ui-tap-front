@@ -18,7 +18,7 @@ export function useUpdateAccommodationUnitDictionaries() {
                 description: getCurrentTime()
             });
         },
-        onError: async (error: any) => {
+        onError: async (error) => {
             toast.error("Ошибка обновления словарей номера", {
                 position: "top-right",
                 richColors: true,

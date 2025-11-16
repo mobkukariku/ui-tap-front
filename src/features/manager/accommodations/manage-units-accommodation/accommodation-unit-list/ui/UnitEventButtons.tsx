@@ -27,7 +27,7 @@ export function UnitEventButtons({unitId}:UnitEventButtonsProps) {
     const [isEditDictionariesOpen, setIsEditDictionariesOpen] = useState(false);
 
 
-    const {data: editUnitData} = useGetAccommodationUnitById(unitId);
+    const { data: editUnitData } = useGetAccommodationUnitById(unitId, isEditMainInfoOpen);
 
     return (
         <>

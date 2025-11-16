@@ -26,7 +26,7 @@ interface AccommodationUnitModalProps {
 
 export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:AccommodationUnitModalProps) {
 
-    const {data} = useGetAccommodationUnitById(id);
+    const {data} = useGetAccommodationUnitById(id, isModalOpen);
 
     return (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
