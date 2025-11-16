@@ -29,7 +29,6 @@ export function UnitEventButtons({unitId}:UnitEventButtonsProps) {
 
     const {data: editUnitData} = useGetAccommodationUnitById(unitId);
 
-
     return (
         <>
             <div className="flex gap-2 justify-center">
