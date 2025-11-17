@@ -46,8 +46,8 @@ export function EditUnitDictionariesModal({
     const onSubmit = (data: UpdateAccommodationUnitDictionariesFormData) => {
         mutate({
             unitId: unitId,
-            serviceDictionaryIds: data.serviceDictionaryIds,
-            conditionDictionaryIds: data.conditionDictionaryIds,
+            serviceDictionaryIds: data?.serviceDictionaryIds,
+            conditionDictionaryIds: data?.conditionDictionaryIds,
         }, {
             onSuccess: () => {
                 setOpen(false);

@@ -1,8 +1,7 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {updateAccommodationTags} from "./updateApi";
+import {updateAccommodationTags, UpdateAccommodationTagsRequest} from "./updateApi";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {toast} from "sonner";
-import { UpdateAccommodationTagsRequest } from "../types";
 
 export function useUpdateAccommodationTags() {
     const queryClient = useQueryClient();
@@ -17,7 +16,7 @@ export function useUpdateAccommodationTags() {
                 description: getCurrentTime()
             });
         },
-        onError: async (error: any) => {
+        onError: async (error) => {
             toast.error("Ошибка обновления тегов", {
                 position: "top-right",
                 richColors: true,

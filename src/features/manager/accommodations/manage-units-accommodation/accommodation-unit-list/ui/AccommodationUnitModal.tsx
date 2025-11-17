@@ -15,6 +15,7 @@ import {
     useGetAccommodationUnitById
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/api/useGetAccommodationUnitById";
 import {Dictionary} from "@/entities/dictionary/model/types";
+import {ImageGallery} from "@/shared/ui/image-gallery";
 
 interface AccommodationUnitModalProps {
     id: string;
@@ -38,6 +39,8 @@ export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:Accommo
                             {data?.name}
                         </DialogTitle>
                     </DialogHeader>
+
+                    {data?.imageUrls ? <ImageGallery images={data?.imageUrls} /> : null}
 
                     <div className="mt-6 space-y-6">
                         <InfoItem icon={Layers} label="Тип номера">

@@ -6,4 +6,6 @@ export interface CreateAccommodationRequest {
     description: string;
     address: string;
     images: File[];
+    serviceDictionaryIds: number[];
+    conditionDictionaryIds: number[];
 }

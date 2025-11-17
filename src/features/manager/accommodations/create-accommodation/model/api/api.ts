@@ -10,6 +10,14 @@ export const createAccommodation = async (data: CreateAccommodationRequest) => {
     formData.append("name", data.name);
     formData.append("description", data.description);
     formData.append("address", data.address);
+    data.serviceDictionaryIds.forEach((service) => {
+        formData.append("serviceDictionaryIds", String(service));
+    })
+
+    data.conditionDictionaryIds.forEach((condition) => {
+        formData.append("conditionDictionaryIds", String(condition));
+    })
+
 
     data.images.forEach((image) => {
         formData.append("images", image);

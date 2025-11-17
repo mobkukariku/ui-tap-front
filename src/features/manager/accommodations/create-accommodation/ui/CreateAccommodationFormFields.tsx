@@ -9,6 +9,7 @@ import { District } from "@/entities/district/model/types";
 import { City } from "@/entities/city/model/types";
 import { useHandleAccommodationFormFields } from "@/features/manager/accommodations/create-accommodation/model/useHandleAccommodationFormFields";
 import {ImageUploader} from "@/widgets/images-uploader/ui/ImageUploader";
+import {SelectDictionary} from "@/widgets/select-dictionary/ui/SelectDictionary";
 
 export function CreateAccommodationFormFields() {
     const {
@@ -144,6 +145,42 @@ export function CreateAccommodationFormFields() {
                 />
                 {form.formState.errors.rating && (
                     <p className="text-sm text-red-500">{form.formState.errors.rating.message as string}</p>
+                )}
+            </fieldset>
+
+            <fieldset className="flex flex-col gap-2">
+                <Label>Услуги</Label>
+                <Controller
+                    name="serviceDictionaryIds"
+                    control={form.control}
+                    render={({ field }) => (
+                        <SelectDictionary
+                            value={field.value || []}
+                            onChange={field.onChange}
+                            placeholder="Выберите услуги"
+                            type="ACC_SERVICE"
+                        />
+                    )}
+                />
+                {form.formState.errors.serviceDictionaryIds && (
+                    <p className="text-sm text-red-500">{form.formState.errors.serviceDictionaryIds.message as string}</p>
+                )}
+            </fieldset>
+            <fieldset className="flex flex-col gap-2">
+                <Label>Условия</Label>
+                <Controller
+                    name={"conditionDictionaryIds"}
+                    control={form.control}
+                    render={({ field }) => (
+                        <SelectDictionary
+                            value={field.value || []}
+                            onChange={field.onChange}
+                            placeholder={"Выберите условия"}
+                            type={"ACC_CONDITION"} />
+                    )}
+                />
+                {form.formState.errors.conditionDictionaryIds && (
+                    <p className="text-sm text-red-500">{form.formState.errors.conditionDictionaryIds.message as string}</p>
                 )}
             </fieldset>
 

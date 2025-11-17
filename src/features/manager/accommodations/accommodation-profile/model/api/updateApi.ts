@@ -35,9 +35,9 @@ export const updateAccommodationMainInfo = async (data: UpdateAccommodationMainI
 };
 
 export const updateAccommodationTags = async (data: UpdateAccommodationTagsRequest) => {
-    const response = await api.put(`/accommodations/${data.id}/tags`, {
-        serviceIds: data.serviceIds,
-        conditionIds: data.conditionIds,
+    const response = await api.put(`/accommodations/${data.id}/dictionaries`, {
+        serviceDictionaryIds: data.serviceIds,
+        conditionDictionaryIds: data.conditionIds,
     });
 
     return response.data;

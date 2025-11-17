@@ -89,10 +89,10 @@ export function SelectDictionary({
                     <CommandEmpty>Ничего не найдено.</CommandEmpty>
                     <CommandList>
                         <CommandGroup>
-                            {data?.content.map((dictionary: Dictionary) => (
+                            {data?.content.map((dictionary: Dictionary,) => (
                                 <CommandItem
                                     key={dictionary.id}
-                                    value={String(dictionary.value)}
+                                    value={String(dictionary.id)}
                                     onSelect={() => handleSetValue(Number(dictionary.id))}
                                 >
                                     <Check

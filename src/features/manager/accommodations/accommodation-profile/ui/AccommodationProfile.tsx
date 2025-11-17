@@ -10,6 +10,7 @@ import {EditMainInfoModal, EditTagsModal, EditPhotosModal} from "@/features/mana
 import {Button} from "@/shared/ui/button";
 import {Pencil} from "lucide-react";
 import { Spinner } from "@/shared/ui/spinner";
+import {Dictionary} from "@/entities/dictionary/model/types";
 
 interface AccommodationProfileProps {
     accommodationId: string
@@ -78,9 +79,10 @@ export function AccommodationProfile({accommodationId}:AccommodationProfileProps
                 open={isTagsOpen}
                 setOpen={setIsTagsOpen}
                 accommodationId={Number(accommodationId)}
-                initialServiceIds={data?.serviceIds || []}
-                initialConditionIds={data?.conditionIds || []}
+                initialServiceIds={(data?.services || []).map((s:Dictionary) => Number(s.id))}
+                initialConditionIds={(data?.conditions || []).map((c:Dictionary) => Number(c.id))}
             />
+
 
             <EditPhotosModal
                 open={isPhotosOpen}

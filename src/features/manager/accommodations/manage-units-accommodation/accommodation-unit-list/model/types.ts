@@ -25,6 +25,6 @@ export interface UpdateAccommodationUnitRequest {
 
 export interface UpdateAccommodationUnitDictionariesRequest {
     unitId: string;
-    serviceDictionaryIds: string[];
-    conditionDictionaryIds: string[];
+    serviceDictionaryIds: number[];
+    conditionDictionaryIds: number[];
 }

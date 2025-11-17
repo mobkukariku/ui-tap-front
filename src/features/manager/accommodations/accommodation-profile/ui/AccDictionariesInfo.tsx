@@ -1,10 +1,11 @@
 import {DictionaryField} from "@/features/manager/accommodations/accommodation-profile/ui/DataField";
 import {Pencil} from "lucide-react";
 import {Button} from "@/shared/ui/button";
+import {Dictionary} from "@/entities/dictionary/model/types";
 
 interface AccDictionariesInfoProps {
-    services: string[],
-    conditions: string[],
+    services: Dictionary[],
+    conditions: Dictionary[],
     onEdit?: () => void;
 }
 
