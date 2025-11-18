@@ -83,16 +83,16 @@ export function SelectDictionary({
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-full p-0">
+            <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
                 <Command>
                     <CommandInput placeholder="Поиск..." />
                     <CommandEmpty>Ничего не найдено.</CommandEmpty>
                     <CommandList>
                         <CommandGroup>
-                            {data?.content.map((dictionary: Dictionary) => (
+                            {data?.content.map((dictionary: Dictionary,) => (
                                 <CommandItem
                                     key={dictionary.id}
-                                    value={String(dictionary.value)}
+                                    value={String(dictionary.id)}
                                     onSelect={() => handleSetValue(Number(dictionary.id))}
                                 >
                                     <Check

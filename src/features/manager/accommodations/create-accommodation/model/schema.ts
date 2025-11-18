@@ -9,6 +9,12 @@ export const createAccommodationSchema = z.object({
     address: z.string().min(1, "Адрес обязателен"),
     cityId: z.string().min(1, "Город обязателен"),
     districtId: z.string().min(1, "Округ обязателен"),
+    serviceDictionaryIds: z
+        .array(z.coerce.number<number>())
+        .min(1, "Выберите хотя бы один сервис"),
+    conditionDictionaryIds: z
+        .array(z.coerce.number<number>())
+        .min(1, "Выберите хотя бы одно условие"),
     rating: z.coerce.number<number>().min(0, "Минимум 0").max(5, "Максимум 5"),
     images: z
         .array(

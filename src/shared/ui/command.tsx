@@ -22,7 +22,7 @@ function Command({
 
       data-slot="command"
       className={cn(
-        "bg-popover min-[960px]:w-160 min-[670px]:w-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 text-popover-foreground flex h-full  flex-col overflow-hidden rounded-md",
+        "bg-popover w-full data-[disabled]:pointer-events-none data-[disabled]:opacity-50 text-popover-foreground flex h-full  flex-col overflow-hidden rounded-md",
         className
       )}
       {...props}

@@ -32,7 +32,7 @@ export function RangeFilter({
 
     return (
         <div className="flex gap-3 items-center">
-            <Label className="w-24">{label}</Label>
+            <Label className="w-fit">{label}:</Label>
 
             <Input
                 type="number"

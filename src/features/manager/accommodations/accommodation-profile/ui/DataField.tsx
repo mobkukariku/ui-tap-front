@@ -1,4 +1,5 @@
 import { Label } from "@/shared/ui/label";
+import {Dictionary} from "@/entities/dictionary/model/types";
 
 interface DataFieldProps {
     icon: React.ElementType;
@@ -20,7 +21,7 @@ export function DataField({ icon: Icon, label, value }: DataFieldProps) {
 
 interface DictionaryFieldProps {
     label: string;
-    values?: string[];
+    values?: Dictionary[];
 }
 
 export function DictionaryField({ label, values }: DictionaryFieldProps) {
@@ -28,8 +29,8 @@ export function DictionaryField({ label, values }: DictionaryFieldProps) {
         <div className="flex flex-col w-full gap-2">
             <Label>{label}</Label>
             <div className="w-full gap-2 items-center flex flex-row p-4 min-h-12 flex-wrap  bg-white rounded-xl border">
-                {values ? values.map(value => (
-                    <p className={"text-[12px] border rounded-full px-4 py-1 bg-[#D1E1FF] border-[#355694]"} key={value}>{value}</p>
+                {values ? values.map((value) => (
+                    <p  className={"text-[12px] border rounded-full px-4 py-1 bg-[#D1E1FF] border-[#355694]"} key={value?.id}>{value?.value}</p>
                 )): (
                     <p className={"opacity-50"}>Пока пусто</p>
                 )}

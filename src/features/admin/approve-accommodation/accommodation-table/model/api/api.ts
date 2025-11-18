@@ -12,7 +12,7 @@ export const getAccommodation = async (data:AccommodationSearchCredentials) => {
             ownerId: data.ownerId ?? "",
             name: data.name ?? "",
             page: data.page ?? 0,
-            size: data.size ?? 20,
+            size: 20,
         }
     });
 

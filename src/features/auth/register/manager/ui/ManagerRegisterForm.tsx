@@ -5,19 +5,15 @@ import {useForm} from "react-hook-form";
 import {ManagerRegisterFormData, managerRegisterSchema} from "@/features/auth/register/manager/model/schema";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useState} from "react";
-import {SuccessfulRequestSendModal} from "@/features/auth/register/manager/ui/SuccessfulRequestSendModal";
 import {Button} from "@/shared/ui/button";
-import {useRegister} from "@/features/auth/register/manager/model/api/useRegister";
+import {useManagerRegister} from "@/features/auth/register/manager/model/api/useManagerRegister";
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
-import {AxiosError} from "axios";
-import {ErrorResponse} from "@/shared/types/error";
 import {sessionService} from "@/entities/session/model/sessionService";
 import {useRouter} from "next/navigation";
 
-export function RegisterForm() {
-    const register = useRegister();
-    const [isModalOpen, setIsModalOpen] = useState(false);
+export function ManagerRegisterForm() {
+    const register = useManagerRegister();
     const [isSubmitting] = useState(false);
     const router = useRouter();
 
@@ -56,21 +52,7 @@ export function RegisterForm() {
                 router.push("/");
             }
         }catch (error) {
-            if (error instanceof Error) {
-                const axiosError = error as AxiosError<ErrorResponse>;
-
-                toast.error("Ошибка входа в систему", {
-                    position: "top-right",
-                    richColors: true,
-                    description: axiosError.response?.data?.message || "Проверьте данные и попробуйте снова"
-                })
-            } else {
-                toast.error("Ошибка входа в систему", {
-                    position: "top-right",
-                    richColors: true,
-                    description: "Произошла непредвиденная ошибка"
-                });
-            }
+            console.error(error);
         }
     };
 
@@ -158,10 +140,6 @@ export function RegisterForm() {
                 </fieldset>
             </form>
 
-            <SuccessfulRequestSendModal
-                open={isModalOpen}
-                setOpen={setIsModalOpen}
-            />
         </>
     );
 }

@@ -17,6 +17,8 @@ import {Button} from "@/shared/ui/button";
 import {
     SelectDictionary
 } from "@/widgets/select-dictionary/ui/SelectDictionary";
+import {ImageUploader} from "@/widgets/images-uploader/ui/ImageUploader";
+import {useCallback, useState} from "react";
 
 interface Props {
     accommodationId: string;
@@ -25,6 +27,8 @@ interface Props {
 export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
     const {mutate} = useCreateAccommodationUnit();
     const router = useRouter();
+
+    const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
     const form = useForm<CreateAccommodationUnitFormData>({
         resolver: zodResolver(createAccommodationUnitSchema),
@@ -40,6 +44,29 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
         },
     });
 
+    const handleImagesChange = useCallback((files: File[]) => {
+        const currentImages = form.getValues("images") || [];
+        const newImages = [...currentImages, ...files];
+
+        form.setValue("images", newImages, { shouldValidate: true });
+
+        // Создаем превью для новых изображений
+        files.forEach((file) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreviews((prev) => [...prev, reader.result as string]);
+            };
+            reader.readAsDataURL(file);
+        });
+    }, [form]);
+
+    const removeImage = useCallback((index: number) => {
+        const currentImages = form.getValues("images");
+        const newImages = currentImages.filter((_, i) => i !== index);
+        form.setValue("images", newImages, { shouldValidate: true });
+
+        setImagePreviews((prev) => prev.filter((_, i) => i !== index));
+    }, [form]);
 
     const onSubmit: SubmitHandler<CreateAccommodationUnitFormData> = async (data) => {
         console.log("data", data);
@@ -56,6 +83,13 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
 
     return (
         <form className={"my-20 flex break-all flex-col mx-auto gap-5"} onSubmit={form.handleSubmit(onSubmit)}>
+            <ImageUploader
+                images={imagePreviews}
+                onImagesChange={handleImagesChange}
+                onImageRemove={removeImage}
+                error={form.formState.errors.images?.message as string}
+                maxImages={10}
+            />
             <fieldset className="flex flex-col gap-2">
                 <Label>Имя</Label>
                 <Input

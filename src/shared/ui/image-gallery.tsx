@@ -80,8 +80,8 @@ export function ImageGallery({ images }: ImageGalleryProps) {
         {lightboxOpen && (
             <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
               <DialogTitle className="sr-only">Просмотр изображения</DialogTitle>
-              <DialogContent className="md:min-w-6xl w-[90dvw] h-[90dvh] p-0 bg-black/95 border-none">
-                <div className="relative w-full h-full flex items-center justify-center">
+              <DialogContent className="md:min-w-6xl w-[90dvw] h-[90dvh]  p-0 bg-black/95 border-none">
+                <div className="relative w-full h-full overflow-hidden flex items-center justify-center">
                   {/* Кнопка закрытия */}
                   <button
                       onClick={closeLightbox}

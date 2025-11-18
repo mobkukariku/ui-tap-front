@@ -8,15 +8,16 @@ import {
   TableRow,
 } from "@/shared/ui/table";
 import { Badge } from "@/shared/ui/badge";
-import { Button } from "@/shared/ui/button";
 import { useGetAccommodationUnits } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/api/useGetAccommodationUnits";
 import { AccommodationUnit } from "@/entities/accommodation-unit/model/types";
 import { TablePagination } from "@/widgets/pagination/ui/TablePagination";
-import { useState } from "react";
-import {
-  AccommodationUnitModal
-} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/ui/AccommodationUnitModal";
 import {Spinner} from "@/shared/ui/spinner";
+import {
+    UnitEventButtons
+} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/ui/UnitEventButtons";
+import {
+  useAccommodationUnitFilter
+} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-filter/model/useAccommodationUnitFilter";
 
 interface AccommodationUnitListProps {
   accommodationId: string;
@@ -25,9 +26,8 @@ interface AccommodationUnitListProps {
 
 export function AccommodationUnitList({accommodationId}:AccommodationUnitListProps) {
   const { data, isLoading, isError } = useGetAccommodationUnits(accommodationId);
-  const [page, setPage] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedId, setSelectedId] = useState<string>("");
+
+  const {filters, setFilter} = useAccommodationUnitFilter()
 
   if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-10"} />
   if (isError) return <p className="text-center py-8 text-red-500">Ошибка загрузки</p>;
@@ -61,12 +61,7 @@ export function AccommodationUnitList({accommodationId}:AccommodationUnitListPro
                 )}
               </TableCell>
               <TableCell className="text-center">
-                <Button size="sm" onClick={() => {
-                  setIsModalOpen(true);
-                  setSelectedId(item.id);
-                }}>
-                  Посмотреть
-                </Button>
+                  <UnitEventButtons unitId={item.id} />
               </TableCell>
             </TableRow>
           ))}
@@ -76,14 +71,13 @@ export function AccommodationUnitList({accommodationId}:AccommodationUnitListPro
       {data?.totalElements > 20 && (
         <div className="mt-6">
           <TablePagination
-            page={page}
-            totalPages={data.totalPages}
-            size={10}
-            onPageChange={setPage}
+              page={filters.page ?? 0}
+              totalPages={data.totalPages}
+              size={filters.size ?? 0}
+              onPageChange={(newPage) => setFilter("page", newPage)} // ✅ вот правильный способ
           />
         </div>
       )}
-      <AccommodationUnitModal id={selectedId} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </>
   );
 }

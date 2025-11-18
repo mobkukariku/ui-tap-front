@@ -16,9 +16,11 @@ import { TablePagination } from "@/widgets/pagination/ui/TablePagination";
 import { useState } from "react";
 import { AccommodationModal } from "@/features/admin/approve-accommodation/accommodation-table/ui/AccommodationModal";
 import {Spinner} from "@/shared/ui/spinner";
+import {
+  useAccommodationFilter
+} from "@/features/admin/approve-accommodation/filter-accommodation/model/store/useAccommodationFilter";
 
 export function AccommodationTable() {
-  const [page, setPage] = useState(0);
   const [selectedId, setSelectedId] = useState<string>("");
   const [openModal, setOpenModal] = useState(false);
 
@@ -31,6 +33,8 @@ export function AccommodationTable() {
     approving,
     rejecting,
   } = useAccommodations();
+
+  const {filters, setFilter} = useAccommodationFilter()
 
   if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-10"} />
   if (isError) return <p>Error loading accommodations</p>;
@@ -109,10 +113,10 @@ export function AccommodationTable() {
 
         {data?.totalElements > 20 && (
             <TablePagination
-                page={page}
+                page={filters.page ?? 0}
                 totalPages={data.totalPages}
-                size={10}
-                onPageChange={setPage}
+                size={filters.size ?? 0}
+                onPageChange={(newPage) => setFilter("page", newPage)} // ✅ вот правильный способ
             />
         )}
 
@@ -120,6 +124,7 @@ export function AccommodationTable() {
             id={selectedId}
             openModal={openModal}
             setOpenModal={setOpenModal}
+
         />
       </>
   );

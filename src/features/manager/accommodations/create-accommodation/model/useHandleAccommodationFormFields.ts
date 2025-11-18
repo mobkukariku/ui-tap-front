@@ -26,6 +26,8 @@ export function useHandleAccommodationFormFields() {
             districtId: "",
             rating: 0,
             images: [],
+            serviceDictionaryIds: [],
+            conditionDictionaryIds: [],
         },
     });
 

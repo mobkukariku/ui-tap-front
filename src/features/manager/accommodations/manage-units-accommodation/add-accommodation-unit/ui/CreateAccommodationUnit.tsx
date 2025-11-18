@@ -8,7 +8,7 @@ interface CreateAccommodationUnitFormFields {
 
 export function CreateAccommodationUnit({accommodationId}:CreateAccommodationUnitFormFields) {
     return (
-        <section className={"max-w-2xl mx-auto mt-20"}>
+        <section className={"max-w-lg mx-auto mt-20"}>
             <h3 className={"text-2xl text-center font-medium"}>Введите данные юнита</h3>
             <CreateAccommodationUnitFormFields accommodationId={accommodationId} />
         </section>

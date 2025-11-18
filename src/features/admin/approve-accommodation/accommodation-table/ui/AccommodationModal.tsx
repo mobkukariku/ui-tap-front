@@ -1,12 +1,14 @@
 "use client"
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/shared/ui/dialog";
-import { FileText, Home, MapPin, Star, User} from "lucide-react";
+import {FileText, Home, MapPin, Package, Star, User} from "lucide-react";
 import {ImageGallery} from "@/shared/ui/image-gallery";
 import InfoItem from "@/shared/ui/info-item";
 import {
     useGetAccommodationById
 } from "@/features/admin/approve-accommodation/accommodation-table/model/api/useGetAccommodationById";
 import {RatingStars} from "@/shared/ui/rating-stars";
+import {Dictionary} from "@/entities/dictionary/model/types";
+import {Badge} from "@/shared/ui/badge";
 
 interface Props {
     id: string;
@@ -61,6 +63,29 @@ export function AccommodationModal({openModal, setOpenModal, id} : Props) {
 
                         <InfoItem icon={User} label="ID Владельца">
                             <p className="text-base">{data?.ownerId}</p>
+                        </InfoItem>
+                        <InfoItem icon={Package} label="Услуги">
+                            <div className="flex flex-wrap gap-2">
+                                {data?.services.map((service:Dictionary) => {
+                                    return (
+                                        <Badge key={service.id} variant="secondary" className="flex items-center gap-1">
+                                            {service.value}
+                                        </Badge>
+                                    );
+                                })}
+                            </div>
+                        </InfoItem>
+
+                        <InfoItem icon={Package} label="Условия">
+                            <div className="flex flex-wrap gap-2">
+                                {data?.conditions.map((condition:Dictionary) => {
+                                    return (
+                                        <Badge key={condition.id} variant="secondary" className="flex items-center gap-1">
+                                            {condition.value}
+                                        </Badge>
+                                    );
+                                })}
+                            </div>
                         </InfoItem>
                     </div>
                 </>

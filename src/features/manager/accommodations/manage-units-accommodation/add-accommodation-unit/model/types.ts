@@ -9,4 +9,5 @@ export interface IAddAccommodationUnitForm {
     area: number;
     serviceDictionaryIds: number[],
     conditionDictionaryIds: number[],
+    images: File[];
 }

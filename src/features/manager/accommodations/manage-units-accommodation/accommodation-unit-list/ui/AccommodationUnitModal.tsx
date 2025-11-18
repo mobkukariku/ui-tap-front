@@ -15,6 +15,7 @@ import {
     useGetAccommodationUnitById
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/api/useGetAccommodationUnitById";
 import {Dictionary} from "@/entities/dictionary/model/types";
+import {ImageGallery} from "@/shared/ui/image-gallery";
 
 interface AccommodationUnitModalProps {
     id: string;
@@ -26,7 +27,7 @@ interface AccommodationUnitModalProps {
 
 export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:AccommodationUnitModalProps) {
 
-    const {data} = useGetAccommodationUnitById(id);
+    const {data} = useGetAccommodationUnitById(id, isModalOpen);
 
     return (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
@@ -38,6 +39,8 @@ export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:Accommo
                             {data?.name}
                         </DialogTitle>
                     </DialogHeader>
+
+                    {data?.imageUrls ? <ImageGallery images={data?.imageUrls} /> : null}
 
                     <div className="mt-6 space-y-6">
                         <InfoItem icon={Layers} label="Тип номера">
@@ -73,7 +76,7 @@ export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:Accommo
                                 className={
                                     data?.isAvailable
                                         ? "bg-green-50 text-green-700"
-                                        : "bg-red-50 text-red-700"
+                                        : "bg-red-100 border-red-400 text-red-700"
                                 }
                             >
                                 {data?.isAvailable ? "Доступно" : "Занято"}
