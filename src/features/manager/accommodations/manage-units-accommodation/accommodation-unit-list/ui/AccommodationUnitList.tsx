@@ -11,7 +11,6 @@ import { Badge } from "@/shared/ui/badge";
 import { useGetAccommodationUnits } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/api/useGetAccommodationUnits";
 import { AccommodationUnit } from "@/entities/accommodation-unit/model/types";
 import { TablePagination } from "@/widgets/pagination/ui/TablePagination";
-import { useState } from "react";
 import {Spinner} from "@/shared/ui/spinner";
 import {
     UnitEventButtons

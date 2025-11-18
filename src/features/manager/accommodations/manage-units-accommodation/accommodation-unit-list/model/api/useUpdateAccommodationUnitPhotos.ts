@@ -4,7 +4,6 @@ import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {toast} from "sonner";
 import {
     UpdateAccommodationUnitPhotosRequest,
-    UpdateAccommodationUnitRequest
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/types";
 import {
     deleteAccommodationUnitPhoto,

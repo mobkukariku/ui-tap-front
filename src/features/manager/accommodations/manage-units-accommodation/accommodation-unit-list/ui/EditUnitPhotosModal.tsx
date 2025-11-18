@@ -2,7 +2,6 @@
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogClose } from "@/shared/ui/dialog";
 import { Button } from "@/shared/ui/button";
 import { ImageUploader } from "@/widgets/images-uploader/ui/ImageUploader";
-import {useEditPhotosModal} from "@/features/manager/accommodations/accommodation-profile/model/useEditPhotosModal";
 import {
     useEditUnitPhotosModal
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/useEditUnitPhotosModal";
