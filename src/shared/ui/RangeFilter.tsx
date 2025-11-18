@@ -4,7 +4,7 @@ import { Input } from "@/shared/ui/input";
 import { Slider } from "@/shared/ui/slider";
 
 interface RangeFilterProps {
-    label: string;
+    label?: string;
     value: number[];
     onChange: (value: number[]) => void;
     min?: number;
@@ -31,8 +31,8 @@ export function RangeFilter({
     };
 
     return (
-        <div className="flex gap-3 items-center">
-            <Label className="w-fit">{label}:</Label>
+        <div className="flex gap-3 w-full items-center">
+            {label && <Label className="w-fit">{label}:</Label>}
 
             <Input
                 type="number"
@@ -42,7 +42,7 @@ export function RangeFilter({
             />
 
             <Slider
-                className="w-[200px]"
+                className="w-full"
                 value={value}
                 onValueChange={onChange}
                 min={min}

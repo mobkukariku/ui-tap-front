@@ -12,7 +12,7 @@ import {Input} from "@/shared/ui/input";
 import {Textarea} from "@/shared/ui/textarea";
 import {useRouter} from "next/navigation";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/shared/ui/select";
-import {unitTypes} from "@/features/manager/accommodations/manage-units-accommodation/add-accommodation-unit/model/constants";
+import {unitTypes} from "@/entities/accommodation-unit/model/constants";
 import {Button} from "@/shared/ui/button";
 import {
     SelectDictionary

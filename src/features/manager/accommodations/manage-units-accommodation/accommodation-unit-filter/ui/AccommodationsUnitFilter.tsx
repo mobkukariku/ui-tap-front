@@ -18,7 +18,7 @@
     } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-filter/ui/FilterSection";
     import {
         RangeFilter
-    } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-filter/ui/RangeFilter";
+    } from "@/shared/ui/RangeFilter";
     import Link from "next/link";
 
     interface AccommodationsUnitFilterProps {

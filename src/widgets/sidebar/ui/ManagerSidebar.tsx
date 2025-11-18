@@ -23,7 +23,7 @@ import {
     DropdownMenuTrigger
 } from "@/shared/ui/dropdown-menu";
 import {Button} from "@/shared/ui/button";
-import {useHandleLogout} from "@/widgets/sidebar/model/useHandleLogout";
+import {useHandleLogout} from "@/shared/hooks/useHandleLogout";
 import {sessionService} from "@/entities/session/model/sessionService";
 import {useEffect, useState} from "react";
 

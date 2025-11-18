@@ -10,7 +10,7 @@ import {Textarea} from "@/shared/ui/textarea";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/shared/ui/select";
 import {useUpdateAccommodationUnit} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/api/useUpdateAccommodationUnit";
 import {updateAccommodationUnitSchema, UpdateAccommodationUnitFormData} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/schema";
-import {unitTypes} from "@/features/manager/accommodations/manage-units-accommodation/add-accommodation-unit/model/constants";
+import {unitTypes} from "@/entities/accommodation-unit/model/constants";
 
 interface EditUnitMainInfoModalProps {
     open: boolean;
