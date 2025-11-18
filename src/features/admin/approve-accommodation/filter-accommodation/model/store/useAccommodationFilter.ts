@@ -3,7 +3,7 @@ import { AccommodationSearchCredentials } from "@/features/admin/approve-accommo
 
 interface AccommodationFilterStore {
     filters: Partial<AccommodationSearchCredentials>;
-    setFilter: (key: keyof AccommodationSearchCredentials, value: string | null | undefined) => void;
+    setFilter: (key: keyof AccommodationSearchCredentials, value: string | number | null | undefined) => void;
 
     resetFilters: () => void;
 }
@@ -17,6 +17,8 @@ export const useAccommodationFilter = create<AccommodationFilterStore>((set) => 
         minRating: null,
         ownerId: null,
         name: null,
+        page: 0,
+        size: 20
     },
 
     setFilter: (key, value) =>
@@ -34,6 +36,8 @@ export const useAccommodationFilter = create<AccommodationFilterStore>((set) => 
                 minRating: null,
                 ownerId: null,
                 name: null,
+                page: 0,
+                size: 5
             },
         }),
 }));

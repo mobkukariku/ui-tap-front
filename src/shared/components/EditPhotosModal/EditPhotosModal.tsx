@@ -2,20 +2,38 @@
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogClose } from "@/shared/ui/dialog";
 import { Button } from "@/shared/ui/button";
 import { ImageUploader } from "@/widgets/images-uploader/ui/ImageUploader";
-import {useEditPhotosModal} from "@/features/manager/accommodations/accommodation-profile/model/useEditPhotosModal";
+import { UseFormReturn } from "react-hook-form";
 
 interface EditPhotosModalProps {
     open: boolean;
     setOpen: (open: boolean) => void;
-    accommodationId: number;
     initialImageUrls?: string[];
+    title?: string;
+    maxImages?: number;
+    usePhotosHook: (params: {
+        open: boolean;
+        setOpen: (open: boolean) => void;
+        id: number;
+        initialImageUrls: string[];
+    }) => {
+        form: UseFormReturn<any>;
+        imagePreviews: string[];
+        isUpdating: boolean;
+        handleImagesChange: (files: File[]) => void;
+        handleImageRemove: (index: number) => void;
+        onSubmit: (data: any) => Promise<void>;
+    };
+    entityId: number;
 }
 
 export function EditPhotosModal({
                                     open,
                                     setOpen,
-                                    accommodationId,
                                     initialImageUrls = [],
+                                    title = "Редактировать фотографии",
+                                    maxImages = 10,
+                                    usePhotosHook,
+                                    entityId,
                                 }: EditPhotosModalProps) {
     const {
         form,
@@ -24,10 +42,10 @@ export function EditPhotosModal({
         handleImagesChange,
         handleImageRemove,
         onSubmit,
-    } = useEditPhotosModal({
+    } = usePhotosHook({
         open,
         setOpen,
-        id: accommodationId,
+        id: entityId,
         initialImageUrls,
     });
 
@@ -35,7 +53,7 @@ export function EditPhotosModal({
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
-                    <DialogTitle>Редактировать фотографии</DialogTitle>
+                    <DialogTitle>{title}</DialogTitle>
                 </DialogHeader>
 
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -44,7 +62,7 @@ export function EditPhotosModal({
                         onImagesChange={handleImagesChange}
                         onImageRemove={handleImageRemove}
                         error={form.formState.errors.images?.message as string}
-                        maxImages={10}
+                        maxImages={maxImages}
                         label="Изображения"
                     />
 

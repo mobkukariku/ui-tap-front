@@ -1,5 +1,8 @@
 import {
-    AccommodationUnitSearchCredientials, UpdateAccommodationUnitDictionariesRequest, UpdateAccommodationUnitRequest,
+    AccommodationUnitSearchCredientials,
+    UpdateAccommodationUnitDictionariesRequest,
+    UpdateAccommodationUnitPhotosRequest,
+    UpdateAccommodationUnitRequest,
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/types";
 import {api} from "@/shared/api/axiosInstance";
 
@@ -51,3 +54,30 @@ export const updateAccommodationUnitDictionaries = async (data: UpdateAccommodat
 
     return response.data;
 };
+
+export const updateAccommodationUnitPhotos = async (data: UpdateAccommodationUnitPhotosRequest) => {
+    const formData = new FormData();
+
+    data.images.forEach((image) => {
+        formData.append("images", image);
+    });
+
+    const response = await api.put(`/accommodation-units/${data.id}/photos`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
+
+    return response.data;
+}
+
+export const deleteAccommodationUnitPhoto = async (id: string, photoUrl: string) => {
+    const response = await api.delete(`/accommodation-units/${id}/photos`, {
+        params: {
+            id,
+            photoUrl,
+        }
+    });
+
+    return response.data;
+}

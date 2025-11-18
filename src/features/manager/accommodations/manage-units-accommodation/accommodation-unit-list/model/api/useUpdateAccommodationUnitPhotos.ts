@@ -1,18 +1,22 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {
-    deleteAccommodationPhoto,
-    updateAccommodationPhotos,
-    UpdateAccommodationPhotosRequest
-} from "./updateApi";
+
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {toast} from "sonner";
+import {
+    UpdateAccommodationUnitPhotosRequest,
+    UpdateAccommodationUnitRequest
+} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/types";
+import {
+    deleteAccommodationUnitPhoto,
+    updateAccommodationUnitPhotos
+} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/api/api";
 
-export function useUpdateAccommodationPhotos() {
+export function useUpdateAccommodationUnitPhotos() {
     const queryClient = useQueryClient();
 
     const updateMutation = useMutation({
-        mutationFn: (data: UpdateAccommodationPhotosRequest) =>
-            updateAccommodationPhotos(data),
+        mutationFn: (data: UpdateAccommodationUnitPhotosRequest) =>
+            updateAccommodationUnitPhotos(data),
         onSuccess: async () => {
             await queryClient.invalidateQueries({queryKey: ["accommodation"]});
             toast.success("Фотографии успешно обновлены", {
@@ -32,7 +36,7 @@ export function useUpdateAccommodationPhotos() {
 
     const deleteMutation = useMutation({
         mutationFn: (data: { id: string; photoUrl: string }) =>
-            deleteAccommodationPhoto(data.id, data.photoUrl),
+            deleteAccommodationUnitPhoto(data.id, data.photoUrl),
         onSuccess: async () => {
             await queryClient.invalidateQueries({queryKey: ["accommodation"]});
             toast.success("Фотография удалена", {

@@ -6,7 +6,7 @@ import {create} from "zustand";
 
 interface AccommodationUnitFilterStore {
     filters: Partial<AccommodationUnitSearchCredientials>;
-    setFilter: (key: keyof AccommodationUnitSearchCredientials, value: string | null | undefined) => void;
+    setFilter: (key: keyof AccommodationUnitSearchCredientials, value: string | number | null | undefined) => void;
     resetFilters: () => void;
 }
 
@@ -21,6 +21,8 @@ export const useAccommodationUnitFilter = create<AccommodationUnitFilterStore>((
         maxCapacity: "10",
         minArea: "0",
         maxArea: "400",
+        page: 0,
+        size: 20
     },
     setFilter: (key, value) =>
         set((state) => ({
@@ -39,6 +41,8 @@ export const useAccommodationUnitFilter = create<AccommodationUnitFilterStore>((
                 maxCapacity: null,
                 minArea: null,
                 maxArea: null,
+                page: 0,
+                size: 20
             }
         })
 }))

@@ -17,5 +17,22 @@ export const updateAccommodationUnitDictionariesSchema = z.object({
     conditionDictionaryIds: z.array(z.coerce.number<number>()),
 });
 
-export type UpdateAccommodationUnitDictionariesFormData = z.infer<typeof updateAccommodationUnitDictionariesSchema>;
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
+
+export const updateUnitPhotosSchema = z.object({
+    images: z
+        .array(
+            z.instanceof(File)
+                .refine((file) => file.size <= MAX_FILE_SIZE, "Максимальный размер файла 5MB")
+                .refine(
+                    (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
+                    "Только .jpg, .jpeg, .png и .webp форматы поддерживаются"
+                )
+        )
+        .max(10, "Максимум 10 изображений"),
+});
+
+export type UpdateAccommodationUnitDictionariesFormData = z.infer<typeof updateAccommodationUnitDictionariesSchema>;
+export type UpdateUnitPhotosFormData = z.infer<typeof updateUnitPhotosSchema>;

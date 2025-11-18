@@ -16,6 +16,9 @@ import {
     EditUnitDictionariesModal
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/ui/EditUnitDictionariesModal";
 import {Dictionary} from "@/entities/dictionary/model/types";
+import {
+    EditUnitPhotosModal
+} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/ui/EditUnitPhotosModal";
 
 interface UnitEventButtonsProps {
     unitId: string;
@@ -24,11 +27,13 @@ interface UnitEventButtonsProps {
 export function UnitEventButtons({unitId}:UnitEventButtonsProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditMainInfoOpen, setIsEditMainInfoOpen] = useState(false);
-    const [isEditDictionariesOpen, setIsEditDictionariesOpen] = useState(false);
+    const [isEditDictionariesOpen, setIsEditDictionariesOpen] = useState(false)
+    const [isPhotosOpen, setIsPhotosOpen] = useState(false);
 
-    const isModalsopen = isEditMainInfoOpen || isEditDictionariesOpen
+    const isModalsopen = isEditMainInfoOpen || isEditDictionariesOpen || isPhotosOpen;
 
     const { data: editUnitData } = useGetAccommodationUnitById(unitId, isModalsopen);
+
 
     return (
         <>
@@ -60,6 +65,11 @@ export function UnitEventButtons({unitId}:UnitEventButtonsProps) {
                         }}>
                             Словари
                         </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => {
+                            setIsPhotosOpen(true);
+                        }}>
+                            Изображения
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
@@ -86,6 +96,12 @@ export function UnitEventButtons({unitId}:UnitEventButtonsProps) {
                 unitId={unitId}
                 initialServiceIds={editUnitData?.services?.map((s: Dictionary) => Number(s.id)) || []}
                 initialConditionIds={editUnitData?.conditions?.map((c: Dictionary) => Number(c.id)) || []}
+            />
+            <EditUnitPhotosModal
+                open={isPhotosOpen}
+                initialImageUrls={editUnitData?.imageUrls || []}
+                setOpen={setIsPhotosOpen}
+                unitId={Number(unitId)}
             />
         </>
     )

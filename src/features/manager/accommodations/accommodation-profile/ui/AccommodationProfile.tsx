@@ -42,7 +42,7 @@ export function AccommodationProfile({accommodationId}:AccommodationProfileProps
                         <Pencil className="h-4 w-4" />
                     </Button>
                 </div>
-                <div className={"flex flex-row mx-auto gap-5"}>
+                <div className={"flex flex-row w-190 mx-auto gap-5"}>
                     <ImageGallery images={data?.imageUrls} />
                 </div>
             </div>

@@ -3,20 +3,23 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogC
 import { Button } from "@/shared/ui/button";
 import { ImageUploader } from "@/widgets/images-uploader/ui/ImageUploader";
 import {useEditPhotosModal} from "@/features/manager/accommodations/accommodation-profile/model/useEditPhotosModal";
+import {
+    useEditUnitPhotosModal
+} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/useEditUnitPhotosModal";
 
-interface EditPhotosModalProps {
+interface EditUnitPhotosModalProps {
     open: boolean;
     setOpen: (open: boolean) => void;
-    accommodationId: number;
+    unitId: number;
     initialImageUrls?: string[];
 }
 
-export function EditPhotosModal({
+export function EditUnitPhotosModal({
                                     open,
                                     setOpen,
-                                    accommodationId,
+                                    unitId,
                                     initialImageUrls = [],
-                                }: EditPhotosModalProps) {
+                                }: EditUnitPhotosModalProps) {
     const {
         form,
         imagePreviews,
@@ -24,10 +27,10 @@ export function EditPhotosModal({
         handleImagesChange,
         handleImageRemove,
         onSubmit,
-    } = useEditPhotosModal({
+    } = useEditUnitPhotosModal({
         open,
         setOpen,
-        id: accommodationId,
+        id:unitId,
         initialImageUrls,
     });
 

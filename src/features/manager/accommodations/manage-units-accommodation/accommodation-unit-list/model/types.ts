@@ -21,6 +21,12 @@ export interface UpdateAccommodationUnitRequest {
     floor: number;
     area: number;
     isAvailable: boolean;
+    images: File[];
+}
+
+export interface UpdateAccommodationUnitPhotosRequest {
+    id: number;
+    images: File[];
 }
 
 export interface UpdateAccommodationUnitDictionariesRequest {
