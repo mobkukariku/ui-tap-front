@@ -1,20 +1,20 @@
 import {BreadcrumbLayout} from "@/widgets/breadcrumbs/ui/BreadcrumbLayout";
+import {AccommodationList} from "@/widgets/manage-list-accommodations/accommodations-list/ui/AccommodationList";
 import {
-  RequestSearchInput
-} from "@/features/manager/requests/filter-request/ui/RequestSearchInput";
-import {RequestTable} from "@/features/manager/requests/request-table/ui/RequestTable";
+    ManagerAccommodationFilterPanel
+} from "@/widgets/manage-list-accommodations/accommodations-filter/ui/ManagerAccommodationFilterPanel";
 
-export default function ManagerRequestsPage() {
-  return (
-      <>
-        <BreadcrumbLayout
-            items={[
-                { label: "Менеджер", href: "/manager" },
-              { label: "Заявки", href: "/manager/requests" }
-            ]}
-        />
-          <RequestSearchInput />
-          <RequestTable />
-      </>
-  );
+export default function ClientAccommodationsPage() {
+    return (
+        <>
+            <BreadcrumbLayout
+                items={[
+                    { label: "Главная", href: "/manager" },
+                    { label: "Заявки по Accommodation", href: "/manager/requests" }
+                ]}
+            />
+            <ManagerAccommodationFilterPanel hasAddButton={false} />
+            <AccommodationList hrefPattern="/manager/requests/{id}" />
+        </>
+    )
 }

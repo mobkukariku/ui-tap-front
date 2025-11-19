@@ -18,14 +18,14 @@ export function useAccommodations() {
     const {filters} = useAccommodationFilter();
 
     const accommodationsQuery = useQuery({
-        queryKey: ["accommodations", filters],
+        queryKey: ["accommodations-list", filters],
         queryFn: () => getAccommodation(filters),
     });
 
     const approveMutation = useMutation({
         mutationFn: (id: string) => approveAccommodation(id),
         onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ["accommodations"] });
+            await queryClient.invalidateQueries({ queryKey: ["accommodations-list"] });
             toast.success("Accommodations одобрен.", {
                 position: "top-right",
                 richColors: true,
@@ -47,7 +47,7 @@ export function useAccommodations() {
     const rejectMutation = useMutation({
         mutationFn: (id: string) => rejectAccommodation(id),
         onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ["accommodations"] });
+            await queryClient.invalidateQueries({ queryKey: ["accommodations-list"] });
             toast.info("Accommodations отклонен.", {
                 position: "top-right",
                 richColors: true,

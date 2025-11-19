@@ -1,8 +1,8 @@
 import {BreadcrumbLayout} from "@/widgets/breadcrumbs/ui/BreadcrumbLayout";
-import {AccommodationList} from "@/features/manager/accommodations/manage-list-accommodations/accommodations-list/ui/AccommodationList";
 import {
     ManagerAccommodationFilterPanel
-} from "@/features/manager/accommodations/manage-list-accommodations/accommodations-filter/ui/ManagerAccommodationFilterPanel";
+} from "@/widgets/manage-list-accommodations/accommodations-filter/ui/ManagerAccommodationFilterPanel";
+import {AccommodationList} from "@/widgets/manage-list-accommodations/accommodations-list/ui/AccommodationList";
 
 export default function ManagerAccommodationsPage() {
     return (
@@ -13,7 +13,7 @@ export default function ManagerAccommodationsPage() {
                     { label: "Accommodations", href: "/manager/accommodations" }
                 ]}
             />
-            <ManagerAccommodationFilterPanel />
+            <ManagerAccommodationFilterPanel hasAddButton={true} />
             <AccommodationList />
         </>
     )

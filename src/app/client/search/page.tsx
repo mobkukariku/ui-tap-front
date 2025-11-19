@@ -1,6 +1,6 @@
 import {Container} from "@/shared/ui/container";
-import {ClientSearchHeader} from "@/features/client/client-search-header/ui/ClientSearchHeader";
-import {ClientSearchInputs} from "@/features/client/client-search-input/ui/ClientSearchInputs";
+import {ClientSearchInputs} from "@/features/client/send-request/client-search-input/ui/ClientSearchInputs";
+import {ClientSearchHeader} from "@/features/client/send-request/client-search-header/ui/ClientSearchHeader";
 
 export default function ClientPage() {
     return (

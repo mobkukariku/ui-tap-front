@@ -1,0 +1,97 @@
+"use client"
+import {Container} from "@/shared/ui/container";
+import {
+    RequestStatusCheck,
+} from "@/features/client/requests/client-by-request/request-by-id/ui/RequestStatusCheck";
+import {useGetSearchRequest} from "@/features/client/requests/client-by-request/request-by-id/model/api/useGetSearchRequest";
+import {Spinner} from "@/shared/ui/spinner";
+import {LabelTextInfo} from "@/shared/ui/label-text-info";
+import {CalendarIcon, EditIcon, StarIcon, UsersIcon} from "lucide-react";
+import {TagList} from "@/shared/ui/TagList";
+import {Dictionary} from "@/entities/dictionary/model/types";
+import {
+    ClientSearchRequestPriceModal
+} from "@/features/client/requests/client-by-request/update-request-price/ui/ClientSearchRequestPriceModal";
+import {
+    RemoveSearchRequestModal
+} from "@/features/client/requests/client-by-request/remove-request-price/ui/RemoveSearchRequestModal";
+
+interface CurrentRequestInfoProps {
+    requestId: string;
+}
+
+export function CurrentRequestInfo({requestId}:CurrentRequestInfoProps) {
+
+    const {data, isError, isLoading} = useGetSearchRequest(requestId);
+
+    if(isError) return <p>Error</p>;
+    if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-10"} />
+
+    return (
+        <Container className={" w-full justify-center gap-5"}>
+            <div className={"flex flex-row justify-between w-full  mt-10 "}>
+                <div className={"space-y-2"}>
+                    <h2 className={"text-3xl font-bold"}>Заявка #{data?.id}</h2>
+                    <span className={"opacity-60"}>От {data?.authorName}</span>
+                </div>
+                <div className={"text-right"}>
+                    <p className={"font-medium opacity-60"}>Бюджет</p>
+                    <p className={"text-2xl font-bold text-green-600"}>{data?.price} Тг</p>
+                </div>
+            </div>
+            <div className={"flex flex-row justify-between gap-5 w-full"}>
+                <div className={"flex flex-col w-full gap-5 my-10"}>
+                    <RequestStatusCheck currentStatus={data?.status} />
+                    <div className={"bg-white border rounded-lg flex flex-col gap-10 py-6 px-6"}>
+                        <div className={"flex flex-row justify-between "}>
+                            <LabelTextInfo
+                                icon={<CalendarIcon width={20} height={20} className={"text-green-500"} />}
+                                label={"Заезд"}
+                                value={data?.checkInDate}
+                            />
+                            <LabelTextInfo
+                                icon={<CalendarIcon width={20} height={20} className={"text-green-500"} />}
+                                label={"Выезд"}
+                                value={data?.checkOutDate}
+                            />
+                            <LabelTextInfo
+                                icon={<UsersIcon width={20} height={20} className={"text-green-500"} />}
+                                label={"Гости"}
+                                value={data?.countOfPeople}
+                            />
+                            <LabelTextInfo
+                                icon={<StarIcon width={20} height={20} className={"text-yellow-500"} />}
+                                label={"Рейтинг"}
+                                value={`от ${data?.fromRating} до ${data?.toRating}`}
+                            />
+                        </div>
+                        <TagList
+                            title="Типы размещения:"
+                            items={data?.unitTypes}
+                            color="green"
+                        />
+
+                        <TagList
+                            title="Необходимые услуги:"
+                            items={data?.services.map((service:Dictionary) => service.value)}
+                            color="blue"
+                        />
+
+                        <TagList
+                            title="Необходимые условия:"
+                            items={data?.conditions.map((condition:Dictionary) => condition.value)}
+                            color="purple"
+                        />
+                    </div>
+                </div>
+                <div className={"bg-white border flex flex-col my-10 gap-5 w-1/2 h-fit rounded-lg p-6"}>
+                    <LabelTextInfo icon={<EditIcon width={20} height={20} className={"text-green-500"} />} label={"Действия"} />
+                    <div className={"flex flex-col w-full gap-3"}>
+                        <ClientSearchRequestPriceModal id={requestId} />
+                        <RemoveSearchRequestModal id={requestId} />
+                    </div>
+                </div>
+            </div>
+        </Container>
+    )
+}

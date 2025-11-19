@@ -1,5 +1,5 @@
 import {Input} from "@/shared/ui/input";
-import {Search, ArrowDownUp} from "lucide-react";
+import {Search} from "lucide-react";
 
 export function RequestSearchInput() {
 
@@ -11,11 +11,10 @@ export function RequestSearchInput() {
                     <Input
                         id="request-search"
                         placeholder="Искать номер"
-                        className="pl-9 w-[209px] border border-[#00000033] bg-[#5757570D] shadow-[0_1px_2px_0_#0000000D] text-[#00000080]"
+                        className="pl-9 w-full border border-[#00000033] shadow-[0_1px_2px_0_#0000000D] "
                     />
                 </fieldset>
             </form>
-            <ArrowDownUp className="w-[16px] text-[#818181] h-[16px]" strokeWidth={2} />
         </section>
     )
 }
