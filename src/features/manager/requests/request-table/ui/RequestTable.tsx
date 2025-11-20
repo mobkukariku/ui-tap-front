@@ -6,6 +6,8 @@ import {formatDate} from "@/shared/lib/date/formateDate";
 import {useGetRelevantRequests} from "@/features/manager/requests/request-table/model/api/useGetRelevantRequests";
 import {RequestStatusBadge} from "@/features/manager/requests/request-table/ui/RequestStatusBadge";
 import {Spinner} from "@/shared/ui/spinner";
+import {CreatePriceRequest} from "@/features/manager/requests/create-price-request/ui/CreatePriceRequest";
+import {SearchRequest} from "@/entities/search-request/model/types";
 
 interface RequestTableProps {
     id: number
@@ -40,7 +42,7 @@ export function RequestTable({id}:RequestTableProps) {
             </TableHeader>
 
             <TableBody>
-                {requests?.content?.map((item) => (
+                {requests?.content?.map((item:SearchRequest) => (
                     <TableRow key={item.id}>
                         <TableCell>{item.authorName}</TableCell>
                         <TableCell>
@@ -57,14 +59,7 @@ export function RequestTable({id}:RequestTableProps) {
                         </TableCell>
 
                         <TableCell>
-                            <div className="relative inline-block">
-                                <Button
-                                    size="sm"
-                                    variant={"default"}
-                                >
-                                    Откликнуться
-                                </Button>
-                            </div>
+                            <CreatePriceRequest price={item.price} />
                         </TableCell>
                     </TableRow>
                 ))}

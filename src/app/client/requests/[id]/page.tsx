@@ -10,6 +10,6 @@ export default async function CurrentRequestPage({params}:CurrentRequestPageProp
 
 
     return (
-        <CurrentRequestInfo requestId={id} />
+        <CurrentRequestInfo requestId={Number(id)} />
     )
 }

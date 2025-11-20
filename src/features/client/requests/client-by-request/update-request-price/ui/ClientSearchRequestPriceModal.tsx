@@ -6,7 +6,7 @@ import {
 import {useState} from "react";
 
 interface ClientSearchRequestPriceModalProps {
-    id: string;
+    id: number;
 }
 
 export function ClientSearchRequestPriceModal({id}: ClientSearchRequestPriceModalProps) {
@@ -25,7 +25,7 @@ export function ClientSearchRequestPriceModal({id}: ClientSearchRequestPriceModa
                         Изменить цену
                     </DialogTitle>
                 </DialogHeader>
-                <ClientSearchRequestPriceForm id={Number(id)} setOpen={setOpen} />
+                <ClientSearchRequestPriceForm id={id} setOpen={setOpen} />
             </DialogContent>
         </Dialog>
     );

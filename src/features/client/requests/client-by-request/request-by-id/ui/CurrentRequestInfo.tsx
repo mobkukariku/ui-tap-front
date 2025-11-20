@@ -17,7 +17,7 @@ import {
 } from "@/features/client/requests/client-by-request/remove-request-price/ui/RemoveSearchRequestModal";
 
 interface CurrentRequestInfoProps {
-    requestId: string;
+    requestId: number;
 }
 
 export function CurrentRequestInfo({requestId}:CurrentRequestInfoProps) {
