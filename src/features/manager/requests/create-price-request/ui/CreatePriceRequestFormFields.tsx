@@ -18,7 +18,7 @@ import {AccommodationUnit} from "@/entities/accommodation-unit/model/types";
 interface CreatePriceRequestFormFieldsProps {
     price?: number;
     accId: number;
-    reqId: string;
+    reqId: number;
 }
 
 export function CreatePriceRequestFormFields({

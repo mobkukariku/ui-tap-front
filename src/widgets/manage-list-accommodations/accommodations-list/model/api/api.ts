@@ -1,7 +1,5 @@
 import {api} from "@/shared/api/axiosInstance";
-import {
-    AccommodationRequest
-} from "@/features/manager/accommodations/manage-list-accommodations/accommodations-list/model/types";
+import {AccommodationRequest} from "@/widgets/manage-list-accommodations/accommodations-list/model/types";
 
 export const getMyAccommodations = async (data: AccommodationRequest) => {
     const response = await api.get("/accommodations/owner/search", {

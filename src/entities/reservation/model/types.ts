@@ -1,4 +1,4 @@
-interface Reservation {
+export interface Reservation {
     id: number;
     clientId: number;
     clientName: string;

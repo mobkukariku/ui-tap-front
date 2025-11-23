@@ -13,7 +13,6 @@ interface RequestAccUnitItemProps {
 }
 
 export function RequestAccUnitItem({
-                                       unitId,
                                        isSelected,
                                        name,
                                        capacity,

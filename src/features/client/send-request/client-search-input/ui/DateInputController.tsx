@@ -13,7 +13,7 @@ export function DateInputController({form}:DateInputControllerProps) {
             <Controller
                 name="checkInDate"
                 control={form.control}
-                render={({ field }) => (
+                render={() => (
                     <DateInputs
                         value={{
                             from: form.watch("checkInDate"),

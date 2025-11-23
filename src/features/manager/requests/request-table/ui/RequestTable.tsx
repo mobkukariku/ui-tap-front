@@ -14,12 +14,12 @@ interface RequestTableProps {
     id: number
 }
 
-function handleSearchRequestStatus(price?:number, status: string, requestId: number, accId: number) {
+function handleSearchRequestStatus(price?:number, status?: string, requestId?: number, accId?: number) {
     switch (status) {
         case SearchRequestStatus.OPEN_TO_PRICE_REQUEST:
-            return <CreatePriceRequest price={price} accId={accId}  requestId={requestId} />;
+            return <CreatePriceRequest price={price} accId={accId ?? 0}  requestId={requestId ?? 0} />;
         case SearchRequestStatus.PRICE_REQUEST_PENDING:
-            return <PriceRequestModal requestId={requestId}  />;
+            return <PriceRequestModal requestId={requestId ?? 0}  />;
         case SearchRequestStatus.WAIT_TO_RESERVATION:
                 return <Button disabled>Ожидание бронирования</Button>;
         case SearchRequestStatus.FINISHED:

@@ -3,6 +3,7 @@ import {formatDate} from "@/shared/lib/date/formateDate";
 import {Badge} from "@/shared/ui/badge";
 import {Calendar, Building2, DollarSign} from "lucide-react";
 import Link from "next/link";
+import {Reservation} from "@/entities/reservation/model/types";
 
 interface ReservationItemProps {
     reservation: Reservation;

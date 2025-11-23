@@ -3,6 +3,7 @@ import {Building2} from "lucide-react";
 import {ReservationItem} from "@/features/client/reservations/reservation-list/ui/MyReservationItem";
 import {useMyReservations} from "@/features/client/reservations/reservation-list/model/api/useMyReservations";
 import {Spinner} from "@/shared/ui/spinner";
+import {Reservation} from "@/entities/reservation/model/types";
 
 export function MyReservationList() {
 
@@ -29,7 +30,7 @@ export function MyReservationList() {
                         <p className="text-gray-600">У вас нет бронирований</p>
                     </div>
                 ) : (
-                    data?.content?.map((reservation) => (
+                    data?.content?.map((reservation:Reservation) => (
                         <ReservationItem
                             key={reservation.id}
                             reservation={reservation}

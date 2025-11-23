@@ -1,4 +1,4 @@
-import {Dialog, DialogContent, DialogTitle, DialogTrigger} from "@/shared/ui/dialog";
+import {Dialog, DialogClose, DialogContent, DialogTitle, DialogTrigger} from "@/shared/ui/dialog";
 import {TriangleAlert} from "lucide-react";
 import {Button} from "@/shared/ui/button";
 import {
@@ -16,7 +16,6 @@ export function RemoveSearchRequestModal({id}:RemoveSearchRequestModalProps) {
     const onSubmit = (id: number) => {
         try{
             mutate(id);
-
         }catch(error){
             console.error(error);
         }
@@ -44,10 +43,11 @@ export function RemoveSearchRequestModal({id}:RemoveSearchRequestModalProps) {
                         <Button onClick={() => onSubmit(id)} variant={"destructive"}>
                             Удалить
                         </Button>
-                        <Button onClick={() => setOpen(false)} variant={"outline"}>
-                            Отмена
-                        </Button>
-
+                       <DialogClose asChild>
+                           <Button  variant={"outline"}>
+                               Отмена
+                           </Button>
+                       </DialogClose>
                     </div>
                 </div>
             </DialogContent>
