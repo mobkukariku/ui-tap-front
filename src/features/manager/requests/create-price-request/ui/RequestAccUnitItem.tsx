@@ -73,7 +73,7 @@ export function RequestAccUnitItem({
                     <div className={"flex flex-col gap-1 p-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"}>
                         <dt className={"flex items-center gap-1 text-gray-600 text-xs font-medium uppercase tracking-wide"}>
                             <Building width={14} height={14} className={"flex-shrink-0 text-primary/70"} />
-                            <span >Этаж</span>
+                            <span>Этаж</span>
                         </dt>
                         <dd className={"text-sm font-bold text-gray-900"}>{floor}</dd>
                     </div>

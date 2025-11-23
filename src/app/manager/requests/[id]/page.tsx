@@ -19,7 +19,7 @@ export default async function RequestsByAccommodationPage({params}:Props) {
                 ]}
             />
             <RequestSearchInput />
-            <RequestTable id={id} />
+            <RequestTable id={Number(id)} />
         </>
     )
 }

@@ -19,7 +19,6 @@ export default function ClientPage() {
                         красивые дома и современные студии ждут вас
                     </p>
                 </section>
-
                 {/* Преимущества сервиса */}
                 <section className="py-8">
                     <h2 className="sr-only">Преимущества нашего сервиса</h2>
@@ -70,6 +69,7 @@ export default function ClientPage() {
                 <div className="absolute top-20 right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
                 <div className="absolute bottom-20 left-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
             </div>
+
         </Container>
     )
 }

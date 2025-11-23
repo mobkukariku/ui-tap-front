@@ -6,9 +6,11 @@ import {Button} from "@/shared/ui/button";
 
 interface CreatePriceRequestProps {
     price?: number;
+    requestId: number;
+    accId: number;
 }
 
-export function CreatePriceRequest({price}:CreatePriceRequestProps) {
+export function CreatePriceRequest({price, requestId, accId}:CreatePriceRequestProps) {
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -16,7 +18,7 @@ export function CreatePriceRequest({price}:CreatePriceRequestProps) {
             </DialogTrigger>
             <DialogContent >
                 <DialogTitle>Создание заявки цены</DialogTitle>
-                <CreatePriceRequestFormFields price={price} />
+                <CreatePriceRequestFormFields reqId={requestId} accId={accId} price={price} />
             </DialogContent>
         </Dialog>
     )

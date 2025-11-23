@@ -1,6 +1,6 @@
 "use client"
 import {Container} from "@/shared/ui/container";
-import {Calendar, EllipsisVertical, FileText, Home, LogOut, Search, User} from "lucide-react";
+import {Calendar, FileText, Home, LogOut, Search, User} from "lucide-react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {
@@ -31,7 +31,9 @@ export function ClientHeader() {
         <header className={"pt-10 pb-5 border-b border-gray-200 dark:border-gray-700"}>
             <Container className={"flex  justify-between items-center"}>
                 <div className={"font-black text-4xl"}>
-                    UI Tap
+                    <Link href={"/client"}>
+                        UI Tap
+                    </Link>
                 </div>
                 <nav className="hidden md:block">
                     <ul className="flex items-center gap-1">

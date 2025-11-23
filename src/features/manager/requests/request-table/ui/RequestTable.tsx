@@ -7,10 +7,26 @@ import {useGetRelevantRequests} from "@/features/manager/requests/request-table/
 import {RequestStatusBadge} from "@/features/manager/requests/request-table/ui/RequestStatusBadge";
 import {Spinner} from "@/shared/ui/spinner";
 import {CreatePriceRequest} from "@/features/manager/requests/create-price-request/ui/CreatePriceRequest";
-import {SearchRequest} from "@/entities/search-request/model/types";
+import {SearchRequest, SearchRequestStatus} from "@/entities/search-request/model/types";
+import {PriceRequestModal} from "@/features/manager/requests/price-request/ui/PriceRequestModal";
 
 interface RequestTableProps {
     id: number
+}
+
+function handleSearchRequestStatus(price?:number, status: string, requestId: number, accId: number) {
+    switch (status) {
+        case SearchRequestStatus.OPEN_TO_PRICE_REQUEST:
+            return <CreatePriceRequest price={price} accId={accId}  requestId={requestId} />;
+        case SearchRequestStatus.PRICE_REQUEST_PENDING:
+            return <PriceRequestModal requestId={requestId}  />;
+        case SearchRequestStatus.WAIT_TO_RESERVATION:
+                return <Button disabled>Ожидание бронирования</Button>;
+        case SearchRequestStatus.FINISHED:
+            return <Button disabled>Завершено</Button>;
+        default:
+            return null;
+    }
 }
 
 
@@ -59,7 +75,7 @@ export function RequestTable({id}:RequestTableProps) {
                         </TableCell>
 
                         <TableCell>
-                            <CreatePriceRequest price={item.price} />
+                            {handleSearchRequestStatus(item.price, item.status, item.id, id)}
                         </TableCell>
                     </TableRow>
                 ))}

@@ -15,6 +15,7 @@ import {
 import {
     RemoveSearchRequestModal
 } from "@/features/client/requests/client-by-request/remove-request-price/ui/RemoveSearchRequestModal";
+import {PriceRequestList} from "@/features/client/requests/price-request/ui/PriceRequestList";
 
 interface CurrentRequestInfoProps {
     requestId: number;
@@ -29,7 +30,7 @@ export function CurrentRequestInfo({requestId}:CurrentRequestInfoProps) {
 
     return (
         <Container className={" w-full justify-center gap-5"}>
-            <div className={"flex flex-row justify-between w-full  mt-10 "}>
+            <div className={"flex flex-row justify-between w-full mt-10 "}>
                 <div className={"space-y-2"}>
                     <h2 className={"text-3xl font-bold"}>Заявка #{data?.id}</h2>
                     <span className={"opacity-60"}>От {data?.authorName}</span>
@@ -41,6 +42,12 @@ export function CurrentRequestInfo({requestId}:CurrentRequestInfoProps) {
             </div>
             <div className={"flex flex-row justify-between gap-5 w-full"}>
                 <div className={"flex flex-col w-full gap-5 my-10"}>
+                    {
+                        data?.status === "PRICE_REQUEST_PENDING" && (
+                            <PriceRequestList requestId={requestId} />
+                        )
+                    }
+
                     <RequestStatusCheck currentStatus={data?.status} />
                     <div className={"bg-white border rounded-lg flex flex-col gap-10 py-6 px-6"}>
                         <div className={"flex flex-row justify-between "}>
@@ -84,13 +91,15 @@ export function CurrentRequestInfo({requestId}:CurrentRequestInfoProps) {
                         />
                     </div>
                 </div>
-                <div className={"bg-white border flex flex-col my-10 gap-5 w-1/2 h-fit rounded-lg p-6"}>
-                    <LabelTextInfo icon={<EditIcon width={20} height={20} className={"text-green-500"} />} label={"Действия"} />
-                    <div className={"flex flex-col w-full gap-3"}>
-                        <ClientSearchRequestPriceModal id={requestId} />
-                        <RemoveSearchRequestModal id={requestId} />
+                {data?.status === "OPEN_TO_PRICE_REQUEST" && (
+                    <div className={"bg-white border flex flex-col my-10 gap-5 w-1/2 h-fit rounded-lg p-6"}>
+                        <LabelTextInfo icon={<EditIcon width={20} height={20} className={"text-green-500"} />} label={"Действия"} />
+                        <div className={"flex flex-col w-full gap-3"}>
+                            <ClientSearchRequestPriceModal id={requestId} />
+                            <RemoveSearchRequestModal id={requestId} />
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </Container>
     )

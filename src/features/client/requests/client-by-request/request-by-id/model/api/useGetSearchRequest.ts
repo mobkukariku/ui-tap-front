@@ -3,7 +3,7 @@ import {getSearchRequestById} from "@/features/client/requests/client-by-request
 
 export function useGetSearchRequest(id: string | number) {
     return useQuery({
-        queryKey: ["search-requests", id],
+        queryKey: ["search-requests", "price-requests", id],
         queryFn: async () => await getSearchRequestById(id),
         enabled: !!id,
         retry: 1,
