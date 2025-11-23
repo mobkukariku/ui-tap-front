@@ -31,17 +31,17 @@ export function CurrentRequestInfo({requestId}:CurrentRequestInfoProps) {
     return (
         <Container className={" w-full justify-center gap-5"}>
             <div className={"flex flex-row justify-between w-full mt-10 "}>
-                <div className={"space-y-2"}>
-                    <h2 className={"text-3xl font-bold"}>Заявка #{data?.id}</h2>
-                    <span className={"opacity-60"}>От {data?.authorName}</span>
+                <div className={"space-y-2 max-md:space-y-1"}>
+                    <h2 className={"text-2xl sm:text-3xl font-bold  "}>Заявка #{data?.id}</h2>
+                    <span className={"opacity-60 max-md:text-sm"}>От {data?.authorName}</span>
                 </div>
-                <div className={"text-right"}>
-                    <p className={"font-medium opacity-60"}>Бюджет</p>
-                    <p className={"text-2xl font-bold text-green-600"}>{data?.price} Тг</p>
+                <div className={"text-right space-y-2 max-md:space-y-1"}>
+                    <p className={"font-medium opacity-60 max-md:text-sm"}>Бюджет</p>
+                    <p className={"text-2xl sm:text-3xl font-bold text-green-600"}>{data?.price} Тг</p>
                 </div>
             </div>
-            <div className={"flex flex-row justify-between gap-5 w-full"}>
-                <div className={"flex flex-col w-full gap-5 my-10"}>
+            <div className={"flex flex-col lg:flex-row lg:justify-between gap-4 sm:gap-5 w-full"}>
+                <div className={"flex flex-col w-full gap-4 sm:gap-5 my-6 sm:my-8 md:my-10"}>
                     {
                         data?.status === "PRICE_REQUEST_PENDING" && (
                             <PriceRequestList requestId={requestId} />
@@ -49,25 +49,25 @@ export function CurrentRequestInfo({requestId}:CurrentRequestInfoProps) {
                     }
 
                     <RequestStatusCheck currentStatus={data?.status} />
-                    <div className={"bg-white border rounded-lg flex flex-col gap-10 py-6 px-6"}>
-                        <div className={"flex flex-row justify-between "}>
+                    <div className={"bg-white border rounded-lg flex flex-col gap-6 sm:gap-8 md:gap-10 py-4 sm:py-5 md:py-6 px-4 sm:px-5 md:px-6"}>
+                        <div className={"flex flex-col sm:flex-row sm:justify-between gap-4 sm:gap-2"}>
                             <LabelTextInfo
-                                icon={<CalendarIcon width={20} height={20} className={"text-green-500"} />}
+                                icon={<CalendarIcon width={18} height={18} className={"sm:w-5 sm:h-5 text-green-500"} />}
                                 label={"Заезд"}
                                 value={data?.checkInDate}
                             />
                             <LabelTextInfo
-                                icon={<CalendarIcon width={20} height={20} className={"text-green-500"} />}
+                                icon={<CalendarIcon width={18} height={18} className={"sm:w-5 sm:h-5 text-green-500"} />}
                                 label={"Выезд"}
                                 value={data?.checkOutDate}
                             />
                             <LabelTextInfo
-                                icon={<UsersIcon width={20} height={20} className={"text-green-500"} />}
+                                icon={<UsersIcon width={18} height={18} className={"sm:w-5 sm:h-5 text-green-500"} />}
                                 label={"Гости"}
                                 value={data?.countOfPeople}
                             />
                             <LabelTextInfo
-                                icon={<StarIcon width={20} height={20} className={"text-yellow-500"} />}
+                                icon={<StarIcon width={18} height={18} className={"sm:w-5 sm:h-5 text-yellow-500"} />}
                                 label={"Рейтинг"}
                                 value={`от ${data?.fromRating} до ${data?.toRating}`}
                             />
@@ -92,8 +92,8 @@ export function CurrentRequestInfo({requestId}:CurrentRequestInfoProps) {
                     </div>
                 </div>
                 {data?.status === "OPEN_TO_PRICE_REQUEST" && (
-                    <div className={"bg-white border flex flex-col my-10 gap-5 w-1/2 h-fit rounded-lg p-6"}>
-                        <LabelTextInfo icon={<EditIcon width={20} height={20} className={"text-green-500"} />} label={"Действия"} />
+                    <div className={"bg-white border flex flex-col my-6 sm:my-8 md:my-10 gap-4 sm:gap-5 w-full lg:w-1/2 h-fit rounded-lg p-4 sm:p-5 md:p-6"}>
+                        <LabelTextInfo icon={<EditIcon width={18} height={18} className={"sm:w-5 sm:h-5 text-green-500"} />} label={"Действия"} />
                         <div className={"flex flex-col w-full gap-3"}>
                             <ClientSearchRequestPriceModal id={requestId} />
                             <RemoveSearchRequestModal id={requestId} />

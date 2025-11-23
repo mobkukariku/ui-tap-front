@@ -27,7 +27,7 @@ export function AccommodationList({ hrefPattern }: AccommodationListProps) {
     if(isError) return <p>Error</p>
 
     return (
-        <section className={"flex flex-wrap max-md:justify-center flex-row gap-3"}>
+        <section className={"flex flex-wrap justify-center sm:justify-start flex-row gap-3 sm:gap-4 md:gap-5"}>
             {accommodations?.content?.map((accommodation:Accommodation) => {
                 // Формируем href на основе шаблона
                 const href = hrefPattern

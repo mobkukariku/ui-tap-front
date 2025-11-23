@@ -14,9 +14,9 @@ interface AccMainInfoProps {
 
 export function AccMainInfo({name, description, address, cityName, districtName, rating, onEdit}:AccMainInfoProps) {
     return (
-        <div className={"flex flex-col mt-10 gap-2"}>
+        <div className={"flex flex-col mt-6 sm:mt-8 md:mt-10 gap-2"}>
             <div className="flex flex-row items-center justify-between">
-                <p className={"opacity-50"}>Основная информация</p>
+                <p className={"opacity-50 text-sm sm:text-base"}>Основная информация</p>
                 {onEdit && (
                     <Button
                         variant="ghost"
@@ -29,7 +29,7 @@ export function AccMainInfo({name, description, address, cityName, districtName,
                     </Button>
                 )}
             </div>
-            <div className={"bg-gray-100 flex px-7 py-5 flex-col gap-5 rounded-3xl border w-full h-fit"}>
+            <div className={"bg-gray-100 flex px-4 sm:px-6 md:px-7 py-4 sm:py-5 flex-col gap-4 sm:gap-5 rounded-2xl sm:rounded-3xl border w-full h-fit"}>
                 <DataField
                     icon={Captions}
                     label="Название"
@@ -45,7 +45,7 @@ export function AccMainInfo({name, description, address, cityName, districtName,
                     label="Адрес"
                     value={address}
                 />
-                <div className={"flex flex-row w-full gap-3 items-center"}>
+                <div className={"flex flex-col sm:flex-row w-full gap-3 sm:gap-3 items-stretch sm:items-center"}>
                     <DataField
                         icon={Building2}
                         label="Город"

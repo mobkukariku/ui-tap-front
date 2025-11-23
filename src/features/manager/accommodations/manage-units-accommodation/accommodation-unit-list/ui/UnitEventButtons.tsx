@@ -37,10 +37,10 @@ export function UnitEventButtons({unitId}:UnitEventButtonsProps) {
 
     return (
         <>
-            <div className="flex gap-2 justify-center">
+            <div className="flex flex-col sm:flex-row gap-2 justify-center">
                 <Button size="sm" onClick={() => {
                     setIsModalOpen(true);
-                }}>
+                }} className="w-full sm:w-auto">
                     Посмотреть
                 </Button>
                 <DropdownMenu>
@@ -48,26 +48,27 @@ export function UnitEventButtons({unitId}:UnitEventButtonsProps) {
                         <Button
                             size="sm"
                             variant="outline"
+                            className="w-full sm:w-auto"
                         >
                             <Pencil className="h-4 w-4 mr-1" />
                             Изменить
                             <ChevronDown className="h-4 w-4 ml-1" />
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent>
+                    <DropdownMenuContent align="end" className="w-[200px] sm:w-auto">
                         <DropdownMenuItem onClick={() => {
                             setIsEditMainInfoOpen(true);
-                        }}>
+                        }} className="text-sm">
                             Основная информация
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => {
                             setIsEditDictionariesOpen(true);
-                        }}>
+                        }} className="text-sm">
                             Словари
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => {
                             setIsPhotosOpen(true);
-                        }}>
+                        }} className="text-sm">
                             Изображения
                         </DropdownMenuItem>
                     </DropdownMenuContent>

@@ -69,12 +69,12 @@ export function AccommodationUnitList({accommodationId}:AccommodationUnitListPro
       </Table>
 
       {data?.totalElements > 20 && (
-        <div className="mt-6">
+        <div className="mt-4 sm:mt-6">
           <TablePagination
               page={filters.page ?? 0}
               totalPages={data.totalPages}
               size={filters.size ?? 0}
-              onPageChange={(newPage) => setFilter("page", newPage)} // ✅ вот правильный способ
+              onPageChange={(newPage) => setFilter("page", newPage)}
           />
         </div>
       )}

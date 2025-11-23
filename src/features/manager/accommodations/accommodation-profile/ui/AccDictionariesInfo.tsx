@@ -11,9 +11,9 @@ interface AccDictionariesInfoProps {
 
 export function AccDictionariesInfo({services, conditions, onEdit}: AccDictionariesInfoProps) {
     return (
-        <div className={"flex flex-col mt-10 gap-2"}>
+        <div className={"flex flex-col mt-6 sm:mt-8 md:mt-10 gap-2"}>
             <div className="flex flex-row items-center justify-between">
-                <p className={"opacity-50"}>Теги</p>
+                <p className={"opacity-50 text-sm sm:text-base"}>Теги</p>
                 {onEdit && (
                     <Button
                         variant="ghost"
@@ -26,7 +26,7 @@ export function AccDictionariesInfo({services, conditions, onEdit}: AccDictionar
                     </Button>
                 )}
             </div>
-            <div className={"bg-gray-100 flex px-7 py-5 flex-col gap-5 rounded-3xl border w-full h-fit"}>
+            <div className={"bg-gray-100 flex px-4 sm:px-6 md:px-7 py-4 sm:py-5 flex-col gap-4 sm:gap-5 rounded-2xl sm:rounded-3xl border w-full h-fit"}>
                 <DictionaryField label={"Услуги"} values={services}  />
                 <DictionaryField label={"Условия"} values={conditions} />
             </div>

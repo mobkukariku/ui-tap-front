@@ -20,16 +20,18 @@ export function AccommodationHeader({accommodationId}: AccommodationHeaderProps)
 
     return (
         <article>
-            <section className={"p-6 flex flex-col gap-4"}>
-                <header className={"flex items-center justify-between gap-4"}>
-                    <div className={"flex flex-row gap-4 items-center"}>
-                        <h1 className={"text-2xl font-semibold"}>{data?.name}</h1>
+            <section className={"p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4"}>
+                <header className={"flex items-center justify-between gap-3 sm:gap-4"}>
+                    <div className={"flex flex-row gap-2 sm:gap-4 items-center flex-1 min-w-0"}>
+                        <h1 className={"text-xl sm:text-2xl font-semibold truncate"}>{data?.name}</h1>
                         {
-                            data?.approved ? (<Badge>Подтвержден</Badge>) : null
+                            data?.approved ? (
+                                <Badge className="text-xs sm:text-sm flex-shrink-0">Подтвержден</Badge>
+                            ) : null
                         }
                     </div>
-                    <Link href={`/manager/accommodations/${accommodationId}/profile`}>
-                        <SettingsIcon className={"opacity-60"} width={20} />
+                    <Link href={`/manager/accommodations/${accommodationId}/profile`} className="flex-shrink-0">
+                        <SettingsIcon className={"opacity-60"} width={18} height={18} />
                     </Link>
                 </header>
             </section>

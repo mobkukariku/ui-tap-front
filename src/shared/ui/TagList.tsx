@@ -13,13 +13,13 @@ export function TagList({ title, items, color = "green" }: TagListProps) {
 
     return (
         <section className={"flex flex-col gap-2"}>
-            <h2 className={"text-gray-500 font-medium"}>{title}</h2>
+            <h2 className={"text-gray-500 font-medium text-sm sm:text-base"}>{title}</h2>
 
             <ul className={"flex flex-wrap gap-2"}>
                 {items.map((item, index) => (
                     <li
                         key={index}
-                        className={`${colors[color]} text-sm font-medium rounded-full px-3 py-1 border`}
+                        className={`${colors[color]} text-xs sm:text-sm font-medium rounded-full px-2 sm:px-3 py-1 border`}
                     >
                         {item}
                     </li>

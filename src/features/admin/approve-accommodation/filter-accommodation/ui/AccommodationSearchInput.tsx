@@ -37,8 +37,8 @@ export function AccommodationSearchInput() {
                 </TabsList>
             </Tabs>
             <div className={"flex flex-wrap items-end justify-between gap-4"}>
-                <form role="search" aria-label="Поиск размещений">
-                    <fieldset className="relative">
+                <form role="search" className="w-full" aria-label="Поиск размещений">
+                    <fieldset className="relative w-full">
                         <legend className="sr-only">Поиск по названию</legend>
                         <Search
                             className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 pointer-events-none"
@@ -47,14 +47,14 @@ export function AccommodationSearchInput() {
                         <Input
                             id="accommodation-search"
                             placeholder="Найти размещение..."
-                            className="pl-9"
+                            className="pl-9 w-full"
                             defaultValue={filters.name ?? ""}
                             onChange={(e) => debouncedSearch({ name: e.target.value })}
                         />
                     </fieldset>
                 </form>
 
-                <div className={"flex gap-10"}>
+                <div className={"flex gap-10 max-md:flex-col max-md:gap-4"}>
                     <form aria-label="Фильтр по статусу" className="flex flex-row items-center gap-2">
                         <Label htmlFor="status-select">Статус:</Label>
                         <Select onValueChange={(value) => debouncedSearch({ approved: value })}>

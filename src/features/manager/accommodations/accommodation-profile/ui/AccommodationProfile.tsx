@@ -23,15 +23,15 @@ export function AccommodationProfile({accommodationId}:AccommodationProfileProps
 
     const {data, isLoading, error} = useGetAccommodationById(accommodationId);
 
-    if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-10"} />
+    if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-6 sm:my-8 md:my-10"} />
 
-    if (error) return <p>{error.message}</p>
+    if (error) return <p className="px-4 sm:px-6 text-sm sm:text-base text-red-600">{error.message}</p>
 
     return (
-        <div className={"flex flex-col mx-auto w-200 "}>
-            <div className={"flex flex-col gap-2 mt-10"}>
+        <div className={"flex flex-col mx-auto w-full max-w-5xl px-4 sm:px-6 md:px-0"}>
+            <div className={"flex flex-col gap-2 mt-6 sm:mt-8 md:mt-10"}>
                 <div className="flex flex-row items-center justify-between">
-                    <p className={"opacity-50"}>Фотографии</p>
+                    <p className={"opacity-50 text-sm sm:text-base"}>Фотографии</p>
                     <Button
                         variant="ghost"
                         size="icon"
@@ -42,7 +42,7 @@ export function AccommodationProfile({accommodationId}:AccommodationProfileProps
                         <Pencil className="h-4 w-4" />
                     </Button>
                 </div>
-                <div className={"flex flex-row w-190 mx-auto gap-5"}>
+                <div className={"flex flex-row w-full mx-auto gap-3 sm:gap-4 md:gap-5"}>
                     <ImageGallery images={data?.imageUrls} />
                 </div>
             </div>

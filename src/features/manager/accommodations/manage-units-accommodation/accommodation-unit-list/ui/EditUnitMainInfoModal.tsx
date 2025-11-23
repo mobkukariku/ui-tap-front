@@ -75,14 +75,14 @@ export function EditUnitMainInfoModal({
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="max-w-2xl break-all max-h-[90vh] overflow-y-auto">
+            <DialogContent className="w-[95vw] sm:w-full max-w-2xl break-all max-h-[90vh] overflow-y-auto p-4 sm:p-6">
                 <DialogHeader>
-                    <DialogTitle>Редактировать основную информацию</DialogTitle>
+                    <DialogTitle className="text-lg sm:text-xl">Редактировать основную информацию</DialogTitle>
                 </DialogHeader>
 
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
                     <div className="flex flex-col gap-2">
-                        <Label htmlFor="name">Название</Label>
+                        <Label htmlFor="name" className="text-sm sm:text-base">Название</Label>
                         <Input
                             id="name"
                             placeholder="Название"
@@ -95,7 +95,7 @@ export function EditUnitMainInfoModal({
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <Label htmlFor="description">Описание</Label>
+                        <Label htmlFor="description" className="text-sm sm:text-base">Описание</Label>
                         <Textarea
                             id="description"
                             placeholder="Описание"
@@ -107,9 +107,9 @@ export function EditUnitMainInfoModal({
                         )}
                     </div>
 
-                    <div className="flex flex-row gap-4 w-full">
+                    <div className="flex flex-col sm:flex-row gap-4 w-full">
                         <div className="flex flex-col w-full gap-2">
-                            <Label htmlFor="capacity">Вместительность</Label>
+                            <Label htmlFor="capacity" className="text-sm sm:text-base">Вместительность</Label>
                             <Input
                                 id="capacity"
                                 type="number"
@@ -123,7 +123,7 @@ export function EditUnitMainInfoModal({
                         </div>
 
                         <div className="flex flex-col w-full gap-2">
-                            <Label htmlFor="area">Площадь</Label>
+                            <Label htmlFor="area" className="text-sm sm:text-base">Площадь</Label>
                             <Input
                                 id="area"
                                 type="number"
@@ -138,9 +138,9 @@ export function EditUnitMainInfoModal({
                         </div>
                     </div>
 
-                    <div className="flex flex-row gap-4 w-full">
+                    <div className="flex flex-col sm:flex-row gap-4 w-full">
                         <div className="flex flex-col w-full gap-2">
-                            <Label htmlFor="floor">Этаж</Label>
+                            <Label htmlFor="floor" className="text-sm sm:text-base">Этаж</Label>
                             <Input
                                 id="floor"
                                 type="number"
@@ -154,7 +154,7 @@ export function EditUnitMainInfoModal({
                         </div>
 
                         <div className="flex flex-col w-full gap-2">
-                            <Label>Тип юнита</Label>
+                            <Label className="text-sm sm:text-base">Тип юнита</Label>
                             <Controller
                                 name="unitType"
                                 control={form.control}
@@ -198,17 +198,17 @@ export function EditUnitMainInfoModal({
                                     />
                                 )}
                             />
-                            <Label htmlFor="isAvailable">Доступен</Label>
+                            <Label htmlFor="isAvailable" className="text-sm sm:text-base">Доступен</Label>
                         </div>
                     </div>
 
-                    <DialogFooter>
+                    <DialogFooter className="flex-col sm:flex-row gap-2 sm:gap-0">
                         <DialogClose asChild>
-                            <Button type="button" variant="secondary" disabled={isPending}>
+                            <Button type="button" variant="secondary" disabled={isPending} className="w-full sm:w-auto">
                                 Отмена
                             </Button>
                         </DialogClose>
-                        <Button type="submit" disabled={isPending}>
+                        <Button type="submit" disabled={isPending} className="w-full sm:w-auto">
                             {isPending ? "Сохранение..." : "Сохранить"}
                         </Button>
                     </DialogFooter>

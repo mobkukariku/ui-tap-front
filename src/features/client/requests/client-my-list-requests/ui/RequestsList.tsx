@@ -17,7 +17,7 @@ export function RequestsList() {
 
 
     return (
-       <div className={"flex flex-col gap-10"}>
+       <div className={"flex flex-col gap-6 sm:gap-8 md:gap-10"}>
            {data?.content?.map((request:SearchRequest) => (
                <Link key={request.id} href={`/client/requests/${request.id}`}>
                    <RequestInfo request={request} />

@@ -50,17 +50,17 @@ export function DateInputs({ value, onChange, error }: DateInputsProps) {
     }
 
     return (
-        <div className="flex flex-col gap-3">
+        <div className="flex w-full flex-col gap-3">
             <Label htmlFor="date" className="flex gap-2 items-center text-gray-700 font-medium">
                 <CalendarIcon width={18} height={18} className="text-green-600" />
                 Дата
             </Label>
-            <Popover open={open} onOpenChange={setOpen}>
+            <Popover  open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <Button
                         id="date"
                         variant={error ? "destructive" : "outline"}
-                        className="w-64 h-10 relative flex justify-start text-left font-normal"
+                        className="w-full h-10 relative flex justify-start text-left font-normal"
                     >
                         {formatDateRange()}
                         <CalendarIcon
@@ -70,14 +70,14 @@ export function DateInputs({ value, onChange, error }: DateInputsProps) {
                         />
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
+                <PopoverContent className="w-full p-0" align="start">
                     <Calendar
                         mode="range"
                         defaultMonth={dateRange?.from}
                         selected={dateRange}
                         onSelect={handleSelectDate}
                         numberOfMonths={2}
-                        className="rounded-lg"
+                        className="rounded-lg w-full"
                         disabled={(date) => date < new Date()}
                     />
                 </PopoverContent>

@@ -22,9 +22,9 @@ export function ClientSearchInputs() {
     return (
         <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="bg-white px-6 md:px-20 w-full flex flex-col gap-6 my-20 rounded-xl p-8 shadow-lg"
+            className="bg-white px-4 sm:px-6 md:px-20 w-full flex flex-col gap-4 sm:gap-6 my-8 sm:my-12 md:my-20 rounded-xl p-4 sm:p-6 md:p-8 shadow-lg"
         >
-            <div className="flex flex-row justify-between items-end gap-4">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4">
                 <PriceInput form={form}/>
                 <DateInputController form={form} />
                 <GuestsInput form={form} />
@@ -34,17 +34,17 @@ export function ClientSearchInputs() {
             <DistrictMultiSelect form={form} />
 
 
-            <div className="flex items-center w-full justify-center cursor-pointer  text-center gap-2 text-gray-700 font-medium text-sm" onClick={() => setOpenOptionals(!openOptionals)}>
+            <div className="flex items-center w-full justify-center cursor-pointer text-center gap-2 text-gray-700 font-medium text-sm py-2" onClick={() => setOpenOptionals(!openOptionals)}>
                 Допольнительные параметры
-                {openOptionals ? <ChevronUp /> : <ChevronDown />}
+                {openOptionals ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </div>
 
             {openOptionals && <OptionalFilters form={form} />}
 
-            <div className="flex gap-3 pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 pt-2 sm:pt-4">
                 <Button
                     type="submit"
-                    className="flex-1 bg-green-600 hover:bg-green-700 text-white h-11 font-semibold"
+                    className="w-full sm:flex-1 bg-green-600 hover:bg-green-700 text-white h-11 font-semibold"
                 >
                     <SearchIcon width={18} height={18} className="mr-2" />
                     Поиск
@@ -52,7 +52,7 @@ export function ClientSearchInputs() {
                 <Button
                     type="button"
                     variant="outline"
-                    className="flex-1 h-11 font-semibold"
+                    className="w-full sm:flex-1 h-11 font-semibold"
                     onClick={handleReset}
                 >
                     Очистить

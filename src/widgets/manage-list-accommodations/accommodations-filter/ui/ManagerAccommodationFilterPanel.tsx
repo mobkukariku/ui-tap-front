@@ -25,25 +25,25 @@ export function ManagerAccommodationFilterPanel({hasAddButton} : ManagerAccommod
 
 
     return (
-        <section className={"mt-5 mb-10 flex justify-between"}>
-            <form role="search" className="flex-1 max-w-md">
+        <section className={"mt-3 sm:mt-5 mb-6 sm:mb-8 md:mb-10 flex flex-col sm:flex-row justify-between gap-3 sm:gap-4"}>
+            <form role="search" className="flex-1 w-full sm:max-w-md">
                 <fieldset
                     className="relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 pointer-events-none" />
                     <Input
                         id="accommondation-search"
                         placeholder="Искать объект"
-                        className="pl-9"
+                        className="pl-9 w-full"
                         defaultValue={filters.name ?? ""}
                         onChange={(e) => debouncedSearch({ name: e.target.value })}
                     />
                 </fieldset>
             </form>
             {hasAddButton && (
-                <Link href={"/manager/accommodations/create"}>
-                    <Button>
-                        <PlusIcon  />
-                        Добавить жилье
+                <Link href={"/manager/accommodations/create"} className="w-full sm:w-auto">
+                    <Button className="w-full sm:w-auto">
+                        <PlusIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <span className="text-sm sm:text-base">Добавить жилье</span>
                     </Button>
                 </Link>
             )}

@@ -10,42 +10,42 @@ interface RequestInfoProps {
 export function RequestInfo({request}:RequestInfoProps) {
 
     return (
-        <article className="bg-white border rounded-xl shadow-md p-10">
-            <header className="flex justify-between flex-wrap gap-6">
+        <article className="bg-white border rounded-xl shadow-md p-4 sm:p-6 md:p-10 hover:shadow-lg transition-shadow">
+            <header className="flex flex-col sm:flex-row sm:justify-between sm:flex-wrap gap-4 sm:gap-6">
                 <LabelTextInfo
-                    icon={<CalendarIcon width={20} height={20} className="text-green-500" />}
+                    icon={<CalendarIcon width={18} height={18} className="sm:w-5 sm:h-5 text-green-500" />}
                     label="Дата заезда"
                     value={request.checkInDate}
                 />
 
                 <LabelTextInfo
-                    icon={<CalendarIcon width={20} height={20} className="text-green-500" />}
+                    icon={<CalendarIcon width={18} height={18} className="sm:w-5 sm:h-5 text-green-500" />}
                     label="Дата выезда"
                     value={request.checkOutDate}
                 />
 
                 <LabelTextInfo
-                    icon={<Users width={20} height={20} className="text-green-500" />}
+                    icon={<Users width={18} height={18} className="sm:w-5 sm:h-5 text-green-500" />}
                     label="Гости"
                     value={request.countOfPeople}
                 />
 
                 <LabelTextInfo
-                    icon={<DollarSignIcon width={20} height={20} className="text-green-500" />}
+                    icon={<DollarSignIcon width={18} height={18} className="sm:w-5 sm:h-5 text-green-500" />}
                     label="Бюджет"
                     value={`${request.price} Тг`}
                 />
 
                 <LabelTextInfo
-                    icon={<Star width={20} height={20} className="text-yellow-500" />}
+                    icon={<Star width={18} height={18} className="sm:w-5 sm:h-5 text-yellow-500" />}
                     label="Рейтинг объекта"
                     value={`от ${request.fromRating} до ${request.toRating}`}
                 />
             </header>
 
-            <hr className="my-6" />
+            <hr className="my-4 sm:my-5 md:my-6" />
 
-            <footer className="flex flex-col gap-5">
+            <footer className="flex flex-col gap-4 sm:gap-5">
                 <TagList
                     title="Типы размещения:"
                     items={request.unitTypes}

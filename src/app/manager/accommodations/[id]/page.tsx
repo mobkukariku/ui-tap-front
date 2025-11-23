@@ -29,7 +29,7 @@ export default async function AccomodationPage({ params }: AccomodationPageProps
                 ]}
             />
             <AccommodationHeader accommodationId={id} />
-            <hr/>
+            <hr className="my-4 sm:my-6"/>
             <AccommodationsUnitFilter accommodationId={id} />
             <AccommodationUnitList accommodationId={id} />
         </>

@@ -35,12 +35,12 @@ export function EditUnitPhotosModal({
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+            <DialogContent className="w-[95vw] sm:w-full max-w-4xl max-h-[90vh] overflow-y-auto p-4 sm:p-6">
                 <DialogHeader>
-                    <DialogTitle>Редактировать фотографии</DialogTitle>
+                    <DialogTitle className="text-lg sm:text-xl">Редактировать фотографии</DialogTitle>
                 </DialogHeader>
 
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
                     <ImageUploader
                         images={imagePreviews}
                         onImagesChange={handleImagesChange}
@@ -50,13 +50,13 @@ export function EditUnitPhotosModal({
                         label="Изображения"
                     />
 
-                    <DialogFooter>
+                    <DialogFooter className="flex-col sm:flex-row gap-2 sm:gap-0">
                         <DialogClose asChild>
-                            <Button type="button" variant="secondary" disabled={isUpdating}>
+                            <Button type="button" variant="secondary" disabled={isUpdating} className="w-full sm:w-auto">
                                 Отмена
                             </Button>
                         </DialogClose>
-                        <Button type="submit" disabled={isUpdating}>
+                        <Button type="submit" disabled={isUpdating} className="w-full sm:w-auto">
                             {isUpdating ? "Сохранение..." : "Сохранить"}
                         </Button>
                     </DialogFooter>
