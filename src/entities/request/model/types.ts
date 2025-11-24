@@ -1,3 +1,4 @@
+
 export type RequestStatus =
     | 'Открыт к запросам по цене'
     | 'Запрос был сделан'
@@ -15,3 +16,4 @@ export interface AccSearchRequest {
     countOfPeople: number
     status: RequestStatus
 }
+

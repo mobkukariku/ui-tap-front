@@ -14,6 +14,7 @@ interface SelectDictionaryProps {
     value?: number[];
     multiple?: boolean;
     valueSize?: number;
+    className?: string;
 }
 
 export function SelectDictionary({
@@ -22,7 +23,8 @@ export function SelectDictionary({
                                      onChange,
                                      value: propValue = [],
                                      multiple = true,
-                                     valueSize = 400
+                                     valueSize = 400,
+                                     className
                                  }: SelectDictionaryProps) {
     const {data} = useDictionary(type ?? "", Number(valueSize));
     const [open, setOpen] = useState(false);
@@ -31,7 +33,7 @@ export function SelectDictionary({
     // Синхронизация с внешним value
     useEffect(() => {
         setValue(propValue);
-    }, [propValue]);
+    }, []);
 
     const handleSetValue = (val: number) => {
         if(!val) return null;
@@ -56,13 +58,13 @@ export function SelectDictionary({
     }
 
     return (
-        <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
+        <Popover open={open}  onOpenChange={setOpen}>
+            <PopoverTrigger  asChild>
                 <Button
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className="w-full h-fit justify-between"
+                    className={`w-full h-fit justify-between ${className}`}
                 >
                     <div className="flex flex-wrap gap-2 justify-start">
                         {value?.length > 0

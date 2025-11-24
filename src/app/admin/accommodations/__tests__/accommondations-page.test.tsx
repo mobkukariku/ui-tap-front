@@ -13,7 +13,7 @@ jest.mock('@/widgets/breadcrumbs/ui/BreadcrumbLayout', () => ({
     ),
 }));
 
-jest.mock('@/widgets/admin/accommodations/accommodations-filter-panel/ui/FilterPanel', () => ({
+jest.mock('@/widgets/admin/accommodations-list/accommodations-list-filter-panel/ui/FilterPanel', () => ({
     FilterPanel: () => <div data-testid="filter-panel">Filter Panel Mock</div>,
 }))
 

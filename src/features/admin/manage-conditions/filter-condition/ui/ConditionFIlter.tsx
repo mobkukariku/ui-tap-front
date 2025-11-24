@@ -13,7 +13,7 @@ export function ConditionFilter() {
     }, 400);
 
     return (
-        <section className={"my-5 flex justify-between"}>
+        <section className={"my-5 flex md:flex-row flex-col gap-3 md:justify-between"}>
             <form role="search" className="flex-1 max-w-md">
                 <fieldset
                     className="relative">

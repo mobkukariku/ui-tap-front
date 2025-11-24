@@ -31,20 +31,20 @@ export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:Accommo
 
     return (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-            <DialogContent className="max-w-2xl break-all max-h-[90vh] overflow-y-auto">
+            <DialogContent className="w-[95vw] sm:w-full max-w-2xl break-all max-h-[90vh] overflow-y-auto p-4 sm:p-6">
                 <>
                     <DialogHeader>
-                        <DialogTitle className="text-2xl font-bold flex items-center gap-2">
-                            <Home className="w-6 h-6 text-primary" />
-                            {data?.name}
+                        <DialogTitle className="text-xl sm:text-2xl font-bold flex items-center gap-2">
+                            <Home className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0" />
+                            <span className="break-words">{data?.name}</span>
                         </DialogTitle>
                     </DialogHeader>
 
                     {data?.imageUrls ? <ImageGallery images={data?.imageUrls} /> : null}
 
-                    <div className="mt-6 space-y-6">
+                    <div className="mt-4 sm:mt-6 space-y-4 sm:space-y-6">
                         <InfoItem icon={Layers} label="Тип номера">
-                            <p className="text-base">
+                            <p className="text-sm sm:text-base">
                                 {data?.unitType === "APARTMENT"
                                     ? "Апартаменты"
                                     : data?.unitType === "HOTEL_ROOM"
@@ -54,29 +54,29 @@ export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:Accommo
                         </InfoItem>
 
                         <InfoItem icon={Tag} label="Описание">
-                            <p className="text-base text-gray-700 leading-relaxed">
+                            <p className="text-sm sm:text-base text-gray-700 leading-relaxed break-words">
                                 {data?.description}
                             </p>
                         </InfoItem>
 
                         <InfoItem icon={Users} label="Вместимость">
-                            <p className="text-base">{data?.capacity} чел.</p>
+                            <p className="text-sm sm:text-base">{data?.capacity} чел.</p>
                         </InfoItem>
 
                         <InfoItem icon={Square} label="Площадь">
-                            <p className="text-base">{data?.area} м²</p>
+                            <p className="text-sm sm:text-base">{data?.area} м²</p>
                         </InfoItem>
 
                         <InfoItem icon={Layers} label="Этаж">
-                            <p className="text-base">{data?.floor} этаж</p>
+                            <p className="text-sm sm:text-base">{data?.floor} этаж</p>
                         </InfoItem>
 
                         <InfoItem icon={data?.isAvailable ? CheckCircle : XCircle} label="Статус">
                             <Badge
                                 className={
                                     data?.isAvailable
-                                        ? "bg-green-50 text-green-700"
-                                        : "bg-red-100 border-red-400 text-red-700"
+                                        ? "bg-green-50 text-green-700 text-xs sm:text-sm"
+                                        : "bg-red-100 border-red-400 text-red-700 text-xs sm:text-sm"
                                 }
                             >
                                 {data?.isAvailable ? "Доступно" : "Занято"}
@@ -87,7 +87,7 @@ export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:Accommo
                             <div className="flex flex-wrap gap-2">
                                 {data?.services.map((service:Dictionary) => {
                                     return (
-                                        <Badge key={service.id} variant="secondary" className="flex items-center gap-1">
+                                        <Badge key={service.id} variant="secondary" className="flex items-center gap-1 text-xs sm:text-sm">
                                             {service.value}
                                         </Badge>
                                     );
@@ -99,7 +99,7 @@ export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:Accommo
                             <div className="flex flex-wrap gap-2">
                                 {data?.conditions.map((condition:Dictionary) => {
                                     return (
-                                        <Badge key={condition.id} variant="secondary" className="flex items-center gap-1">
+                                        <Badge key={condition.id} variant="secondary" className="flex items-center gap-1 text-xs sm:text-sm">
                                             {condition.value}
                                         </Badge>
                                     );

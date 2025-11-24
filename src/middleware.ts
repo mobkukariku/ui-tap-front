@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const roleRoutes = {
     ADMIN: ["/admin"],
     SUPER_MANAGER: ["/manager"],
+    CLIENT: ["/client"]
 };
 
 const LOGIN_PAGE = "/auth/login";
@@ -30,5 +31,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/admin/:path*", "/manager/:path*"],
+    matcher: ["/admin/:path*", "/manager/:path*", "/client/:path*"],
 };

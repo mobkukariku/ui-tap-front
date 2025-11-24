@@ -13,7 +13,7 @@ export function ServicesFilter() {
     }, 400);
 
     return (
-        <section className={"my-5 flex justify-between"}>
+        <section className={"my-5 flex md:flex-row flex-col gap-3 md:justify-between"}>
             <form role="search" className="flex-1 max-w-md">
                 <fieldset className="relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 pointer-events-none" />

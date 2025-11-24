@@ -13,7 +13,7 @@ jest.mock('next/navigation', () => ({
         replace: jest.fn(),
         back: jest.fn(),
     }),
-    usePathname: () => '/admin/accommodations',
+    usePathname: () => '/admin/accommodations-list',
     useSearchParams: () => new URLSearchParams(),
 }));
 

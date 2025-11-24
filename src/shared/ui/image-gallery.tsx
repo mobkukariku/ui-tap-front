@@ -59,12 +59,12 @@ export function ImageGallery({ images }: ImageGalleryProps) {
   return (
       <>
         <div className="overflow-x-auto py-2">
-          <div className="flex gap-3">
+          <div className="flex gap-2 sm:gap-3">
             {images.map((url, i) => (
                 <button
                     key={i}
                     onClick={() => openLightbox(i)}
-                    className="flex-shrink-0 w-64 h-48 rounded-lg overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="flex-shrink-0 w-48 h-36 sm:w-56 sm:h-40 md:w-64 md:h-48 rounded-lg overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
                 >
                   <img
                       src={url}

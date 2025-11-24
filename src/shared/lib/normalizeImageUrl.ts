@@ -6,8 +6,7 @@ export function normalizeImageUrl(url?: string): string {
 
     // убираем абсолютный адрес и делаем относительный
     if (url.startsWith("http://localhost:8888") || url.startsWith(BUCKET_URL)) {
-        const path = url.replace(/^https?:\/\/[^/]+/, "");
-        return path; // => /accommodation-images/retrieve/files/...
+        return url.replace(/^http?:\/\/[^/]+/, BUCKET_URL); // => /accommodation-images/retrieve/files/...
     }
 
     return url;

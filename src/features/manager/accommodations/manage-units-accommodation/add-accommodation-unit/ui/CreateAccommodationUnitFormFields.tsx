@@ -12,7 +12,7 @@ import {Input} from "@/shared/ui/input";
 import {Textarea} from "@/shared/ui/textarea";
 import {useRouter} from "next/navigation";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/shared/ui/select";
-import {unitTypes} from "@/features/manager/accommodations/manage-units-accommodation/add-accommodation-unit/model/constants";
+import {unitTypes} from "@/entities/accommodation-unit/model/constants";
 import {Button} from "@/shared/ui/button";
 import {
     SelectDictionary
@@ -82,7 +82,7 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
 
 
     return (
-        <form className={"my-20 flex break-all flex-col mx-auto gap-5"} onSubmit={form.handleSubmit(onSubmit)}>
+        <form className={"my-8 sm:my-12 md:my-20 flex break-all flex-col mx-auto gap-4 sm:gap-5"} onSubmit={form.handleSubmit(onSubmit)}>
             <ImageUploader
                 images={imagePreviews}
                 onImagesChange={handleImagesChange}
@@ -91,7 +91,7 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
                 maxImages={10}
             />
             <fieldset className="flex flex-col gap-2">
-                <Label>Имя</Label>
+                <Label className="text-sm sm:text-base">Имя</Label>
                 <Input
                     placeholder="Имя"
                     {...form.register("name")}
@@ -102,7 +102,7 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
                 )}
             </fieldset>
             <fieldset className="flex flex-col gap-2">
-                <Label>Описание</Label>
+                <Label className="text-sm sm:text-base">Описание</Label>
                 <Textarea
                     placeholder="Описание"
                     {...form.register("description")}
@@ -113,7 +113,7 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
                 )}
             </fieldset>
             <fieldset className="flex flex-col gap-2">
-                <Label>Кол-во людей могут жить</Label>
+                <Label className="text-sm sm:text-base">Кол-во людей могут жить</Label>
                 <Input
                     placeholder="Количество"
                     {...form.register("capacity", { valueAsNumber: true })}
@@ -124,7 +124,7 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
                 )}
             </fieldset>
             <fieldset className="flex flex-col gap-2">
-                <Label>Площадь</Label>
+                <Label className="text-sm sm:text-base">Площадь</Label>
                 <Input
                     placeholder="Площадь"
                     {...form.register("area", { valueAsNumber: true })}
@@ -135,7 +135,7 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
                 )}
             </fieldset>
             <fieldset className="flex flex-col gap-2">
-                <Label>Этаж</Label>
+                <Label className="text-sm sm:text-base">Этаж</Label>
                 <Input
                     placeholder="Этаж"
                     {...form.register("floor", { valueAsNumber: true })}
@@ -146,7 +146,7 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
                 )}
             </fieldset>
             <fieldset className="flex flex-col gap-2">
-                <Label>Тип юнита</Label>
+                <Label className="text-sm sm:text-base">Тип юнита</Label>
                 <Controller
                     name="unitType"
                     control={form.control}
@@ -175,7 +175,7 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
                 )}
             </fieldset>
             <fieldset className="flex flex-col gap-2">
-                <Label>Услуги</Label>
+                <Label className="text-sm sm:text-base">Услуги</Label>
                 <Controller
                     name="serviceDictionaryIds"
                     control={form.control}
@@ -193,7 +193,7 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
                 )}
             </fieldset>
             <fieldset className="flex flex-col gap-2">
-                <Label>Условия</Label>
+                <Label className="text-sm sm:text-base">Условия</Label>
                 <Controller
                     name={"conditionDictionaryIds"}
                     control={form.control}
@@ -209,9 +209,9 @@ export function CreateAccommodationUnitFormFields({accommodationId}:Props) {
                     <p className="text-sm text-red-500">{form.formState.errors.conditionDictionaryIds.message as string}</p>
                 )}
             </fieldset>
-            <fieldset className="flex flex-row self-center gap-2">
-                <Button type={"submit"}>Создать</Button>
-                <Button onClick={() => history.back()} variant={"outline"}>Отмена</Button>
+            <fieldset className="flex flex-col sm:flex-row self-center gap-2 sm:gap-3 w-full sm:w-auto">
+                <Button type={"submit"} className="w-full sm:w-auto">Создать</Button>
+                <Button onClick={() => history.back()} variant={"outline"} className="w-full sm:w-auto">Отмена</Button>
             </fieldset>
         </form>
         )

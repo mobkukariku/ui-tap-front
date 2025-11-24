@@ -24,7 +24,7 @@ export function CreateAccommodationFormFields() {
     } = useHandleAccommodationFormFields();
 
     return (
-        <form className={"my-20 flex break-all flex-col mx-auto gap-5"} onSubmit={form.handleSubmit(onSubmit)}>
+        <form className={"my-8 sm:my-12 md:my-20 flex break-all flex-col mx-auto gap-4 sm:gap-5"} onSubmit={form.handleSubmit(onSubmit)}>
             <ImageUploader
                 images={imagePreviews}
                 onImagesChange={handleImagesChange}
@@ -34,7 +34,7 @@ export function CreateAccommodationFormFields() {
             />
 
             <fieldset className="flex flex-col gap-2">
-                <Label>Имя</Label>
+                <Label className="text-sm sm:text-base">Имя</Label>
                 <Input
                     placeholder="Имя"
                     {...form.register("name")}
@@ -46,7 +46,7 @@ export function CreateAccommodationFormFields() {
             </fieldset>
 
             <fieldset className="flex flex-col gap-2">
-                <Label>Адрес</Label>
+                <Label className="text-sm sm:text-base">Адрес</Label>
                 <Input
                     placeholder="Адрес"
                     {...form.register("address")}
@@ -58,7 +58,7 @@ export function CreateAccommodationFormFields() {
             </fieldset>
 
             <fieldset className="flex flex-col gap-2">
-                <Label>Описание</Label>
+                <Label className="text-sm sm:text-base">Описание</Label>
                 <Textarea
                     placeholder="Описание"
                     {...form.register("description")}
@@ -69,9 +69,9 @@ export function CreateAccommodationFormFields() {
                 )}
             </fieldset>
 
-            <div className={"flex flex-row gap-4 w-full"}>
+            <div className={"flex flex-col sm:flex-row gap-4 w-full"}>
                 <fieldset className="flex flex-col w-full gap-2">
-                    <Label>Город</Label>
+                    <Label className="text-sm sm:text-base">Город</Label>
                     <Controller
                         name="cityId"
                         control={form.control}
@@ -103,7 +103,7 @@ export function CreateAccommodationFormFields() {
                 </fieldset>
 
                 <fieldset className="flex flex-col w-full gap-2">
-                    <Label>Округи</Label>
+                    <Label className="text-sm sm:text-base">Округи</Label>
                     <Controller
                         name="districtId"
                         control={form.control}
@@ -136,7 +136,7 @@ export function CreateAccommodationFormFields() {
             </div>
 
             <fieldset className="flex flex-col gap-2">
-                <Label>Рейтинг</Label>
+                <Label className="text-sm sm:text-base">Рейтинг</Label>
                 <Input
                     type={"number"}
                     placeholder="Рейтинг"
@@ -149,7 +149,7 @@ export function CreateAccommodationFormFields() {
             </fieldset>
 
             <fieldset className="flex flex-col gap-2">
-                <Label>Услуги</Label>
+                <Label className="text-sm sm:text-base">Услуги</Label>
                 <Controller
                     name="serviceDictionaryIds"
                     control={form.control}
@@ -167,7 +167,7 @@ export function CreateAccommodationFormFields() {
                 )}
             </fieldset>
             <fieldset className="flex flex-col gap-2">
-                <Label>Условия</Label>
+                <Label className="text-sm sm:text-base">Условия</Label>
                 <Controller
                     name={"conditionDictionaryIds"}
                     control={form.control}
@@ -184,9 +184,9 @@ export function CreateAccommodationFormFields() {
                 )}
             </fieldset>
 
-            <fieldset className="flex flex-row self-center gap-2">
-                <Button type={"submit"}>Создать</Button>
-                <Button type="button" onClick={handleCancel} variant={"outline"}>Отмена</Button>
+            <fieldset className="flex flex-col sm:flex-row self-center gap-2 sm:gap-3 w-full sm:w-auto">
+                <Button type={"submit"} className="w-full sm:w-auto">Создать</Button>
+                <Button type="button" onClick={handleCancel} variant={"outline"} className="w-full sm:w-auto">Отмена</Button>
             </fieldset>
         </form>
     );
