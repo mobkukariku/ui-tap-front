@@ -19,7 +19,7 @@ export function useAccommodations() {
 
     const accommodationsQuery = useQuery({
         queryKey: ["accommodations-list", filters],
-        queryFn: () => getAccommodation(filters),
+        queryFn: async () => await getAccommodation(filters),
     });
 
     const approveMutation = useMutation({

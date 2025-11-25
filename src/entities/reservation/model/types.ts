@@ -8,11 +8,21 @@ export interface Reservation {
     priceRequestId: number;
     searchRequestId: number;
     price: number;
-    status: "APPROVED" | "PENDING" | "REJECTED" | "CANCELLED";
+    status: ReservationStatus;
     needToPay: boolean;
     createdAt: string;
     updatedAt: string;
     checkInDate: string;
     checkOutDate: string;
     guestCount: number;
+}
+
+
+
+export enum ReservationStatus {
+    SUCCESSFUL = 'Успешно',
+    WAITING_TO_APPROVE = 'Ожидает подтверждения',
+    APPROVED = 'Подтверждено',
+    REJECTED = 'Отклонено',
+    CLIENT_DIDNT_CAME = 'Клиент не пришёл',
 }

@@ -5,7 +5,7 @@ export function RequestSearchInput() {
 
     return (
         <section className="my-5 flex items-center gap-[14.75px]">
-            <form role="search" className="max-w-md">
+            <form role="search" className="md:max-w-md w-full">
                 <fieldset className="relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#00000080] w-4 h-4 pointer-events-none" />
                     <Input

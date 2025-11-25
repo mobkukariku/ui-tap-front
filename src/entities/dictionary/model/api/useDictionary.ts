@@ -14,6 +14,6 @@ export function useDictionary(key: string, size?: number) {
 
     return useQuery({
         queryKey: ["dictionary", key, payload.size, filters],
-        queryFn: () => getDictionaries(payload),
+        queryFn: async () => await getDictionaries(payload),
     });
 }

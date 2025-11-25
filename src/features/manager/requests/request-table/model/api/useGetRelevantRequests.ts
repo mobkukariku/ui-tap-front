@@ -4,6 +4,6 @@ import {getRelevantRequests} from "@/features/manager/requests/request-table/mod
 export function useGetRelevantRequests(id:number) {
     return useQuery({
         queryKey: ['relevant-requests'],
-        queryFn: () => getRelevantRequests(id),
+        queryFn: async () => await getRelevantRequests(id),
     })
 }

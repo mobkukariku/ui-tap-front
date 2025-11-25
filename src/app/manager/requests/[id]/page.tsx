@@ -18,7 +18,7 @@ export default async function RequestsByAccommodationPage({params}:Props) {
                     { label: id, href: `/manager/requests/${id}` }
                 ]}
             />
-            <RequestSearchInput />
+            {/*<RequestSearchInput />*/}
             <RequestTable id={Number(id)} />
         </>
     )

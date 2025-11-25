@@ -7,6 +7,6 @@ export function useGetAccommodationById(id: string) {
 
     return useQuery({
         queryKey: ["accommodation"],
-        queryFn: () => getAccommodationById(Number(id))
+        queryFn: async() => await getAccommodationById(Number(id))
     })
 }
