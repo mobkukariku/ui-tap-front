@@ -92,7 +92,7 @@ export function ReservationItem({reservation}: ReservationItemProps) {
                                     <span>Заезд</span>
                                 </dt>
                                 <dd className="text-sm font-semibold text-gray-900">
-                                    {formatDate(reservation.checkInDate)}
+                                    {formatDate(reservation.checkInDate.split('T')[0])}
                                 </dd>
                             </div>
 
@@ -103,7 +103,7 @@ export function ReservationItem({reservation}: ReservationItemProps) {
                                     <span>Выезд</span>
                                 </dt>
                                 <dd className="text-sm font-semibold text-gray-900">
-                                    {formatDate(reservation.checkOutDate)}
+                                    {formatDate(reservation.checkOutDate.split('T')[0])}
                                 </dd>
                             </div>
 

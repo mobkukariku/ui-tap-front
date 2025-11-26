@@ -155,12 +155,12 @@ export function ReservationById({id}: ReservationByIdProps) {
                         <LabelTextInfo
                             icon={<Calendar width={18} height={18} className="sm:w-5 sm:h-5 text-primary" />}
                             label="Заезд"
-                            value={formatDate(data.checkInDate)}
+                            value={formatDate(data.checkInDate.split('T')[0])}
                         />
                         <LabelTextInfo
                             icon={<Calendar width={18} height={18} className="sm:w-5 sm:h-5 text-primary" />}
                             label="Выезд"
-                            value={formatDate(data.checkOutDate)}
+                            value={formatDate(data.checkOutDate.split('T')[0])}
                         />
                         <LabelTextInfo
                             icon={<Users width={18} height={18} className="sm:w-5 sm:h-5 text-primary" />}

@@ -31,18 +31,18 @@ export function useUpdateAccommodationPhotos() {
     });
 
     const deleteMutation = useMutation({
-        mutationFn: (data: { id: string; photoUrl: string }) =>
-            deleteAccommodationPhoto(data.id, data.photoUrl),
+        mutationFn: (data: { id: string; photoUrls: string[] }) =>
+            deleteAccommodationPhoto(data.id, data.photoUrls),
         onSuccess: async () => {
             await queryClient.invalidateQueries({queryKey: ["accommodation"]});
-            toast.success("Фотография удалена", {
+            toast.success("Фотографии удалены", {
                 position: "top-right",
                 richColors: true,
                 description: getCurrentTime(),
             });
         },
         onError: async (error) => {
-            toast.error("Ошибка удаления фотографии", {
+            toast.error("Ошибка удаления фотографий", {
                 position: "top-right",
                 richColors: true,
                 description: error.message || "Не удалось удалить фото",

@@ -86,12 +86,10 @@ export function useEditPhotosModal({
 
         try {
             if (deletedUrls.length > 0) {
-                for (const photoUrl of deletedUrls) {
-                    await deletePhotoAsync({
-                        id: String(id),
-                        photoUrl: photoUrl
-                    });
-                }
+                await deletePhotoAsync({
+                    id: String(id),
+                    photoUrls: deletedUrls
+                });
             }
 
             if (data.images.length > 0) {

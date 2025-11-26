@@ -8,6 +8,7 @@ import {Spinner} from "@/shared/ui/spinner";
 import {BookingStatusVariant} from "@/features/manager/bookings/booking-table/ui/BookingStatusVariant";
 import {BookingBtnVariant} from "@/features/manager/bookings/booking-table/ui/BookingBtnVariant";
 import {Reservation} from "@/entities/reservation/model/types";
+import { formatDate } from "@/shared/lib/date/formateDate";
 
 interface BookingTableProps {
     accId: number
@@ -69,7 +70,7 @@ function BookingTable({accId}:BookingTableProps) {
                     <TableRow key={item.id}>
                         <TableCell>{item.clientName}</TableCell>
                         <TableCell>
-                            {item.checkOutDate} – {item.checkInDate}
+                            {formatDate(item.checkOutDate.split('T')[0])} – {formatDate(item.checkInDate.split('T')[0])}
                         </TableCell>
                         <TableCell>
                             {item.accommodationUnitName}

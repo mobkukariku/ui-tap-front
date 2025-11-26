@@ -8,6 +8,7 @@ import {
 } from "@/features/manager/bookings/current-reservation-modal/ui/ChangeReservationStatus";
 import {useState} from "react";
 import {useGetReservation} from "@/features/manager/bookings/current-reservation-modal/model/api/useGetReservation";
+import { formatDate } from "@/shared/lib/date/formateDate";
 
 
 interface CurrentReservationModalProps {
@@ -59,14 +60,14 @@ export function CurrentReservationModal({ reservationId }: CurrentReservationMod
                                 <CalendarIcon className="w-3.5 h-3.5" />
                                 Заезд
                             </p>
-                            <p className="text-sm font-medium mt-1">{data?.checkInDate}</p>
+                            <p className="text-sm font-medium mt-1">{formatDate(data?.checkInDate.split('T')[0])}</p>
                         </div>
                         <div>
                             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide flex items-center gap-1">
                                 <CalendarIcon className="w-3.5 h-3.5" />
                                 Выезд
                             </p>
-                            <p className="text-sm font-medium mt-1">{data?.checkOutDate}</p>
+                            <p className="text-sm font-medium mt-1">{formatDate(data?.checkOutDate.split('T')[0])}</p>
                         </div>
                     </div>
 
