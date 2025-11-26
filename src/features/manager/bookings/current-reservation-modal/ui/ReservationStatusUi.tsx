@@ -28,7 +28,7 @@ export function ReservationStatusUi({status}: ReservationStatusUiProps) {
                     </div>
                 </div>
             );
-        case ReservationStatus.SUCCESSFUL:
+        case ReservationStatus.FINISHED_SUCCESSFUL:
             return (
                 <div className="flex items-center gap-3 p-4 bg-green-50 border border-green-200 rounded-xl">
                     <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />

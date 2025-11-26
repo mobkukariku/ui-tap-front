@@ -7,8 +7,18 @@ import {
     UpdateStatusFormData,
     updateStatusSchema
 } from "@/features/manager/bookings/current-reservation-modal/model/schema";
+import {
+    usePutReservationFinalStatus
+} from "@/features/manager/bookings/current-reservation-modal/model/api/usePutReservationFinalStatus";
 
-export function ChangeReservationStatus() {
+interface ChangeReservationStatusProps {
+    reservationId: number;
+}
+
+export function ChangeReservationStatus({reservationId}:ChangeReservationStatusProps) {
+
+    const {mutate} = usePutReservationFinalStatus();
+
 
     const form = useForm({
         resolver: zodResolver(updateStatusSchema),
@@ -18,7 +28,14 @@ export function ChangeReservationStatus() {
     })
 
     const onSubmit = (data: UpdateStatusFormData) => {
-        console.log(data);
+        try{
+            mutate({
+                reservationId: reservationId,
+                status: data.status
+            })
+        }catch (err){
+            console.log(err);
+        }
     }
 
 
@@ -40,7 +57,7 @@ export function ChangeReservationStatus() {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
-                                        <SelectItem value={"SUCCESSFUL"}>
+                                        <SelectItem value={"FINISHED_SUCCESSFUL"}>
                                             Успешно
                                         </SelectItem>
                                         <SelectItem value={"CLIENT_DIDNT_CAME"}>

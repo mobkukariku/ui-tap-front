@@ -1,13 +1,17 @@
 import {ReservationById} from "@/features/client/reservations/reservation-by-id/ui/ReservationById";
+import {Suspense} from "react";
+import {Spinner} from "@/shared/ui/spinner";
 
 interface ReservationPageProps {
-    params: {id: string}
+    params: Promise<{id: string}>
 }
 
 export default async function ReservationPage({params}:ReservationPageProps) {
     const {id} = await params;
 
     return (
-        <ReservationById id={Number(id)} />
+        <Suspense fallback={<Spinner className={"w-full mx-auto size-7 my-10"} />}>
+            <ReservationById id={Number(id)} />
+        </Suspense>
     )
 }

@@ -1,5 +1,4 @@
 import {BreadcrumbLayout} from "@/widgets/breadcrumbs/ui/BreadcrumbLayout";
-import {BookingSearchInput} from "@/features/manager/bookings/filter-booking/ui/BookingSearchInput";
 import BookingTable from "@/features/manager/bookings/booking-table/ui/BookingTable";
 
 interface ReservationPageProps {
@@ -18,7 +17,6 @@ export default async function ReservationPage({params}:ReservationPageProps) {
                     { label: id, href: `/manager/reservations/${id}`},
                 ]}
             />
-            {/*<BookingSearchInput />*/}
             <BookingTable accId={Number(id)} />
         </>
     )

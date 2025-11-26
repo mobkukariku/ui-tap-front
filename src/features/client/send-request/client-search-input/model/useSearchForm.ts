@@ -2,9 +2,16 @@ import {usePostSearchRequests} from "@/features/client/send-request/client-searc
 import {SubmitHandler, useForm} from "react-hook-form";
 import {SearchFormData, searchFormSchema} from "@/features/client/send-request/client-search-input/model/schema";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {useState, useCallback} from "react";
 
 export function useSearchForm() {
-    const {mutate} = usePostSearchRequests();
+    const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+    
+    const handleSuccess = useCallback(() => {
+        setIsSuccessModalOpen(true);
+    }, []);
+
+    const {mutate} = usePostSearchRequests(handleSuccess);
 
     const form = useForm<SearchFormData>({
         resolver: zodResolver(searchFormSchema),
@@ -28,7 +35,7 @@ export function useSearchForm() {
         try {
             const requestData = {
                 checkInDate: data.checkInDate,
-                checkOutDate: data.checkOutDate,
+                checkOutDate: data.oneNight ? undefined : data.checkOutDate,
                 oneNight: data.oneNight,
                 price: data.price || 0,
                 countOfPeople: data.countOfPeople || 0,
@@ -52,5 +59,15 @@ export function useSearchForm() {
         form.reset()
     }
 
-    return {form, onSubmit, handleReset}
+    const handleCloseSuccessModal = useCallback(() => {
+        setIsSuccessModalOpen(false);
+    }, []);
+
+    return {
+        form, 
+        onSubmit, 
+        handleReset,
+        isSuccessModalOpen,
+        handleCloseSuccessModal,
+    }
 }

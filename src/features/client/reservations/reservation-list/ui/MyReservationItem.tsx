@@ -1,56 +1,75 @@
-
+"use client"
 import {formatDate} from "@/shared/lib/date/formateDate";
 import {Badge} from "@/shared/ui/badge";
 import {Calendar, Building2, DollarSign} from "lucide-react";
 import Link from "next/link";
-import {Reservation} from "@/entities/reservation/model/types";
+import {Reservation, ReservationStatus} from "@/entities/reservation/model/types";
+import {useRouter} from "next/navigation";
+import {useState} from "react";
 
 interface ReservationItemProps {
     reservation: Reservation;
 }
 
-const getStatusBadge = (status: string) => {
+const getStatusBadge = (status: ReservationStatus) => {
     switch (status) {
-        case "WAITING_TO_APPROVE":
+        case ReservationStatus.WAITING_TO_APPROVE:
             return (
                 <Badge variant="outline" className="border-yellow-300 text-yellow-700 bg-yellow-50">
                     Ожидание подтверждения
                 </Badge>
             );
-        case "APPROVED":
+        case ReservationStatus.APPROVED:
             return (
                 <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100">
                     ✓ Подтверждено
                 </Badge>
             );
-        case "COMPLETED":
+        case ReservationStatus.FINISHED_SUCCESSFUL:
             return (
                 <Badge className="bg-green-100 text-green-700 hover:bg-green-100">
-                    ✓ Завершено
+                    ✓ Завершено успешно
                 </Badge>
             );
-        case "REJECTED":
+        case ReservationStatus.REJECTED:
             return (
                 <Badge variant="destructive" className="hover:bg-red-600">
                     ✗ Отклонено
                 </Badge>
             );
-        case "CANCELLED":
+        case ReservationStatus.CLIENT_DIDNT_CAME:
             return (
-                <Badge variant="outline" className="border-red-300 text-red-700">
-                    ✗ Отменено
+                <Badge variant="outline" className="border-orange-300 text-orange-700 bg-orange-50">
+                    ✗ Клиент не приехал
                 </Badge>
             );
         default:
-            return null;
+            return (
+                <Badge variant="outline" className="border-gray-300 text-gray-700">
+                    {status}
+                </Badge>
+            );
     }
 };
 
 export function ReservationItem({reservation}: ReservationItemProps) {
+    const router = useRouter();
+    const [isNavigating, setIsNavigating] = useState(false);
+
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        setIsNavigating(true);
+        router.push(`/client/reservations/${reservation.id}`);
+    };
 
     return (
-        <Link href={`/client/reservations/${reservation.id}`} key={reservation.id}>
-            <article className="group bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition-all duration-300 cursor-pointer">
+        <Link 
+            href={`/client/reservations/${reservation.id}`} 
+            key={reservation.id}
+            prefetch={false}
+            onClick={handleClick}
+        >
+            <article className={`group bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition-all duration-300 cursor-pointer ${isNavigating ? 'opacity-50 cursor-wait' : ''}`}>
                 <div className="flex flex-col lg:flex-row lg:items-start gap-5">
                     <div className="flex-shrink-0 p-3 bg-gradient-to-br w-fit from-primary/10 to-primary/5 rounded-lg group-hover:from-primary/20 group-hover:to-primary/10 transition-colors">
                         <Building2 width={24} height={24} className="text-primary" />
@@ -112,6 +131,11 @@ export function ReservationItem({reservation}: ReservationItemProps) {
                         </div>
                     </div>
                 </div>
+                {isNavigating && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-xl z-10">
+                        <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                )}
             </article>
         </Link>
     );

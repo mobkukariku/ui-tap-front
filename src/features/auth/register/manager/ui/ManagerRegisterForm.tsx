@@ -34,23 +34,12 @@ export function ManagerRegisterForm() {
         console.log(data);
         try{
             await register.mutateAsync(data);
-
             toast.success("Успешный вход в систему.", {
                 position: "top-right",
                 richColors: true,
                 description: getCurrentTime()
             });
-
-            const token = sessionService.getToken();
-            const user = sessionService.getUserFromToken(token ?? "");
-
-            if (user?.role.includes("SUPER_MANAGER")) {
-                router.push("/manager");
-            } else if (user?.role.includes("ADMIN")) {
-                router.push("/admin");
-            } else {
-                router.push("/");
-            }
+            router.push("/manager");
         }catch (error) {
             console.error(error);
         }

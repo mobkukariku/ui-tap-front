@@ -4,7 +4,7 @@ import {createAccommodation} from "@/features/manager/accommodations/create-acco
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {toast} from "sonner";
 
-export function useCreateAccommodation() {
+export function useCreateAccommodation(onSuccessCallback?: () => void) {
 
     return useMutation({
         mutationFn: (data: CreateAccommodationRequest) => createAccommodation(data),
@@ -14,6 +14,7 @@ export function useCreateAccommodation() {
                 richColors: true,
                 description: getCurrentTime()
             });
+            onSuccessCallback?.();
         },
         onError: async (error) => {
             toast.error("Ошибка отправки запроса.", {

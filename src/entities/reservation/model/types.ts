@@ -20,9 +20,9 @@ export interface Reservation {
 
 
 export enum ReservationStatus {
-    SUCCESSFUL = 'Успешно',
-    WAITING_TO_APPROVE = 'Ожидает подтверждения',
-    APPROVED = 'Подтверждено',
-    REJECTED = 'Отклонено',
-    CLIENT_DIDNT_CAME = 'Клиент не пришёл',
+    FINISHED_SUCCESSFUL = 'FINISHED_SUCCESSFUL',
+    WAITING_TO_APPROVE = 'WAITING_TO_APPROVE',
+    APPROVED = 'APPROVED',
+    REJECTED = 'REJECTED',
+    CLIENT_DIDNT_CAME = 'CLIENT_DIDNT_CAME',
 }

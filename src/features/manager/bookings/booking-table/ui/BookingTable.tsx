@@ -1,11 +1,13 @@
 'use client'
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/ui/table"
-import {getBadgeVariant, getButtonsVariant} from "@/features/manager/bookings/booking-table/model/getVariantByStatus";
 import {
     useGetReservationsByAccommodation
 } from "@/features/manager/bookings/booking-table/model/api/useGetReservationsByAccommodation";
 import {Spinner} from "@/shared/ui/spinner";
+import {BookingStatusVariant} from "@/features/manager/bookings/booking-table/ui/BookingStatusVariant";
+import {BookingBtnVariant} from "@/features/manager/bookings/booking-table/ui/BookingBtnVariant";
+import {Reservation} from "@/entities/reservation/model/types";
 
 interface BookingTableProps {
     accId: number
@@ -63,7 +65,7 @@ function BookingTable({accId}:BookingTableProps) {
             </TableHeader>
 
             <TableBody>
-                {data?.content?.map((item) => (
+                {data?.content?.map((item:Reservation) => (
                     <TableRow key={item.id}>
                         <TableCell>{item.clientName}</TableCell>
                         <TableCell>
@@ -72,12 +74,12 @@ function BookingTable({accId}:BookingTableProps) {
                         <TableCell>
                             {item.accommodationUnitName}
                         </TableCell>
-                        <TableCell>{item.price} тг</TableCell>
+                        <TableCell>{item.price.toLocaleString("ru-RU")} тг</TableCell>
                         <TableCell>
-                            {getBadgeVariant(item.status)}
+                            <BookingStatusVariant status={item.status} />
                         </TableCell>
                         <TableCell className="text-center">
-                            {getButtonsVariant(item.status)}
+                            <BookingBtnVariant reservationId={item.id} status={item.status} />
                         </TableCell>
                     </TableRow>
                 ))}

@@ -3,7 +3,8 @@ import {getReservationById} from "@/features/client/reservations/reservation-by-
 
 export function useReservationById(id:number){
     return useQuery({
-        queryKey: ["reservation-by-id"],
-        queryFn: async () => await getReservationById(id)
+        queryKey: ["reservation-by-id", id],
+        queryFn: async () => await getReservationById(id),
+        staleTime: 30000, // Кешировать данные на 30 секунд
     })
 }

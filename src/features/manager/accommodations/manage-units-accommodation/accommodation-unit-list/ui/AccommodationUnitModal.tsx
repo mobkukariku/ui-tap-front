@@ -1,6 +1,7 @@
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/shared/ui/dialog";
 import {
     CheckCircle,
+    DollarSign,
     Home,
     Layers,
     Package,
@@ -16,6 +17,15 @@ import {
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/api/useGetAccommodationUnitById";
 import {Dictionary} from "@/entities/dictionary/model/types";
 import {ImageGallery} from "@/shared/ui/image-gallery";
+
+interface Tariff {
+    id: number;
+    price: number;
+    currency: string;
+    rangeTypeId: number;
+    rangeTypeKey: string;
+    rangeTypeValue: string;
+}
 
 interface AccommodationUnitModalProps {
     id: string;
@@ -107,18 +117,28 @@ export function AccommodationUnitModal({id, isModalOpen, setIsModalOpen}:Accommo
                             </div>
                         </InfoItem>
 
-                      {/*  <InfoItem icon={DollarSign} label="Тарифы">*/}
-                      {/*      <div className="space-y-2">*/}
-                      {/*          {mockUnit.tariffs.map((t, i) => (*/}
-                      {/*              <div key={i} className="flex justify-between text-sm">*/}
-                      {/*                  <span className="font-medium">{t.name}</span>*/}
-                      {/*                  <span className="text-muted-foreground">*/}
-                      {/*  {t.price.toLocaleString()} ₸ / ночь*/}
-                      {/*</span>*/}
-                      {/*              </div>*/}
-                      {/*          ))}*/}
-                      {/*      </div>*/}
-                      {/*  </InfoItem>*/}
+                        <InfoItem icon={DollarSign} label="Тарифы">
+                            {data?.tariffs && data.tariffs.length > 0 ? (
+                                <div className="space-y-2 sm:space-y-3">
+                                    {data.tariffs.map((tariff: Tariff) => (
+                                        <div key={tariff.id} className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-2 p-2 sm:p-3 bg-gray-50 rounded-lg">
+                                            <div className="flex flex-col gap-1">
+                                                <span className="font-medium text-sm sm:text-base">{tariff.rangeTypeValue}</span>
+                                                <span className="text-xs sm:text-sm text-gray-500">{tariff.rangeTypeKey}</span>
+                                            </div>
+                                            <div className="flex items-center gap-1 sm:gap-2">
+                                                <span className="text-sm sm:text-base font-semibold">
+                                                    {tariff.price.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                                </span>
+                                                <span className="text-xs sm:text-sm text-gray-600">{tariff.currency}</span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="text-sm sm:text-base text-gray-500">Тарифы не установлены</p>
+                            )}
+                        </InfoItem>
                     </div>
                 </>
             </DialogContent>

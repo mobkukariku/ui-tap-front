@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  ui-tap-front:
+    image: mobkus837/ui-tap-front:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - NEXT_PUBLIC_BUCKET_URL=${NEXT_PUBLIC_BUCKET_URL}
+      - NEXT_PUBLIC_INITIAL_GET_FILES_URL=${NEXT_PUBLIC_INITIAL_GET_FILES_URL}
+    restart: unless-stopped
+

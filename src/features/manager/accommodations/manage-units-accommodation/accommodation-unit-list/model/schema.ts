@@ -36,3 +36,11 @@ export const updateUnitPhotosSchema = z.object({
 
 export type UpdateAccommodationUnitDictionariesFormData = z.infer<typeof updateAccommodationUnitDictionariesSchema>;
 export type UpdateUnitPhotosFormData = z.infer<typeof updateUnitPhotosSchema>;
+
+export const createTariffSchema = z.object({
+    price: z.coerce.number<number>().min(0.01, "Цена должна быть больше 0").max(1000000, "Максимальная цена 1,000,000"),
+    currency: z.string().min(1, "Валюта обязательна"),
+    rangeTypeId: z.coerce.number<number>().min(1, "Выберите тип диапазона"),
+});
+
+export type CreateTariffFormData = z.infer<typeof createTariffSchema>;
