@@ -4,7 +4,7 @@ import {postSearchRequest} from "@/features/client/send-request/client-search-in
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 
-export function usePostSearchRequests() {
+export function usePostSearchRequests(onSuccessCallback?: () => void) {
     const queryClient = useQueryClient();
 
 
@@ -20,7 +20,8 @@ export function usePostSearchRequests() {
                 position: "top-right",
                 richColors: true,
                 description: getCurrentTime(),
-            })
+            });
+            onSuccessCallback?.();
         },
         onError: (error) => {
             toast.error("Ошибка создания запроса", {

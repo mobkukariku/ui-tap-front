@@ -93,7 +93,6 @@ export function ClientHeader() {
 
                 {/* Mobile Navigation */}
                 <div className="flex items-center gap-2 md:hidden">
-
                     
                     <Button
                         variant="ghost"

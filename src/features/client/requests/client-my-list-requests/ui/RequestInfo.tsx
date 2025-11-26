@@ -2,6 +2,7 @@ import {LabelTextInfo} from "@/shared/ui/label-text-info";
 import {CalendarIcon, DollarSignIcon, Star, Users} from "lucide-react";
 import {TagList} from "@/shared/ui/TagList";
 import {SearchRequest} from "@/entities/search-request/model/types";
+import { formatDate } from "@/shared/lib/date/formateDate";
 
 interface RequestInfoProps {
     request: SearchRequest
@@ -15,13 +16,13 @@ export function RequestInfo({request}:RequestInfoProps) {
                 <LabelTextInfo
                     icon={<CalendarIcon width={18} height={18} className="sm:w-5 sm:h-5 text-green-500" />}
                     label="Дата заезда"
-                    value={request.checkInDate}
+                    value={formatDate(request.checkInDate.split('T')[0])}
                 />
 
                 <LabelTextInfo
                     icon={<CalendarIcon width={18} height={18} className="sm:w-5 sm:h-5 text-green-500" />}
                     label="Дата выезда"
-                    value={request.checkOutDate}
+                    value={formatDate(request.checkOutDate.split('T')[0])}
                 />
 
                 <LabelTextInfo

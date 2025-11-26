@@ -13,7 +13,7 @@ interface PriceRequestListProps {
 
 export function PriceRequestList({requestId}: PriceRequestListProps) {
 
-    const {data, respond, isResponding, hasResponded, responseStatus} = usePriceRequestForClient(requestId);
+    const {data, respond, isResponding} = usePriceRequestForClient(requestId);
 
     const handleAccept = (id: number) => {
         respond({priceRequestId: id, status: "ACCEPTED"});
@@ -42,8 +42,8 @@ export function PriceRequestList({requestId}: PriceRequestListProps) {
                             onAccept={handleAccept}
                             onReject={handleReject}
                             isResponding={isResponding}
-                            hasResponded={hasResponded}
-                            responseStatus={responseStatus}
+                            hasResponded={response?.clientResponseStatus !== "WAITING"}
+                            responseStatus={response?.clientResponseStatus as "ACCEPTED" | "REJECTED" | null}
                         />
                     ))
                 )}

@@ -1,6 +1,6 @@
 export interface SearchRequestCredientials {
     checkInDate: string,
-    checkOutDate: string,
+    checkOutDate?: string,
     oneNight?: boolean,
     price: number,
     countOfPeople: number,

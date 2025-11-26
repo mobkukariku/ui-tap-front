@@ -19,6 +19,9 @@ import {Dictionary} from "@/entities/dictionary/model/types";
 import {
     EditUnitPhotosModal
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/ui/EditUnitPhotosModal";
+import {
+    EditUnitTariffsModal
+} from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/ui/EditUnitTariffsModal";
 
 interface UnitEventButtonsProps {
     unitId: string;
@@ -29,6 +32,7 @@ export function UnitEventButtons({unitId}:UnitEventButtonsProps) {
     const [isEditMainInfoOpen, setIsEditMainInfoOpen] = useState(false);
     const [isEditDictionariesOpen, setIsEditDictionariesOpen] = useState(false)
     const [isPhotosOpen, setIsPhotosOpen] = useState(false);
+    const [isTariffsOpen, setIsTariffsOpen] = useState(false);
 
     const isModalsopen = isEditMainInfoOpen || isEditDictionariesOpen || isPhotosOpen;
 
@@ -71,6 +75,11 @@ export function UnitEventButtons({unitId}:UnitEventButtonsProps) {
                         }} className="text-sm">
                             Изображения
                         </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => {
+                            setIsTariffsOpen(true);
+                        }} className="text-sm">
+                            Тарифы
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
@@ -103,6 +112,11 @@ export function UnitEventButtons({unitId}:UnitEventButtonsProps) {
                 initialImageUrls={editUnitData?.imageUrls || []}
                 setOpen={setIsPhotosOpen}
                 unitId={Number(unitId)}
+            />
+            <EditUnitTariffsModal
+                open={isTariffsOpen}
+                setOpen={setIsTariffsOpen}
+                unitId={unitId}
             />
         </>
     )

@@ -7,7 +7,6 @@ import {useState} from "react";
 import {Button} from "@/shared/ui/button";
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
-import {sessionService} from "@/entities/session/model/sessionService";
 import {useRouter} from "next/navigation";
 import {ClientRegisterFormData, clientRegisterSchema} from "@/features/auth/register/client/model/schema";
 import {useClientRegister} from "@/features/auth/register/client/model/api/useClientRegister";
@@ -39,19 +38,7 @@ export function ClientRegisterForm() {
                 richColors: true,
                 description: getCurrentTime()
             });
-
-            const token = sessionService.getToken();
-            const user = sessionService.getUserFromToken(token ?? "");
-
-            if (user?.role.includes("SUPER_MANAGER")) {
-                router.push("/manager");
-            } else if (user?.role.includes("ADMIN")) {
-                router.push("/admin");
-            } else if (user?.role.includes("CLIENT")) {
-                router.push("/client");
-            } else {
-                router.push("/");
-            }
+            router.push("/client");
         }catch (error) {
             console.error(error);
         }

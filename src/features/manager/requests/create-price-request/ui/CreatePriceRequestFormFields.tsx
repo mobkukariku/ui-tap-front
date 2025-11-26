@@ -62,7 +62,7 @@ export function CreatePriceRequestFormFields({
     return (
         <form onSubmit={form.handleSubmit(onSubmit)} className={"flex flex-col gap-4 w-full"}>
 
-            <fieldset className={"flex flex-col gap-2"}>
+            <fieldset className={"flex w-full flex-col min-w-0 gap-2"}>
                 <Label htmlFor={"price"} className={"text-sm"}>Цена</Label>
                 <Input
                     id={"price"}
@@ -83,7 +83,7 @@ export function CreatePriceRequestFormFields({
                     id={"units"}
                     role={"group"}
                     aria-label={"Выбор юнитов"}
-                    className={"border border-gray-200 overflow-y-auto flex flex-col gap-3 rounded-lg py-3 px-3 bg-gray-50 max-h-64"}
+                    className={"border border-gray-200 overflow-y-auto flex flex-col gap-3 rounded-lg py-3 px-3 bg-gray-50 w-full max-h-64"}
                 >
                     {units?.length > 0 ? (
                         units?.map((unit:AccommodationUnit) => (
@@ -91,7 +91,7 @@ export function CreatePriceRequestFormFields({
                                 key={unit.id}
                                 type={"button"}
                                 onClick={() => handleUnitSelect(unit.id)}
-                                className={"text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg transition-all disabled:opacity-60 disabled:cursor-not-allowed"}
+                                className={"text-left w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg transition-all disabled:opacity-60 disabled:cursor-not-allowed"}
                                 aria-pressed={selectUnitId === unit.id}
                                 disabled={!unit.isAvailable}
                             >

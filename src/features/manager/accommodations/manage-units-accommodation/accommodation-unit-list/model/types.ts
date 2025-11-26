@@ -34,3 +34,9 @@ export interface UpdateAccommodationUnitDictionariesRequest {
     serviceDictionaryIds: number[];
     conditionDictionaryIds: number[];
 }
+
+export interface CreateTariffRequest {
+    price: number;
+    currency: string;
+    rangeTypeId: number;
+}

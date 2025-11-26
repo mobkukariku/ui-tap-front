@@ -1,32 +1,30 @@
 'use client'
 
-import { useState } from "react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shared/ui/table"
-import { Badge } from "@/shared/ui/badge"
-import { Button } from "@/shared/ui/button"
-import { data as initialData } from "@/features/manager/bookings/booking-table/model/constants"
+import {
+    useGetReservationsByAccommodation
+} from "@/features/manager/bookings/booking-table/model/api/useGetReservationsByAccommodation";
+import {Spinner} from "@/shared/ui/spinner";
+import {BookingStatusVariant} from "@/features/manager/bookings/booking-table/ui/BookingStatusVariant";
+import {BookingBtnVariant} from "@/features/manager/bookings/booking-table/ui/BookingBtnVariant";
+import {Reservation} from "@/entities/reservation/model/types";
+import { formatDate } from "@/shared/lib/date/formateDate";
 
-function BookingTable() {
-    const [data] = useState(initialData);
+interface BookingTableProps {
+    accId: number
+}
 
+function BookingTable({accId}:BookingTableProps) {
 
-    const getBadgeVariant = (status: string) => {
-        switch (status) {
-            case "Ожидает подтверждениявв":
-                return "secondary"
-            case "Ожидает подтверждения":
-                return "waiting"
-            case "Подтверждено":
-                return "default"
-            case "Отменено":
-                return "destructive"
-            default:
-                return "outline"
-        }
-    }
+    const {data, isError, isLoading} = useGetReservationsByAccommodation(accId);
 
-    const formatDate = (dateStr: string) =>
-        new Date(dateStr).toLocaleDateString("ru-RU")
+    if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-6 sm:my-8 md:my-10"} />
+
+    if (isError) return (
+        <div>
+            Error! <button onClick={() => window.location.reload()}>Reload</button>
+        </div>
+    )
 
     return (
         <Table className="w-full relative">
@@ -38,6 +36,14 @@ function BookingTable() {
                             className="flex items-center gap-2 cursor-pointer select-none"
                         >
                             Даты
+                        </div>
+                    </TableHead>
+                    <TableHead>
+                        <div
+                            className="flex items-center gap-2 cursor-pointer select-none"
+                        >
+                            Юнит
+
                         </div>
                     </TableHead>
                     <TableHead>
@@ -60,25 +66,21 @@ function BookingTable() {
             </TableHeader>
 
             <TableBody>
-                {data.map((item) => (
+                {data?.content?.map((item:Reservation) => (
                     <TableRow key={item.id}>
-                        <TableCell>{item.clientId}</TableCell>
+                        <TableCell>{item.clientName}</TableCell>
                         <TableCell>
-                            {formatDate(item.fromDate)} – {formatDate(item.toDate)}
+                            {formatDate(item.checkOutDate.split('T')[0])} – {formatDate(item.checkInDate.split('T')[0])}
                         </TableCell>
-                        <TableCell>{item.price} тг</TableCell>
                         <TableCell>
-                            <Badge variant={getBadgeVariant(item.status)}>
-                                {item.status}
-                            </Badge>
+                            {item.accommodationUnitName}
+                        </TableCell>
+                        <TableCell>{item.price.toLocaleString("ru-RU")} тг</TableCell>
+                        <TableCell>
+                            <BookingStatusVariant status={item.status} />
                         </TableCell>
                         <TableCell className="text-center">
-                            <Button className="me-2" size="sm" variant="default">
-                                Подтвердить
-                            </Button>
-                            <Button size="sm" variant="outline">
-                                Отмена
-                            </Button>
+                            <BookingBtnVariant reservationId={item.id} status={item.status} />
                         </TableCell>
                     </TableRow>
                 ))}

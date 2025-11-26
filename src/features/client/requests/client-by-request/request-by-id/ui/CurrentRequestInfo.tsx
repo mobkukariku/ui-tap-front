@@ -16,6 +16,7 @@ import {
     RemoveSearchRequestModal
 } from "@/features/client/requests/client-by-request/remove-request-price/ui/RemoveSearchRequestModal";
 import {PriceRequestList} from "@/features/client/requests/price-request/ui/PriceRequestList";
+import { formatDate } from "@/shared/lib/date/formateDate";
 
 interface CurrentRequestInfoProps {
     requestId: number;
@@ -54,12 +55,12 @@ export function CurrentRequestInfo({requestId}:CurrentRequestInfoProps) {
                             <LabelTextInfo
                                 icon={<CalendarIcon width={18} height={18} className={"sm:w-5 sm:h-5 text-green-500"} />}
                                 label={"Заезд"}
-                                value={data?.checkInDate}
+                                value={formatDate(data?.checkInDate.split('T')[0])}
                             />
                             <LabelTextInfo
                                 icon={<CalendarIcon width={18} height={18} className={"sm:w-5 sm:h-5 text-green-500"} />}
                                 label={"Выезд"}
-                                value={data?.checkOutDate}
+                                value={formatDate(data?.checkOutDate.split('T')[0])}
                             />
                             <LabelTextInfo
                                 icon={<UsersIcon width={18} height={18} className={"sm:w-5 sm:h-5 text-green-500"} />}

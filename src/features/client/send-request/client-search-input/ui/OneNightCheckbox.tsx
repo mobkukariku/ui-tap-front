@@ -17,7 +17,13 @@ export function OneNightCheckbox({ form }: OneNightCheckboxProps) {
                     <Checkbox
                         id="oneNight"
                         checked={field.value}
-                        onCheckedChange={field.onChange}
+                        onCheckedChange={(checked) => {
+                            field.onChange(checked);
+                            // При включении галочки очищаем checkOutDate
+                            if (checked) {
+                                form.setValue("checkOutDate", "");
+                            }
+                        }}
                         className="w-5 h-5"
                     />
                 )}

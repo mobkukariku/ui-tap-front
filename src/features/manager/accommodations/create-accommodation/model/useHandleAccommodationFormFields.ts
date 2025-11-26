@@ -11,11 +11,11 @@ import { useGetCities } from "@/entities/city/model/api/useGetCities";
 import { useGetDistricts } from "@/entities/district/model/api/useGetDistricts";
 
 export function useHandleAccommodationFormFields() {
-    const { mutate } = useCreateAccommodation();
-    const { data: cities } = useGetCities();
     const router = useRouter();
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
-
+    const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+    const { data: cities } = useGetCities();
+    
     const form = useForm<CreateAccommodationFormData>({
         resolver: zodResolver(createAccommodationSchema),
         defaultValues: {
@@ -30,6 +30,14 @@ export function useHandleAccommodationFormFields() {
             conditionDictionaryIds: [],
         },
     });
+
+    const handleSuccess = useCallback(() => {
+        setIsSuccessModalOpen(true);
+        form.reset();
+        setImagePreviews([]);
+    }, [form]);
+
+    const { mutate } = useCreateAccommodation(handleSuccess);
 
     const selectedCityId = form.watch("cityId");
     const { data: districts } = useGetDistricts(
@@ -63,13 +71,15 @@ export function useHandleAccommodationFormFields() {
     const onSubmit = (data: CreateAccommodationFormData) => {
         try {
             mutate(data);
-            form.reset();
-            setImagePreviews([]);
-            router.push("/manager/accommodations");
         } catch (error) {
             console.error(error);
         }
     };
+
+    const handleCloseSuccessModal = useCallback(() => {
+        setIsSuccessModalOpen(false);
+        router.push("/manager/accommodations");
+    }, [router]);
 
     const handleCancel = () => {
         history.back();
@@ -84,5 +94,7 @@ export function useHandleAccommodationFormFields() {
         removeImage,
         onSubmit,
         handleCancel,
+        isSuccessModalOpen,
+        handleCloseSuccessModal,
     };
 }

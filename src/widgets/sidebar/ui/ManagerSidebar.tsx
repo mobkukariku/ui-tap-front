@@ -40,7 +40,7 @@ const items = [
     },
     {
         title: "Бронирования",
-        url: "/manager/bookings",
+        url: "/manager/reservations",
         icon: Calendar1Icon,
     }
 ]

@@ -61,12 +61,9 @@ export const updateAccommodationPhotos = async (data: UpdateAccommodationPhotosR
 
 
 
-export const deleteAccommodationPhoto = async (id: string, photoUrl: string) => {
+export const deleteAccommodationPhoto = async (id: string, photoUrls: string[]) => {
     const response = await api.delete(`/accommodations/${id}/photos`, {
-        params: {
-            id,
-            photoUrl,
-        }
+        data: photoUrls,
     });
 
     return response.data;

@@ -16,7 +16,7 @@ export function CreatePriceRequest({price, requestId, accId}:CreatePriceRequestP
             <DialogTrigger asChild>
                 <Button size={"sm"}>Откликнуться</Button>
             </DialogTrigger>
-            <DialogContent >
+            <DialogContent className="w-[95vw] max-w-md overflow-y-auto ">
                 <DialogTitle>Создание заявки цены</DialogTitle>
                 <CreatePriceRequestFormFields reqId={requestId} accId={accId} price={price} />
             </DialogContent>

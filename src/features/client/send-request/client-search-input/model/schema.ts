@@ -11,8 +11,7 @@ export const searchFormSchema = z.object({
             return selected >= today
         }, "Дата заезда не может быть в прошлом"),
 
-    checkOutDate: z.string()
-        .min(1, "Выберите дату выезда"),
+    checkOutDate: z.string().optional(),
 
     oneNight: z.boolean(),
 
@@ -47,7 +46,19 @@ export const searchFormSchema = z.object({
 
     conditionDictionaryIds: z.array(z.number()),
 }).refine((data) => {
-    if (!data.checkInDate || !data.checkOutDate) return true
+    // Если одна ночь, checkOutDate не обязательна
+    if (data.oneNight) return true;
+    // Если не одна ночь, checkOutDate обязательна
+    return data.checkOutDate && data.checkOutDate.length > 0;
+}, {
+    message: "Выберите дату выезда",
+    path: ["checkOutDate"]
+}).refine((data) => {
+    // Если одна ночь, не проверяем checkOutDate
+    if (data.oneNight) return true;
+    // Если не указаны даты, пропускаем проверку
+    if (!data.checkInDate || !data.checkOutDate) return true;
+    // Проверяем, что дата выезда позже даты заезда
     return new Date(data.checkOutDate) > new Date(data.checkInDate)
 }, {
     message: "Дата выезда должна быть позже даты заезда",

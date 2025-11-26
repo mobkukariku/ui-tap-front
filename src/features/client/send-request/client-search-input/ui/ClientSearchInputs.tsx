@@ -1,9 +1,6 @@
 "use client"
-import {ChevronDown, ChevronUp, Moon, SearchIcon, Star, User} from "lucide-react"
+import {ChevronDown, ChevronUp, SearchIcon} from "lucide-react"
 import { Button } from "@/shared/ui/button"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { SearchFormData, searchFormSchema } from "@/features/client/send-request/client-search-input/model/schema"
-import { zodResolver } from "@hookform/resolvers/zod"
 import {useState} from "react";
 import {PriceInput} from "@/features/client/send-request/client-search-input/ui/PriceInput";
 import {GuestsInput} from "@/features/client/send-request/client-search-input/ui/GuestsInput";
@@ -11,15 +8,16 @@ import {CitySelect} from "@/features/client/send-request/client-search-input/ui/
 import {DateInputController} from "@/features/client/send-request/client-search-input/ui/DateInputController";
 import {OptionalFilters} from "@/features/client/send-request/client-search-input/ui/OptionalFilters";
 import {DistrictMultiSelect} from "@/features/client/send-request/client-search-input/ui/DistrictMultiSelect";
-import {usePostSearchRequests} from "@/features/client/send-request/client-search-input/model/api/usePostSearchRequests";
 import {useSearchForm} from "@/features/client/send-request/client-search-input/model/useSearchForm";
+import { SearchRequestSuccessModal } from "./SearchRequestSuccessModal";
 
 export function ClientSearchInputs() {
     const [openOptionals, setOpenOptionals] = useState(false);
 
-    const {form, onSubmit, handleReset} = useSearchForm();
+    const {form, onSubmit, handleReset, isSuccessModalOpen, handleCloseSuccessModal} = useSearchForm();
 
     return (
+        <>
         <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="bg-white px-4 sm:px-6 md:px-20 w-full flex flex-col gap-4 sm:gap-6 my-8 sm:my-12 md:my-20 rounded-xl p-4 sm:p-6 md:p-8 shadow-lg"
@@ -59,5 +57,11 @@ export function ClientSearchInputs() {
                 </Button>
             </div>
         </form>
+
+        <SearchRequestSuccessModal
+            isOpen={isSuccessModalOpen}
+            onClose={handleCloseSuccessModal}
+        />
+    </>
     )
 }

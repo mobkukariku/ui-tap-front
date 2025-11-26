@@ -1,3 +1,4 @@
+
 import {BreadcrumbLayout} from "@/widgets/breadcrumbs/ui/BreadcrumbLayout";
 import {
     AccommodationHeader

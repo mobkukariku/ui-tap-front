@@ -29,7 +29,7 @@ export function RequestAccUnitItem({
     }
 
     return (
-        <article className={`group bg-white hover:shadow-lg transition-all duration-300 border-2 rounded-xl p-3 ${
+        <article className={`group bg-white w-full hover:shadow-lg transition-all duration-300 border-2 rounded-xl p-3 ${
             isSelected
                 ? "border-primary shadow-lg"
                 : "border-gray-200 hover:border-primary/30"
@@ -41,7 +41,7 @@ export function RequestAccUnitItem({
                     </div>
                     <div className={"min-w-0 flex-1"}>
                         <h3 className={"font-semibold text-gray-900 text-sm truncate"}>{name}</h3>
-                        <p className={"text-xs text-gray-600 mt-0.5 line-clamp-1"}>{description}</p>
+                        <p className={"text-xs text-gray-600 break-all mt-0.5 line-clamp-1"}>{description}</p>
                     </div>
                     <div className={"flex-shrink-0"}>
                         {isAvailableBadge(isAvailable)}

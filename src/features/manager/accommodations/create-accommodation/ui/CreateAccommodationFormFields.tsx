@@ -10,6 +10,7 @@ import { City } from "@/entities/city/model/types";
 import { useHandleAccommodationFormFields } from "@/features/manager/accommodations/create-accommodation/model/useHandleAccommodationFormFields";
 import {ImageUploader} from "@/widgets/images-uploader/ui/ImageUploader";
 import {SelectDictionary} from "@/widgets/select-dictionary/ui/SelectDictionary";
+import { CreateAccommodationSuccessModal } from "./CreateAccommodationSuccessModal";
 
 export function CreateAccommodationFormFields() {
     const {
@@ -21,9 +22,12 @@ export function CreateAccommodationFormFields() {
         removeImage,
         onSubmit,
         handleCancel,
+        isSuccessModalOpen,
+        handleCloseSuccessModal,
     } = useHandleAccommodationFormFields();
 
     return (
+        <>
         <form className={"my-8 sm:my-12 md:my-20 flex break-all flex-col mx-auto gap-4 sm:gap-5"} onSubmit={form.handleSubmit(onSubmit)}>
             <ImageUploader
                 images={imagePreviews}
@@ -189,5 +193,11 @@ export function CreateAccommodationFormFields() {
                 <Button type="button" onClick={handleCancel} variant={"outline"} className="w-full sm:w-auto">Отмена</Button>
             </fieldset>
         </form>
+
+        <CreateAccommodationSuccessModal
+            isOpen={isSuccessModalOpen}
+            onClose={handleCloseSuccessModal}
+        />
+        </>
     );
 }

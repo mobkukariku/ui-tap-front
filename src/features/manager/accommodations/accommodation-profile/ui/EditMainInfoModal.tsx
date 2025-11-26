@@ -55,7 +55,6 @@ export function EditMainInfoModal({
         selectedCityId ? Number(selectedCityId) : null
     );
 
-    // Сбрасываем форму при открытии модального окна
     useEffect(() => {
         if (open && initialData) {
             const cityIdStr = initialData.cityId ? String(initialData.cityId) : "";
@@ -72,13 +71,11 @@ export function EditMainInfoModal({
         }
     }, [open, initialData, form]);
 
-    // Восстанавливаем districtId после загрузки округов для выбранного города
     useEffect(() => {
         if (open && districts && initialData.districtId) {
             const initialCityIdStr = initialData.cityId ? String(initialData.cityId) : "";
             const currentCityId = form.getValues("cityId");
             
-            // Если город совпадает с начальным, восстанавливаем округ
             if (currentCityId === initialCityIdStr && currentCityId) {
                 const districtIdStr = String(initialData.districtId);
                 const districtExists = districts.some((d: District) => String(d.id) === districtIdStr);

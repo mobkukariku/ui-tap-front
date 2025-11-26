@@ -3,9 +3,10 @@ import {getSearchRequestById} from "@/features/client/requests/client-by-request
 
 export function useGetSearchRequest(id: string | number) {
     return useQuery({
-        queryKey: ["search-requests", "price-requests", id],
+        queryKey: ["search-request", id],
         queryFn: async () => await getSearchRequestById(id),
         enabled: !!id,
         retry: 1,
+        staleTime: 30000, // Кешировать данные на 30 секунд
     });
 }

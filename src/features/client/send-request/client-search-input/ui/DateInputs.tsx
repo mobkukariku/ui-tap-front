@@ -17,9 +17,10 @@ interface DateInputsProps {
     }
     onChange?: (dates: { from?: string; to?: string } | undefined) => void
     error?: string
+    oneNight?: boolean
 }
 
-export function DateInputs({ value, onChange, error }: DateInputsProps) {
+export function DateInputs({ value, onChange, error, oneNight = false }: DateInputsProps) {
     const [open, setOpen] = useState(false)
 
     const dateRange: DateRange | undefined = {
@@ -27,9 +28,11 @@ export function DateInputs({ value, onChange, error }: DateInputsProps) {
         to: value?.to ? new Date(value.to) : undefined,
     }
 
+    const singleDate: Date | undefined = value?.from ? new Date(value.from) : undefined
+
     const formatDateRange = () => {
         if (!value?.from) return "Выберите даты"
-        if (!value?.to) {
+        if (oneNight || !value?.to) {
             return format(new Date(value.from), "d MMM", { locale: ru })
         }
         return `${format(new Date(value.from), "d MMM", { locale: ru })} - ${format(new Date(value.to), "d MMM", { locale: ru })}`
@@ -47,6 +50,20 @@ export function DateInputs({ value, onChange, error }: DateInputsProps) {
         }
 
         onChange?.(formattedDates)
+    }
+
+    const handleSelectSingleDate = (selectedDate: Date | undefined) => {
+        if (!selectedDate) {
+            onChange?.(undefined)
+            return
+        }
+
+        const formattedDate = {
+            from: format(selectedDate, "yyyy-MM-dd"),
+            to: undefined,
+        }
+
+        onChange?.(formattedDate)
     }
 
     return (
@@ -71,15 +88,27 @@ export function DateInputs({ value, onChange, error }: DateInputsProps) {
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-full p-0" align="start">
-                    <Calendar
-                        mode="range"
-                        defaultMonth={dateRange?.from}
-                        selected={dateRange}
-                        onSelect={handleSelectDate}
-                        numberOfMonths={2}
-                        className="rounded-lg w-full"
-                        disabled={(date) => date < new Date()}
-                    />
+                    {oneNight ? (
+                        <Calendar
+                            mode="single"
+                            defaultMonth={singleDate}
+                            selected={singleDate}
+                            onSelect={handleSelectSingleDate}
+                            numberOfMonths={1}
+                            className="rounded-lg w-full"
+                            disabled={(date) => date < new Date()}
+                        />
+                    ) : (
+                        <Calendar
+                            mode="range"
+                            defaultMonth={dateRange?.from}
+                            selected={dateRange}
+                            onSelect={handleSelectDate}
+                            numberOfMonths={2}
+                            className="rounded-lg w-full"
+                            disabled={(date) => date < new Date()}
+                        />
+                    )}
                 </PopoverContent>
             </Popover>
         </div>

@@ -10,6 +10,6 @@ export function useGetMyAccommodations() {
 
     return useQuery({
         queryKey: ["accommodations-list", filters],
-        queryFn: async () => getMyAccommodations(filters),
+        queryFn: async () => await getMyAccommodations(filters),
     });
 }

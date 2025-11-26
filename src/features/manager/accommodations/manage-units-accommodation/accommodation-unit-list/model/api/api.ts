@@ -3,6 +3,7 @@ import {
     UpdateAccommodationUnitDictionariesRequest,
     UpdateAccommodationUnitPhotosRequest,
     UpdateAccommodationUnitRequest,
+    CreateTariffRequest,
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/types";
 import {api} from "@/shared/api/axiosInstance";
 
@@ -71,12 +72,19 @@ export const updateAccommodationUnitPhotos = async (data: UpdateAccommodationUni
     return response.data;
 }
 
-export const deleteAccommodationUnitPhoto = async (id: string, photoUrl: string) => {
+export const deleteAccommodationUnitPhoto = async (id: string, photoUrls: string[]) => {
     const response = await api.delete(`/accommodation-units/${id}/photos`, {
-        params: {
-            id,
-            photoUrl,
-        }
+        data: photoUrls,
+    });
+
+    return response.data;
+}
+
+export const createTariff = async (unitId: string, data: CreateTariffRequest) => {
+    const response = await api.post(`/accommodation-units/${unitId}/tariffs`, {
+        price: data.price,
+        currency: data.currency,
+        rangeTypeId: data.rangeTypeId,
     });
 
     return response.data;

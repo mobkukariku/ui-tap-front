@@ -1,9 +1,10 @@
 import {BreadcrumbLayout} from "@/widgets/breadcrumbs/ui/BreadcrumbLayout";
 import {RequestTable} from "@/features/manager/requests/request-table/ui/RequestTable";
-import {RequestSearchInput} from "@/features/manager/requests/filter-request/ui/RequestSearchInput";
+import {Suspense} from "react";
+import {Spinner} from "@/shared/ui/spinner";
 
 interface Props {
-    params: {id: string}
+    params: Promise<{id: string}>
 }
 
 export default async function RequestsByAccommodationPage({params}:Props) {
@@ -18,8 +19,9 @@ export default async function RequestsByAccommodationPage({params}:Props) {
                     { label: id, href: `/manager/requests/${id}` }
                 ]}
             />
-            <RequestSearchInput />
-            <RequestTable id={Number(id)} />
+            <Suspense fallback={<Spinner className={"w-full mx-auto size-7 my-10"} />}>
+                <RequestTable id={Number(id)} />
+            </Suspense>
         </>
     )
 }

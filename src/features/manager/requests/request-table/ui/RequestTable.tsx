@@ -65,7 +65,7 @@ export function RequestTable({id}:RequestTableProps) {
                             {formatDate(item.checkInDate)} - {formatDate(item.checkOutDate)}
                         </TableCell>
                         <TableCell className="text-right">
-                            {item.price} тг
+                            {item.price.toLocaleString("ru-RU")} тг
                         </TableCell>
                         <TableCell className="text-right">
                             {item.countOfPeople} человек
