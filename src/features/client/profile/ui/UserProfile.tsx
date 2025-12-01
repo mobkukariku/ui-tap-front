@@ -71,9 +71,7 @@ export function UserProfile() {
                 </p>
             </div>
 
-            {/* Profile Card */}
             <div className="bg-white rounded-2xl sm:rounded-3xl shadow-lg border border-gray-200 overflow-hidden mb-6 sm:mb-8">
-                {/* Avatar Section */}
                 <div className="bg-gradient-to-r from-green-500 to-green-600 px-6 sm:px-8 py-8 sm:py-10 text-center">
                     <div className="flex justify-center mb-4">
                         <Avatar className="w-24 h-24 sm:w-32 sm:h-32 border-4 border-white shadow-lg">
@@ -85,13 +83,9 @@ export function UserProfile() {
                     <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">
                         {data.firstName} {data.lastName}
                     </h2>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full">
-                        <CheckCircle2 className="w-4 h-4 text-white" />
-                        <span className="text-sm text-white font-medium">Аккаунт подтвержден</span>
-                    </div>
+                    
                 </div>
 
-                {/* Info Section */}
                 <div className="p-6 sm:p-8 space-y-4 sm:space-y-5">
                     <ProfileCard
                         icon={UserCircle}
@@ -123,7 +117,6 @@ export function UserProfile() {
                 </div>
             </div>
 
-            {/* Additional Info Card */}
             <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-green-200">
                 <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-10 border border-green-600 h-10 rounded-full bg-green-100 flex items-center justify-center">
