@@ -9,6 +9,7 @@ import {
     deleteAccommodationUnitPhoto,
     updateAccommodationUnitPhotos
 } from "@/features/manager/accommodations/manage-units-accommodation/accommodation-unit-list/model/api/api";
+import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
 export function useUpdateAccommodationUnitPhotos() {
     const queryClient = useQueryClient();
@@ -25,10 +26,11 @@ export function useUpdateAccommodationUnitPhotos() {
             });
         },
         onError: async (error) => {
-            toast.error("Ошибка обновления фотографий", {
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description: error.message || "Проверьте данные и попробуйте снова",
+                description: formattedError.description || "Проверьте данные и попробуйте снова",
             });
         },
     });
@@ -45,10 +47,11 @@ export function useUpdateAccommodationUnitPhotos() {
             });
         },
         onError: async (error) => {
-            toast.error("Ошибка удаления фотографий", {
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description: error.message || "Не удалось удалить фото",
+                description: formattedError.description || "Не удалось удалить фото",
             });
         },
     });

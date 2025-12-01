@@ -4,6 +4,7 @@ import {createClient} from "@/features/auth/register/client/model/api/api";
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {useMutation} from "@tanstack/react-query";
+import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
 export function useClientRegister() {
     return useMutation({
@@ -17,10 +18,11 @@ export function useClientRegister() {
             });
         },
         onError: (error) => {
-            toast.error("Ошибка входа в систему", {
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description: error.message || "Проверьте данные и попробуйте снова"
+                description: formattedError.description || "Проверьте данные и попробуйте снова"
             })
         },
         onSettled: () => (

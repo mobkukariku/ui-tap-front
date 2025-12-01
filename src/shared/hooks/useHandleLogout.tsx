@@ -1,7 +1,7 @@
 "use client";
 import { toast } from "sonner";
-import { AxiosError } from "axios";
 import {useLogOut} from "@/features/auth/logout/model/api/useLogOut";
+import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
 export function useHandleLogout() {
     const logOut = useLogOut();
@@ -11,17 +11,12 @@ export function useHandleLogout() {
             await logOut.mutateAsync();
             window.location.href = "/";
         } catch (error) {
-            if (error instanceof AxiosError) {
-                toast.error("Ошибка выхода из системы", {
-                    position: "top-right",
-                    richColors: true,
-                    description:
-                        error.response?.data?.message ||
-                        "Произошла ошибка. Попробуйте снова.",
-                });
-            } else {
-                toast.error("Неизвестная ошибка при выходе");
-            }
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
+                position: "top-right",
+                richColors: true,
+                description: formattedError.description || "Произошла ошибка. Попробуйте снова.",
+            });
         }
     };
 

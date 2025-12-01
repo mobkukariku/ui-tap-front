@@ -3,5 +3,5 @@ export interface ErrorResponse {
     status: number,
     error: string,
     message: string,
-    validationErrors: string,
+    validationErrors: Record<string, string> | null,
 }

@@ -2,6 +2,7 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {updateAccommodationMainInfo, UpdateAccommodationMainInfoRequest} from "./updateApi";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {toast} from "sonner";
+import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
 export function useUpdateAccommodationMainInfo() {
     const queryClient = useQueryClient();
@@ -17,10 +18,11 @@ export function useUpdateAccommodationMainInfo() {
             });
         },
         onError: async (error) => {
-            toast.error("Ошибка обновления основной информации", {
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description: error.message || "Проверьте данные и попробуйте снова",
+                description: formattedError.description || "Проверьте данные и попробуйте снова",
             });
         }
     });

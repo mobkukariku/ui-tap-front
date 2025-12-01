@@ -81,6 +81,12 @@ export function ClientHeader() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
                                 <DropdownMenuGroup>
+                                    <DropdownMenuItem asChild>
+                                        <Link href="/client/users/me">
+                                            <User />
+                                            Профиль
+                                        </Link>
+                                    </DropdownMenuItem>
                                     <DropdownMenuItem onClick={() => handleLogout()}>
                                         <LogOut />
                                         Выйти
@@ -140,6 +146,16 @@ export function ClientHeader() {
                                 )
                             })}
                             <li className="mt-4 pt-4 border-t border-gray-200">
+                                <Link
+                                    href="/client/users/me"
+                                    onClick={handleNavClick}
+                                    className="flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:bg-gray-100"
+                                >
+                                    <User className="w-5 h-5" />
+                                    Профиль
+                                </Link>
+                            </li>
+                            <li>
                                 <Button
                                     variant="ghost"
                                     onClick={() => {

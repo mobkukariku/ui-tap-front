@@ -6,7 +6,7 @@ export const managerRegisterSchema = z
         firstName: z.string().min(1, 'Имя обязательно'),
         lastName: z.string().min(1, 'Фамилия обязательна'),
         email: z.email('Введите корректный email').min(1, 'Email обязателен'),
-        password: z.string().min(6, 'Пароль должен быть не менее 6 символов'),
+        password: z.string().min(8, 'Пароль должен быть не менее 6 символов'),
         phoneNumber: z.string().min(1, "Номер телефона обязателен")
     })
 

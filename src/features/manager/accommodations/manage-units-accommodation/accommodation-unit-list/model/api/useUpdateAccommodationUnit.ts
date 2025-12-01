@@ -3,6 +3,7 @@ import {updateAccommodationUnit} from "./api";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {toast} from "sonner";
 import { UpdateAccommodationUnitRequest } from "../types";
+import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
 export function useUpdateAccommodationUnit() {
     const queryClient = useQueryClient();
@@ -19,10 +20,11 @@ export function useUpdateAccommodationUnit() {
             });
         },
         onError: async (error) => {
-            toast.error("Ошибка обновления информации о номере", {
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description: error.message || "Проверьте данные и попробуйте снова",
+                description: formattedError.description || "Проверьте данные и попробуйте снова",
             });
         }
     });

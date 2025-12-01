@@ -7,6 +7,7 @@ import {
 } from "@/features/manager/accommodations/manage-units-accommodation/add-accommodation-unit/model/api/api";
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
+import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
 export function useCreateAccommodationUnit() {
 
@@ -21,12 +22,11 @@ export function useCreateAccommodationUnit() {
             });
         },
         onError: async (error) => {
-            toast.error("Ошибка создания юнита.", {
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description:
-                    error.message ||
-                    "Проверьте данные и попробуйте снова",
+                description: formattedError.description || "Проверьте данные и попробуйте снова",
             });
             return error.message;
         }
