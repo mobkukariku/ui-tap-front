@@ -3,6 +3,7 @@ import {updateAccommodationUnitDictionaries} from "./api";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {toast} from "sonner";
 import { UpdateAccommodationUnitDictionariesRequest } from "../types";
+import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
 export function useUpdateAccommodationUnitDictionaries() {
     const queryClient = useQueryClient();
@@ -19,10 +20,11 @@ export function useUpdateAccommodationUnitDictionaries() {
             });
         },
         onError: async (error) => {
-            toast.error("Ошибка обновления словарей номера", {
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description: error.message || "Проверьте данные и попробуйте снова",
+                description: formattedError.description || "Проверьте данные и попробуйте снова",
             });
         }
     });

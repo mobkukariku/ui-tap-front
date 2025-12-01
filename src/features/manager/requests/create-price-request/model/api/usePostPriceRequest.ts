@@ -3,6 +3,7 @@ import {createPriceRequest} from "@/features/manager/requests/create-price-reque
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {PriceRequestCredetials} from "@/features/manager/requests/create-price-request/model/types";
+import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
 export function usePostPriceRequest() {
     const queryClient = useQueryClient();
@@ -18,12 +19,11 @@ export function usePostPriceRequest() {
             })
         },
         onError: (error) => {
-            toast.error("Ошибка создания заявки цены.", {
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description:
-                    error.message ||
-                    "Проверьте данные и попробуйте снова",
+                description: formattedError.description || "Проверьте данные и попробуйте снова",
             });
             return error.message;
         }

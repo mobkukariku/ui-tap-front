@@ -38,7 +38,7 @@ export function CurrentRequestInfo({requestId}:CurrentRequestInfoProps) {
                 </div>
                 <div className={"text-right space-y-2 max-md:space-y-1"}>
                     <p className={"font-medium opacity-60 max-md:text-sm"}>Бюджет</p>
-                    <p className={"text-2xl sm:text-3xl font-bold text-green-600"}>{data?.price} Тг</p>
+                    <p className={"text-2xl sm:text-3xl font-bold text-green-600"}>{data?.price.toLocaleString("ru-RU")} Тг</p>
                 </div>
             </div>
             <div className={"flex flex-col lg:flex-row lg:justify-between gap-4 sm:gap-5 w-full"}>

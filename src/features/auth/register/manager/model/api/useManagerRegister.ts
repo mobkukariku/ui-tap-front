@@ -3,6 +3,7 @@ import {RegisterCredentials} from "@/features/auth/register/manager/model/types"
 import {managerRegisterApi} from "@/features/auth/register/manager/model/api/api";
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
+import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
 export function useManagerRegister() {
     return useMutation({
@@ -17,10 +18,11 @@ export function useManagerRegister() {
             });
         },
         onError: (error) => {
-            toast.error("Ошибка входа в систему", {
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description: error.message || "Проверьте данные и попробуйте снова"
+                description: formattedError.description || "Проверьте данные и попробуйте снова"
             })
         },
         onSettled: () => {

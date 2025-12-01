@@ -6,6 +6,7 @@ import {
 } from "./updateApi";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {toast} from "sonner";
+import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
 export function useUpdateAccommodationPhotos() {
     const queryClient = useQueryClient();
@@ -22,10 +23,11 @@ export function useUpdateAccommodationPhotos() {
             });
         },
         onError: async (error) => {
-            toast.error("Ошибка обновления фотографий", {
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description: error.message || "Проверьте данные и попробуйте снова",
+                description: formattedError.description || "Проверьте данные и попробуйте снова",
             });
         },
     });
@@ -42,10 +44,11 @@ export function useUpdateAccommodationPhotos() {
             });
         },
         onError: async (error) => {
-            toast.error("Ошибка удаления фотографий", {
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description: error.message || "Не удалось удалить фото",
+                description: formattedError.description || "Не удалось удалить фото",
             });
         },
     });

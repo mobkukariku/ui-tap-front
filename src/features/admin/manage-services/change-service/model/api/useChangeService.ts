@@ -3,6 +3,7 @@ import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {changeService} from "@/features/admin/manage-services/change-service/model/api/api";
 import {ChangeServiceCredentials} from "@/features/admin/manage-services/change-service/model/types";
+import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
 
 
@@ -23,12 +24,11 @@ export function useChangeService() {
             })
         },
         onError: (error) => {
-            toast.error("Ошибка изменении услуги", {
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description:
-                    error.message ||
-                    "Проверьте данные и попробуйте снова",
+                description: formattedError.description || "Проверьте данные и попробуйте снова",
             });
             return error.message;
         },

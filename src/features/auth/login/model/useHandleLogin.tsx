@@ -4,9 +4,9 @@ import { useLogin } from "@/features/auth/login/model/api/useLogin";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { getCurrentTime } from "@/shared/lib/date/getCurrentTime";
-import { AxiosError } from "axios";
 import {sessionService} from "@/entities/session/model/sessionService";
 import {LoginCredentials} from "@/features/auth/login/model/types";
+import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
 export function useHandleLogin() {
     const login = useLogin();
@@ -35,15 +35,12 @@ export function useHandleLogin() {
                 router.push("/");
             }
         } catch (error) {
-            if (error instanceof AxiosError) {
-                toast.error("Ошибка входа в систему", {
-                    position: "top-right",
-                    richColors: true,
-                    description:
-                        error.response?.data?.message ||
-                        "Проверьте данные и попробуйте снова",
-                });
-            }
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
+                position: "top-right",
+                richColors: true,
+                description: formattedError.description || "Проверьте данные и попробуйте снова",
+            });
         }
     };
 

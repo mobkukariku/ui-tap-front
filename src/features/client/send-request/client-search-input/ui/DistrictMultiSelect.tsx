@@ -108,29 +108,34 @@ export function DistrictMultiSelect({ form }: DistrictMultiSelectProps) {
                                 </label>
                             </div>
 
-                            {/* Список районов */}
                             <ScrollArea className="h-[200px] pr-2">
                                 <div className="flex flex-col gap-2">
                                     {districts.map((district: District) => (
                                         <label
                                             key={district.id}
-                                            className="flex items-center gap-3 p-2 rounded-md hover:bg-white cursor-pointer transition-colors"
+                                            className="flex items-center justify-between gap-3 p-2 rounded-md hover:bg-white cursor-pointer transition-colors"
                                         >
-                                            <Checkbox
-                                                id={`district-${district.id}`}
-                                                checked={selectedIds.includes(district.id)}
-                                                onCheckedChange={() => handleToggle(district.id)}
-                                                className="w-4 h-4"
-                                            />
-                                            <span className="text-sm text-gray-700">
-                        {district.name}
-                      </span>
+                                            <div className="flex items-center gap-2">
+                                                <Checkbox
+                                                    id={`district-${district.id}`}
+                                                    checked={selectedIds.includes(district.id)}
+                                                    onCheckedChange={() => handleToggle(district.id)}
+                                                    className="w-4 h-4"
+                                                />
+                                                <span className="text-sm text-gray-700">
+                                                    {district.name}
+                                                </span>
+                                            </div>
+                                            {district.averagePrice !== null && district.averagePrice !== undefined && (
+                                                <div className="text-xs text-gray-500">
+                                                    Средняя цена: {Number(district.averagePrice).toLocaleString("ru-RU")} тг
+                                                </div>
+                                            )}
                                         </label>
                                     ))}
                                 </div>
                             </ScrollArea>
 
-                            {/* Счетчик выбранных */}
                             {selectedIds.length > 0 && (
                                 <div className="mt-3 pt-3 border-t border-gray-200">
                   <span className="text-xs text-gray-600">

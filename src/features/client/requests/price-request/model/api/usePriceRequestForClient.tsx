@@ -3,6 +3,7 @@ import {getPriceRequestByRequestId, respondToPriceRequest} from "@/features/clie
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {useState} from "react";
+import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
 export function usePriceRequestForClient(requestId: number) {
     const queryClient = useQueryClient();
@@ -27,10 +28,11 @@ export function usePriceRequestForClient(requestId: number) {
             });
         },
         onError: (error) => {
-            toast.error("Ошибка при отправке ответа", {
+            const formattedError = formatErrorForToast(error);
+            toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description: error.message || "Проверьте данные и попробуйте снова",
+                description: formattedError.description || "Проверьте данные и попробуйте снова",
             });
         }
     });

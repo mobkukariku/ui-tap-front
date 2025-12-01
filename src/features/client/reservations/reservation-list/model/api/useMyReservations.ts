@@ -1,10 +1,18 @@
-import {useQuery} from "@tanstack/react-query";
+import {useInfiniteQuery} from "@tanstack/react-query";
 import {getMyReservations} from "@/features/client/reservations/reservation-list/model/api/api";
 
-export function useMyReservations() {
+const PAGE_SIZE = 5;
 
-    return useQuery({
-        queryKey: ["my-reservations"],
-        queryFn: async () => await getMyReservations(),
-    })
+export function useMyReservations() {
+    return useInfiniteQuery({
+        queryKey: ["my-reservations", "infinite"],
+        queryFn: ({ pageParam = 0 }) => getMyReservations(pageParam, PAGE_SIZE),
+        getNextPageParam: (lastPage) => {
+            if (lastPage.last) {
+                return undefined;
+            }
+            return lastPage.page + 1;
+        },
+        initialPageParam: 0,
+    });
 }

@@ -34,7 +34,7 @@ export function RequestInfo({request}:RequestInfoProps) {
                 <LabelTextInfo
                     icon={<DollarSignIcon width={18} height={18} className="sm:w-5 sm:h-5 text-green-500" />}
                     label="Бюджет"
-                    value={`${request.price} Тг`}
+                    value={`${request.price.toLocaleString("ru-RU")} Тг`}
                 />
 
                 <LabelTextInfo
