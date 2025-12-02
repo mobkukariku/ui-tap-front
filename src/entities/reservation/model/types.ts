@@ -25,4 +25,5 @@ export enum ReservationStatus {
     APPROVED = 'APPROVED',
     REJECTED = 'REJECTED',
     CLIENT_DIDNT_CAME = 'CLIENT_DIDNT_CAME',
+    CANCELED = 'CANCELED',
 }

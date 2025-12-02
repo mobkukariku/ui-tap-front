@@ -7,6 +7,7 @@ import {formatDate} from "@/shared/lib/date/formateDate";
 import {LabelTextInfo} from "@/shared/ui/label-text-info";
 import {Calendar, Building2, DollarSign, Users, Clock, CheckCircle2, XCircle, Info} from "lucide-react";
 import {ReservationStatus} from "@/entities/reservation/model/types";
+import {CancelReservationModal} from "@/features/client/reservations/reservation-by-id/ui/CancelReservationModal";
 
 interface ReservationByIdProps {
     id: number;
@@ -73,6 +74,18 @@ const getStatusInfo = (status: ReservationStatus) => {
                 bgColor: "bg-orange-50",
                 borderColor: "border-orange-200",
                 iconColor: "text-orange-600"
+            };
+        case ReservationStatus.CANCELED:
+            return {
+                text: "Отменено",
+                badge: (
+                    <Badge variant="destructive" className="hover:bg-red-600 text-sm sm:text-base px-3 sm:px-4 py-1.5 sm:py-2">
+                        ✗ Отменено
+                    </Badge>
+                ),
+                bgColor: "bg-red-50",
+                borderColor: "border-red-200",
+                iconColor: "text-red-600"
             };
         default:
             return {
@@ -200,6 +213,22 @@ export function ReservationById({id}: ReservationByIdProps) {
                         />
                     </div>
                 </div>
+
+                {(data.status === ReservationStatus.WAITING_TO_APPROVE || data.status === ReservationStatus.APPROVED) && (
+                    <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-5 md:p-6">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                            <div>
+                                <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">Действия</h3>
+                                <p className="text-xs sm:text-sm text-gray-600">
+                                    Вы можете отменить бронирование, если передумали
+                                </p>
+                            </div>
+                            <div className="flex-shrink-0">
+                                <CancelReservationModal id={data.id} />
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </Container>
     );
