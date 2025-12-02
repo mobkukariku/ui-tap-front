@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Docker image
-        run: docker build --no-cache --build-arg API_URL="${{ secrets.API_URL }}" -t mobkus837/ui-tap-front:latest .
+        run: docker build --build-arg API_URL="${{ secrets.API_URL }}" -t mobkus837/ui-tap-front:latest .
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u mobkus837 --password-stdin
