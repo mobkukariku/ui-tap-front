@@ -21,7 +21,7 @@ const getStatusBadge = (status: ReservationStatus) => {
             );
         case ReservationStatus.APPROVED:
             return (
-                <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100">
+                <Badge className="bg-blue-100 border-blue-300 text-blue-700 hover:bg-blue-100">
                     ✓ Подтверждено
                 </Badge>
             );
@@ -41,6 +41,12 @@ const getStatusBadge = (status: ReservationStatus) => {
             return (
                 <Badge variant="outline" className="border-orange-300 text-orange-700 bg-orange-50">
                     ✗ Клиент не приехал
+                </Badge>
+            );
+        case ReservationStatus.CANCELED:
+            return (
+                <Badge variant="destructive" className="">
+                    ✗ Отменено
                 </Badge>
             );
         default:

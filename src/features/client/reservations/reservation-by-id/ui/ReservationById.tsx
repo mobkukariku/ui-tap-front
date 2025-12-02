@@ -31,7 +31,7 @@ const getStatusInfo = (status: ReservationStatus) => {
             return {
                 text: "Подтверждено",
                 badge: (
-                    <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100 text-sm sm:text-base px-3 sm:px-4 py-1.5 sm:py-2">
+                    <Badge className="bg-blue-100 border-blue-300 text-blue-700 hover:bg-blue-100 text-sm sm:text-base px-3 sm:px-4 py-1.5 sm:py-2">
                         ✓ Подтверждено
                     </Badge>
                 ),
