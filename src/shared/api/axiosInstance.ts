@@ -1,4 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import {normalizeImageUrl} from "@/shared/lib/normalizeImageUrl";
+import {Accommodation} from "@/entities/accommodation/model/types";
+
 const API_URL = "/api";
 
 export const api = axios.create({
@@ -11,6 +14,12 @@ api.interceptors.request.use((config) => {
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
+    
+    const language = localStorage.getItem("language") || "en";
+    const supportedLanguages = ["kk", "ru", "en"];
+    const acceptLanguage = supportedLanguages.includes(language) ? language : "en";
+    config.headers["Accept-Language"] = acceptLanguage;
+    
     return config;
 });
 
@@ -57,3 +66,23 @@ api.interceptors.response.use(
     }
 );
 
+api.interceptors.response.use((response) => {
+    const data = response.data;
+
+    if (Array.isArray(data?.content)) {
+        data.content = data.content.map((item:Accommodation) => ({
+            ...item,
+            imageUrls: item.imageUrls?.map(normalizeImageUrl),
+        }));
+    }
+
+    if (data?.imageUrls) {
+        data.imageUrls = data.imageUrls.map(normalizeImageUrl);
+    }
+
+    if (data?.photoUrl) {
+        data.photoUrl = normalizeImageUrl(data.photoUrl);
+    }
+
+    return response;
+});
