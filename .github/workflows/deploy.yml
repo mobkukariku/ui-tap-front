@@ -38,11 +38,11 @@ jobs:
             docker pull mobkus837/ui-tap-front:latest
 
             echo "Stopping and removing old containers..."
-            docker-compose stop ui-tap-front
-            docker-compose rm -f ui-tap-front
+            docker-compose stop front
+            docker-compose rm -f front
             
             echo "Starting up containers with Docker Compose..."
-            docker-compose up -d ui-tap-front
+            docker-compose up -d front
             
             echo "Cleaning up unused Docker images..."
             docker image prune -af  
