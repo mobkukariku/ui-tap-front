@@ -70,7 +70,7 @@ function BookingTable({accId}:BookingTableProps) {
                     <TableRow key={item.id}>
                         <TableCell>{item.clientName}</TableCell>
                         <TableCell>
-                            {formatDate(item.checkOutDate.split('T')[0])} – {formatDate(item.checkInDate.split('T')[0])}
+                            {formatDate(item?.checkOutDate?.split('T')[0])} – {formatDate(item?.checkInDate?.split('T')[0])}
                         </TableCell>
                         <TableCell>
                             {item.accommodationUnitName}
