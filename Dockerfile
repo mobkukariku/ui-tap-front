@@ -6,9 +6,9 @@ RUN npm install
 
 COPY . .
 
-ARG API_URL
+ARG NEXT_PUBLIC_API_URL
 
-ENV API_URL=${NEXT_PUBLIC_API_URL}
+ENV NEXT_PUBLIC_API_URL=${API_URL}
 RUN npm run build
 
 FROM node:20-alpine AS runner
