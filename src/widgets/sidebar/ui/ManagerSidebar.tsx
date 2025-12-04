@@ -28,6 +28,7 @@ import {useHandleLogout} from "@/shared/hooks/useHandleLogout";
 import {sessionService} from "@/entities/session/model/sessionService";
 import {useEffect, useState} from "react";
 import Link from "next/link";
+import {useMe} from "@/entities/user/model/api/useMe";
 
 const items = [
     {
@@ -49,6 +50,8 @@ const items = [
 
 export function ManagerSidebar() {
     const {handleLogout} = useHandleLogout();
+    const {data} = useMe();
+
     const [isManager, setIsManager] = useState(false);
     const token = typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
     const user = sessionService.getUserFromToken(token ?? "");
@@ -63,16 +66,16 @@ export function ManagerSidebar() {
             <SidebarHeader className={"p-4"}>
                 <figure className={"flex items-center gap-2 justify-between"}>
                     <Avatar className={"w-10 h-10"}>
-                        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                        <AvatarFallback>CN</AvatarFallback>
+                        <AvatarImage className={"object-cover"} src={data?.photoUrl} alt="@shadcn" />
+                        <AvatarFallback>{data?.firstName[0]}{data?.lastName[0]}</AvatarFallback>
                     </Avatar>
                     <figcaption
-                        className={"flex flex-col gap-0"}>
+                        className={"flex flex-col w-full gap-0"}>
                         <p className={"w-full"}>
-                            {user?.given_name}
+                            {data?.firstName} {data?.lastName}
                         </p>
                         <p className={"text-gray-500 text-xs dark:text-gray-400"}>
-                            {user?.role}
+                            {user?.email}
                         </p>
                     </figcaption>
                     <DropdownMenu>

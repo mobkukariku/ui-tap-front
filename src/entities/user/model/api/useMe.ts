@@ -5,6 +5,8 @@ export function useMe() {
     return useQuery({
         queryKey: ["user", "me"],
         queryFn: async () => await getMe(),
+        staleTime: 5 * 60 * 1000,
+        refetchOnWindowFocus: false,
     });
 }
 

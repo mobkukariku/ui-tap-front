@@ -122,9 +122,9 @@ export function EditPhotoModal({
                     <div className="flex justify-center">
                         <Avatar className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 border-2 sm:border-4 border-gray-200">
                             {preview ? (
-                                <AvatarImage src={preview} alt="Preview" />
+                                <AvatarImage src={preview} alt="Preview" className={"object-cover"} />
                             ) : currentPhotoUrl ? (
-                                <AvatarImage src={currentPhotoUrl} alt="Current photo" />
+                                <AvatarImage src={currentPhotoUrl} alt="Current photo" className={"object-cover"} />
                             ) : (
                                 <AvatarFallback className="bg-green-100 text-green-600 text-2xl sm:text-3xl md:text-4xl font-bold">
                                     {currentInitials}
