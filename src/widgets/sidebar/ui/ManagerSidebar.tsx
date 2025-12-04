@@ -4,7 +4,8 @@ import {
     EllipsisVertical,
     InfoIcon,
     LayoutDashboardIcon,
-    LogOut
+    LogOut,
+    UserIcon
 } from "lucide-react";
 import {
     Sidebar, SidebarContent,
@@ -26,6 +27,7 @@ import {Button} from "@/shared/ui/button";
 import {useHandleLogout} from "@/shared/hooks/useHandleLogout";
 import {sessionService} from "@/entities/session/model/sessionService";
 import {useEffect, useState} from "react";
+import Link from "next/link";
 
 const items = [
     {
@@ -81,6 +83,12 @@ export function ManagerSidebar() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                             <DropdownMenuGroup>
+                                <Link href="/manager/profile">
+                                    <DropdownMenuItem>
+                                        <UserIcon />
+                                        Профиль
+                                    </DropdownMenuItem>
+                                </Link>
                                 <DropdownMenuItem onClick={() => handleLogout()}>
                                     <LogOut />
                                     Выйти

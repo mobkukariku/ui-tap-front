@@ -9,7 +9,6 @@ import {Button} from "@/shared/ui/button";
 import {useManagerRegister} from "@/features/auth/register/manager/model/api/useManagerRegister";
 import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
-import {sessionService} from "@/entities/session/model/sessionService";
 import {useRouter} from "next/navigation";
 
 export function ManagerRegisterForm() {

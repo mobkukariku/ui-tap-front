@@ -1,4 +1,4 @@
-import {DataField} from "@/features/manager/accommodations/accommodation-profile/ui/DataField";
+import {DataField} from "@/shared/ui/DataField";
 import {Building, Building2, Captions, MapPin, ScrollText, Star, Pencil} from "lucide-react";
 import {Button} from "@/shared/ui/button";
 

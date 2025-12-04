@@ -1,14 +1,14 @@
 "use client";
 import {useState, useCallback, useEffect} from "react";
 import {useMe} from "@/entities/user/model/api/useMe";
-import {User as UserIcon, Mail, Phone, UserCircle, CheckCircle2, Pencil, Camera, X} from "lucide-react";
+import {User as UserIcon, Mail, Phone, UserCircle, Pencil, Camera, X} from "lucide-react";
 import {Spinner} from "@/shared/ui/spinner";
 import {formatErrorForToast} from "@/shared/lib/error/formatError";
 import {toast} from "sonner";
 import {Avatar, AvatarFallback, AvatarImage} from "@/shared/ui/avatar";
 import {Button} from "@/shared/ui/button";
-import {EditProfileModal} from "@/features/client/profile/ui/EditProfileModal";
-import {EditPhotoModal} from "@/features/client/profile/ui/EditPhotoModal";
+import {EditProfileModal} from "@/widgets/user-profile/ui/EditProfileModal";
+import {EditPhotoModal} from "@/widgets/user-profile/ui/EditPhotoModal";
 import {Dialog, DialogContent, DialogTitle} from "@/shared/ui/dialog";
 
 function ProfileCard({icon: Icon, label, value}: {icon: React.ElementType; label: string; value: string}) {
@@ -81,19 +81,9 @@ export function UserProfile() {
     }
 
     return (
-        <div className="max-w-4xl mx-auto px-3 sm:px-4 md:px-6">
-            {/* Header Section */}
-            <div className="text-center mb-6 sm:mb-8 md:mb-10">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">
-                    Мой профиль
-                </h1>
-                <p className="text-sm sm:text-base md:text-lg text-gray-600 px-2">
-                    Управляйте своей учетной записью и личной информацией
-                </p>
-            </div>
-
-            <div className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl shadow-lg border border-gray-200 overflow-hidden mb-4 sm:mb-6 md:mb-8">
-                <div className="bg-gradient-to-r from-green-500 to-green-600 px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-10 text-center relative">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 md:px-6 my-10">
+            <div className="bg-white rounded-xl  sm:rounded-2xl md:rounded-3xl shadow-lg border border-gray-300 overflow-hidden mb-4 sm:mb-6 md:mb-8">
+                <div className="bg-primary px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-10 text-center relative">
                     <div className="flex justify-center mb-3 sm:mb-4 relative">
                         <button
                             type="button"
@@ -145,7 +135,7 @@ export function UserProfile() {
 
                 <div className="p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-4 md:space-y-5">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-3 sm:mb-4">
-                        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Личная информация</h3>
+                        <h3 className="text-base sm:text-lg font-semibold text-gray-600">Личная информация</h3>
                         <Button
                             type="button"
                             variant="outline"
@@ -228,4 +218,3 @@ export function UserProfile() {
         </div>
     );
 }
-

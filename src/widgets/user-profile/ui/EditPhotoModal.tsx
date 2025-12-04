@@ -5,7 +5,7 @@ import {Button} from "@/shared/ui/button";
 import {Label} from "@/shared/ui/label";
 import {useUpdateMyPhoto} from "@/entities/user/model/api/useUpdateMyPhoto";
 import {useDeleteMyPhoto} from "@/entities/user/model/api/useDeleteMyPhoto";
-import {photoSchema} from "@/features/client/profile/model/schema";
+import {photoSchema} from "@/widgets/user-profile/model/schema";
 import {Camera, X, Trash2} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "@/shared/ui/avatar";
 
@@ -206,4 +206,3 @@ export function EditPhotoModal({
         </Dialog>
     );
 }
-

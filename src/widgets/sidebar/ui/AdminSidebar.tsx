@@ -8,7 +8,7 @@ import {
     SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem
 } from "@/shared/ui/sidebar";
 import {Avatar, AvatarFallback, AvatarImage} from "@/shared/ui/avatar";
-import {EllipsisVertical, LayoutDashboardIcon, LogOut, Settings} from "lucide-react";
+import {EllipsisVertical, LayoutDashboardIcon, LogOut, Settings, UserIcon} from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
@@ -18,6 +18,7 @@ import {Button} from "@/shared/ui/button";
 import {useHandleLogout} from "@/shared/hooks/useHandleLogout";
 import {sessionService} from "@/entities/session/model/sessionService";
 import {useEffect, useState} from "react";
+import Link from "next/link";
 
 const items = [
     {
@@ -74,6 +75,12 @@ export function AdminSidebar() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                             <DropdownMenuGroup>
+                                <Link href={"/admin/manager"}>
+                                    <DropdownMenuItem>
+                                        <UserIcon />
+                                        Профиль
+                                    </DropdownMenuItem>
+                                </Link>
                                 <DropdownMenuItem onClick={() => handleLogout()}>
                                     <LogOut />
                                     Выйти

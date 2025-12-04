@@ -9,6 +9,8 @@ import {Spinner} from "@/shared/ui/spinner";
 import {CreatePriceRequest} from "@/features/manager/requests/create-price-request/ui/CreatePriceRequest";
 import {SearchRequest, SearchRequestStatus} from "@/entities/search-request/model/types";
 import {PriceRequestModal} from "@/features/manager/requests/price-request/ui/PriceRequestModal";
+import { TablePagination } from "@/widgets/pagination/ui/TablePagination";
+import { useRequestFilter } from "../../filter-request/model/useRequestFilter";
 
 interface RequestTableProps {
     id: number
@@ -34,11 +36,14 @@ export function RequestTable({id}:RequestTableProps) {
 
     const {data: requests, isLoading ,isError} = useGetRelevantRequests(id);
 
+    const {filters, setFilter} = useRequestFilter();
+
     if(isLoading) return <Spinner className={"w-full mx-auto size-7 my-10"} />
 
     if(isError) return <p>Error</p>
 
     return (
+        <>
         <Table  className="w-full relative">
             <TableHeader>
                 <TableRow>
@@ -81,5 +86,16 @@ export function RequestTable({id}:RequestTableProps) {
                 ))}
             </TableBody>
         </Table>
+        {requests?.totalElements > 20 && (
+                <div className="mt-4 sm:mt-6">
+                  <TablePagination
+                      page={filters.page ?? 0}
+                      totalPages={requests.totalPages}
+                      size={filters.size ?? 0}
+                      onPageChange={(newPage) => setFilter("page", newPage)}
+                  />
+                </div>
+              )}
+        </>
     )
 }

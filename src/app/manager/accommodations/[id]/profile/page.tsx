@@ -1,4 +1,3 @@
-'use client';
 
 import {BreadcrumbLayout} from "@/widgets/breadcrumbs/ui/BreadcrumbLayout";
 import {AccommodationProfile} from "@/features/manager/accommodations/accommodation-profile/ui/AccommodationProfile";

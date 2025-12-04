@@ -1,15 +1,15 @@
 import { create } from "zustand";
 
-interface RequestFilterStore {
+interface BookingSearchFilterStore {
     filters: {
         page: number;
         size: number;
     };
-    setFilter: (key: keyof RequestFilterStore["filters"], value: string | number | null | undefined) => void;
+    setFilter: (key: keyof BookingSearchFilterStore["filters"], value: number) => void;
     resetFilters: () => void;
 }
 
-export const useRequestFilter = create<RequestFilterStore>((set) => ({
+export const useBookingSearchFilter = create<BookingSearchFilterStore>((set) => ({
     filters: {
         page: 0,
         size: 20

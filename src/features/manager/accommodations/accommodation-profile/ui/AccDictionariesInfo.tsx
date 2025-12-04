@@ -1,4 +1,4 @@
-import {DictionaryField} from "@/features/manager/accommodations/accommodation-profile/ui/DataField";
+import {DictionaryField} from "@/shared/ui/DataField";
 import {Pencil} from "lucide-react";
 import {Button} from "@/shared/ui/button";
 import {Dictionary} from "@/entities/dictionary/model/types";

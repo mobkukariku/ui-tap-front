@@ -1,5 +1,5 @@
 export interface District {
     id: number,
     name: string,
-    averagePrice: string,
+    averagePrice: number | null,
 }

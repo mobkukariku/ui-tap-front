@@ -17,4 +17,3 @@ export const photoSchema = z.instanceof(File)
         (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
         "Только .jpg, .jpeg, .png и .webp форматы поддерживаются"
     );
-

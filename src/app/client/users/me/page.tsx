@@ -1,8 +1,8 @@
 import {Container} from "@/shared/ui/container";
-import {UserProfile} from "@/features/client/profile/ui/UserProfile";
 import {Suspense} from "react";
 import {Spinner} from "@/shared/ui/spinner";
 import type { Metadata } from 'next'
+import { UserProfile } from "@/widgets/user-profile/ui/UserProfile";
 
 export const metadata: Metadata = {
     title: 'Профиль пользователя',

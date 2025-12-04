@@ -3,7 +3,7 @@ import {api} from "@/shared/api/axiosInstance";
 
 
 export const postSearchRequest = async (data:SearchRequestCredientials) => {
-    const response = await api.post("/search-requests", data);
+    const response = await api.post("/search-requests",  data);
 
     return response.data;
 }

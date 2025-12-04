@@ -7,7 +7,7 @@ import {Button} from "@/shared/ui/button";
 import {Label} from "@/shared/ui/label";
 import {Input} from "@/shared/ui/input";
 import {useUpdateMe} from "@/entities/user/model/api/useUpdateMe";
-import {updateProfileSchema, UpdateProfileFormData} from "@/features/client/profile/model/schema";
+import {updateProfileSchema, UpdateProfileFormData} from "@/widgets/user-profile/model/schema";
 import {User} from "@/entities/user/model/types";
 
 interface EditProfileModalProps {
@@ -113,4 +113,3 @@ export function EditProfileModal({
         </Dialog>
     );
 }
-
