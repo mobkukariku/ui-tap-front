@@ -7,6 +7,7 @@ import {RequestAccInfo} from "@/features/manager/requests/price-request/ui/Reque
 import {useGetPriceRequestById} from "@/features/manager/requests/price-request/model/api/useGetPriceRequestById";
 import {useState} from "react";
 import {Spinner} from "@/shared/ui/spinner";
+import {UpdatePriceModal} from "@/features/manager/requests/price-request/ui/UpdatePriceModal";
 
 interface PriceRequestModalProps {
     requestId: number
@@ -44,7 +45,7 @@ export function PriceRequestModal({requestId}: PriceRequestModalProps) {
                         <Spinner className="w-full mx-auto size-7" />
                     ) : (
                         <>
-                            <RequestStatus status={"WAITING"} />
+                            <RequestStatus status={data?.content[0]?.clientResponseStatus} />
 
                             <RequestAccInfo
                                 accommodationName={data?.content[0]?.accommodationName}
@@ -54,7 +55,12 @@ export function PriceRequestModal({requestId}: PriceRequestModalProps) {
                         </>
                     )}
 
-                    <div className="flex gap-2 pt-4 border-t border-gray-200">
+                    <div className="flex flex-col gap-2 pt-4 border-t border-gray-200">
+                        {
+                            data?.content[0]?.clientResponseStatus === "REJECTED" && (
+                                <UpdatePriceModal curPrice={data?.content[0].price} />
+                            )
+                        }
                         <Button
                             variant="outline"
                             className="flex-1 rounded-lg"
