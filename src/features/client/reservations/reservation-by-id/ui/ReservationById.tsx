@@ -5,7 +5,7 @@ import {Container} from "@/shared/ui/container";
 import {Badge} from "@/shared/ui/badge";
 import {formatDate} from "@/shared/lib/date/formateDate";
 import {LabelTextInfo} from "@/shared/ui/label-text-info";
-import {Calendar, Building2, DollarSign, Users, Clock, CheckCircle2, XCircle, Info} from "lucide-react";
+import {Calendar, Building2, DollarSign, Users, Clock, CheckCircle2, XCircle, Info, MapIcon} from "lucide-react";
 import {ReservationStatus} from "@/entities/reservation/model/types";
 import {CancelReservationModal} from "@/features/client/reservations/reservation-by-id/ui/CancelReservationModal";
 
@@ -164,7 +164,7 @@ export function ReservationById({id}: ReservationByIdProps) {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
+                    <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
                         <LabelTextInfo
                             icon={<Calendar width={18} height={18} className="sm:w-5 sm:h-5 text-primary" />}
                             label="Заезд"
@@ -184,6 +184,12 @@ export function ReservationById({id}: ReservationByIdProps) {
                             icon={<DollarSign width={18} height={18} className="sm:w-5 sm:h-5 text-green-500" />}
                             label="Цена"
                             value={`${data.price.toLocaleString()} тг`}
+                        />
+                        <LabelTextInfo
+                            c
+                            icon={<MapIcon width={18} height={18} className="sm:w-5 sm:h-5 text-green-500" />}
+                            label="Адрес"
+                            value={`${data.city}, ${data.district}, ${data.address}`}
                         />
                     </div>
                 </div>
