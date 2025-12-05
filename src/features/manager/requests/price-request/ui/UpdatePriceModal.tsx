@@ -11,34 +11,31 @@ import {useUpdatePrice} from "@/features/manager/requests/price-request/model/ap
 
 interface UpdatePriceModalProps {
     curPrice: number;
-    id: number
+    id: number;
+    parentModal: (isOpen:boolean) => void;
 }
 
-export function UpdatePriceModal({curPrice, id}:UpdatePriceModalProps) {
+export function UpdatePriceModal({ curPrice, id, parentModal }: UpdatePriceModalProps) {
     const [isOpen, setIsOpen] = useState(false);
 
-    const form = useForm({
+    const form = useForm<UpdatePriceFormData>({
         resolver: zodResolver(updatePriceSchema),
-        defaultValues: {
-            price: curPrice ?? 0
-        }
-    })
+        defaultValues: { price: curPrice ?? 0 },
+    });
 
-    const {mutate} = useUpdatePrice();
+    const { mutate, isPending } = useUpdatePrice(id);
 
-    const onSubmit: SubmitHandler<UpdatePriceFormData> = (data: UpdatePriceFormData) => {
-        try{
-            mutate({
-                price: data.price,
-                searchRequestId: id,
-            })
-            setIsOpen(false);
-        }catch (err){
-            console.log(err);
-        }
-    }
-
-
+    const onSubmit: SubmitHandler<UpdatePriceFormData> = (data) => {
+        mutate(
+            { price: data.price, searchRequestId: id },
+            {
+                onSuccess: () => {
+                    setIsOpen(false)
+                    parentModal(false)
+                },
+            }
+        );
+    };
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -50,16 +47,24 @@ export function UpdatePriceModal({curPrice, id}:UpdatePriceModalProps) {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
                     <fieldset className="flex flex-col gap-2">
                         <Label>Цена</Label>
-                        <Input {...form.register("price")} />
+                        <Input
+                            type="number"
+                            step="0.01"
+                            {...form.register("price", { valueAsNumber: true })}
+                        />
                     </fieldset>
                     <DialogFooter>
-                        <DialogClose>
-                            <Button variant={"outline"}>Отмена</Button>
+                        <DialogClose asChild>
+                            <Button type="button" variant="outline" disabled={isPending}>
+                                Отмена
+                            </Button>
                         </DialogClose>
-                        <Button>Сохранить</Button>
+                        <Button type="submit" disabled={isPending}>
+                            {isPending ? "Сохранение..." : "Сохранить"}
+                        </Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
         </Dialog>
-    )
+    );
 }

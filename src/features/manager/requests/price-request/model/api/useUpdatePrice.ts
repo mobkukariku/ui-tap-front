@@ -4,7 +4,7 @@ import {toast} from "sonner";
 import {getCurrentTime} from "@/shared/lib/date/getCurrentTime";
 import {formatErrorForToast} from "@/shared/lib/error/formatError";
 
-export function useUpdatePrice() {
+export function useUpdatePrice(id: number) {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -17,21 +17,26 @@ export function useUpdatePrice() {
         },
 
         onSuccess: async () => {
-            await queryClient.invalidateQueries({queryKey: ['relevant-requests', 'price-request']});
+            await Promise.all([
+                queryClient.invalidateQueries({ queryKey: ['relevant-requests'] }),
+                queryClient.invalidateQueries({ queryKey: ['price-request', id] }),
+            ]);
+
             toast.success("Заявка цены была обновлена.", {
                 position: "top-right",
                 richColors: true,
-                description: getCurrentTime()
-            })
+                description: getCurrentTime(),
+            });
         },
+
         onError: (error) => {
             const formattedError = formatErrorForToast(error);
             toast.error(formattedError.message, {
                 position: "top-right",
                 richColors: true,
-                description: formattedError.description || "Проверьте данные и попробуйте снова",
+                description:
+                    formattedError.description || "Проверьте данные и попробуйте снова",
             });
-            return error.message;
-        }
-    })
+        },
+    });
 }
