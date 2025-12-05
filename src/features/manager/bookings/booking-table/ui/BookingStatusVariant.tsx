@@ -12,5 +12,6 @@ export function BookingStatusVariant({status}:BookingStatusVariantProps) {
         case "APPROVED": return <Badge>Подтверждено</Badge>
         case "REJECTED": return <Badge variant={"destructive"}>Отказ</Badge>
         case "CLIENT_DIDNT_CAME": return <Badge variant={"outline"}>Клиент не пришел</Badge>
+        case "CANCELED": return <Badge variant={"destructive"}>Отменено</Badge>
     }
 }
