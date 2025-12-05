@@ -77,7 +77,7 @@ export function AdminSidebar() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                             <DropdownMenuGroup>
-                                <Link href={"/admin/manager"}>
+                                <Link href={"/admin/profile"}>
                                     <DropdownMenuItem>
                                         <UserIcon />
                                         Профиль
