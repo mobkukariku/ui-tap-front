@@ -17,7 +17,7 @@ export function useUpdatePrice() {
         },
 
         onSuccess: async () => {
-            await queryClient.invalidateQueries({queryKey: ['relevant-requests']});
+            await queryClient.invalidateQueries({queryKey: ['relevant-requests', 'price-request']});
             toast.success("Заявка цены была обновлена.", {
                 position: "top-right",
                 richColors: true,

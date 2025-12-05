@@ -11,9 +11,10 @@ import {useUpdatePrice} from "@/features/manager/requests/price-request/model/ap
 
 interface UpdatePriceModalProps {
     curPrice: number;
+    id: number
 }
 
-export function UpdatePriceModal({curPrice}:UpdatePriceModalProps) {
+export function UpdatePriceModal({curPrice, id}:UpdatePriceModalProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const form = useForm({
@@ -29,7 +30,7 @@ export function UpdatePriceModal({curPrice}:UpdatePriceModalProps) {
         try{
             mutate({
                 price: data.price,
-                searchRequestId: curPrice,
+                searchRequestId: id,
             })
             setIsOpen(false);
         }catch (err){

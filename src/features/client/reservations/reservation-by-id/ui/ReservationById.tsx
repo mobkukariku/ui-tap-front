@@ -186,7 +186,7 @@ export function ReservationById({id}: ReservationByIdProps) {
                             value={`${data.price.toLocaleString()} тг`}
                         />
                         <LabelTextInfo
-                            c
+
                             icon={<MapIcon width={18} height={18} className="sm:w-5 sm:h-5 text-green-500" />}
                             label="Адрес"
                             value={`${data.city}, ${data.district}, ${data.address}`}

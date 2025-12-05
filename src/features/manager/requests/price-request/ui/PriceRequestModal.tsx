@@ -58,7 +58,7 @@ export function PriceRequestModal({requestId}: PriceRequestModalProps) {
                     <div className="flex flex-col gap-2 pt-4 border-t border-gray-200">
                         {
                             data?.content[0]?.clientResponseStatus === "REJECTED" && (
-                                <UpdatePriceModal curPrice={data?.content[0].price} />
+                                <UpdatePriceModal id={data?.content[0]?.id} curPrice={data?.content[0].price} />
                             )
                         }
                         <Button
